@@ -522,3 +522,64 @@ footer {
         font-size: 2.8rem;
     }
 }
+/* ==========================================================================
+   Mobile Menu Styles (Hamburger Menu)
+   ========================================================================== */
+.menu-toggle {
+    display: none;
+    color: var(--accent-gold);
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 1001;
+    transition: transform 0.3s;
+}
+
+@media (max-width: 992px) {
+    header {
+        padding: 15px 30px;
+    }
+}
+
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block; /* ෆෝන් වලදී විතරක් මෙනු අයිකන් එක පෙන්නනවා */
+    }
+
+    nav {
+        position: fixed;
+        top: 0;
+        right: -100%; /* මුලින්ම මෙනු එක හැංගිලා තියෙන්නේ */
+        width: 75%;
+        height: 100vh;
+        background: rgba(6, 19, 38, 0.98);
+        backdrop-filter: blur(15px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transition: right 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+        z-index: 1000;
+        border-left: 1px solid var(--gold-border);
+        box-shadow: -10px 0 40px rgba(0,0,0,0.7);
+    }
+
+    nav.active {
+        right: 0; /* බට්න් එක එබුවම මෙනු එක එළියට එනවා */
+    }
+
+    nav ul {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    nav ul li a {
+        font-size: 1.3rem;
+        letter-spacing: 3px;
+    }
+    
+    /* මෙනු එක ඕපන් වෙලා තියෙද්දී පේජ් එක Scroll වෙන එක නවත්තන්න */
+    body.no-scroll {
+        overflow: hidden;
+    }
+}
