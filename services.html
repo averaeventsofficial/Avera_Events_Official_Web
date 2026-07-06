@@ -5,16 +5,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Our Services | Avera Events</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .page-hero { margin-top: 80px; padding: 100px 20px; background: linear-gradient(rgba(10, 28, 54, 0.85), rgba(10, 28, 54, 0.95)), url('images/slide5.jpg') center/cover; text-align: center; border-bottom: 1px solid var(--gold-border); }
+        .page-hero-content { max-width: 800px; margin: 0 auto; }
+        .page-hero h1 { font-size: 3.5rem; color: var(--accent-gold); margin-bottom: 20px; }
+        .page-hero p { font-size: 1.15rem; color: var(--text-grey); line-height: 1.8; }
+        .services-wrapper { max-width: 1200px; margin: 0 auto; }
+        .service-row { display: flex; align-items: center; gap: 50px; margin-bottom: 100px; }
+        .service-row.reverse { flex-direction: row-reverse; }
+        .service-image { flex: 1; border-radius: 12px; overflow: hidden; border: 1px solid var(--gold-border); box-shadow: 0 15px 40px rgba(0,0,0,0.4); }
+        .service-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+        .service-row:hover .service-image img { transform: scale(1.05); }
+        .service-text { flex: 1; text-align: left; }
+        .service-text h2 { font-size: 2.2rem; color: var(--accent-gold); margin-bottom: 15px; }
+        .service-text h2 span { font-size: 1.5rem; color: var(--text-grey); opacity: 0.5; margin-right: 10px; }
+        .service-intro { font-size: 1.1rem; color: var(--text-white); margin-bottom: 25px; font-weight: 300; }
+        .features-list { list-style: none; }
+        .features-list li { margin-bottom: 15px; padding-left: 30px; position: relative; color: var(--text-grey); line-height: 1.6; }
+        .features-list li::before { content: '✦'; position: absolute; left: 0; top: 2px; color: var(--accent-gold); font-size: 1.2rem; }
+        .features-list li strong { color: var(--text-white); font-weight: 500; }
+        .why-choose-us { background-color: var(--dark-blue-bg); border-top: 1px solid var(--gold-border); }
+        .badges-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        .badge-card { text-align: center; padding: 20px; } .badge-icon { font-size: 2.5rem; margin-bottom: 15px; }
+        .badge-card h3 { color: var(--accent-gold); font-size: 1.4rem; margin-bottom: 12px; } .badge-card p { color: var(--text-grey); font-size: 0.95rem; }
+        @media (max-width: 992px) { .service-row, .service-row.reverse { flex-direction: column; gap: 30px; margin-bottom: 80px; } .page-hero h1 { font-size: 2.8rem; } }
+    </style>
 </head>
 <body>
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
-                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
-            </a>
+            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
         </div>
-        <nav>
-            <ul>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <nav id="nav-menu">
+            <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="services.html" class="active">Services</a></li>
@@ -33,11 +58,8 @@
     </section>
 
     <section class="services-wrapper section-padding">
-        
         <div class="service-row">
-            <div class="service-image">
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783347612/img1_hniivx.jpg" alt="Social and Family Celebrations">
-            </div>
+            <div class="service-image"><img src="images/slide1.jpg" alt="Social and Family Celebrations"></div>
             <div class="service-text">
                 <h2><span>01.</span> Social & Family Celebrations</h2>
                 <p class="service-intro">We turn your special moments into unforgettable memories. From concept development to day-of coordination, we handle it all.</p>
@@ -50,9 +72,7 @@
         </div>
 
         <div class="service-row reverse">
-            <div class="service-image">
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783347616/img2_yfvlnj.jpg" alt="Corporate Events">
-            </div>
+            <div class="service-image"><img src="images/slide2.jpg" alt="Corporate Events"></div>
             <div class="service-text">
                 <h2><span>02.</span> Corporate & Educational Events</h2>
                 <p class="service-intro">Professional event management tailored to elevate your brand, educate your audience, or engage your team.</p>
@@ -65,9 +85,7 @@
         </div>
 
         <div class="service-row">
-            <div class="service-image">
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783347613/img3_ehsmf8.jpg" alt="Virtual and Hybrid Events">
-            </div>
+            <div class="service-image"><img src="images/slide3.jpg" alt="Virtual and Hybrid Events"></div>
             <div class="service-text">
                 <h2><span>03.</span> Virtual & Hybrid Events</h2>
                 <p class="service-intro">Distance is no longer a barrier. We provide high-quality virtual event hosting with zero interruptions, powered by Premium Zoom.</p>
@@ -80,9 +98,7 @@
         </div>
 
         <div class="service-row reverse">
-            <div class="service-image">
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783347612/img4_wgtraj.jpg" alt="Micro Events">
-            </div>
+            <div class="service-image"><img src="images/slide4.jpg" alt="Micro Events"></div>
             <div class="service-text">
                 <h2><span>04.</span> Micro-Events & Custom Gatherings</h2>
                 <p class="service-intro">No event is too small for us. We believe every gathering deserves professional touch and precision.</p>
@@ -92,38 +108,22 @@
                 </ul>
             </div>
         </div>
-
     </section>
 
     <section class="why-choose-us section-padding">
         <h2 class="section-title">Why Choose Us?</h2>
         <p style="color: var(--text-grey); margin-bottom: 50px;">The Avera Advantage for your next masterpiece.</p>
-        
         <div class="badges-container">
-            <div class="badge-card">
-                <div class="badge-icon">🛡️</div>
-                <h3>End-to-End Solutions</h3>
-                <p>From the first brainstorming session to the final cleanup, we manage every single detail flawlessly.</p>
-            </div>
-            <div class="badge-card">
-                <div class="badge-icon">💻</div>
-                <h3>Tech-Driven Executions</h3>
-                <p>Utilizing premium virtual tools to ensure your online and hybrid events run without a single glitch.</p>
-            </div>
-            <div class="badge-card">
-                <div class="badge-icon">💎</div>
-                <h3>Tailored to Your Budget</h3>
-                <p>Flexible planning to deliver the most luxurious experience within your financial comfort zone.</p>
-            </div>
+            <div class="badge-card"><div class="badge-icon">🛡️</div><h3>End-to-End Solutions</h3><p>From the first brainstorming session to the final cleanup, we manage every single detail flawlessly.</p></div>
+            <div class="badge-card"><div class="badge-icon">💻</div><h3>Tech-Driven Executions</h3><p>Utilizing premium virtual tools to ensure your online and hybrid events run without a single glitch.</p></div>
+            <div class="badge-card"><div class="badge-icon">💎</div><h3>Tailored to Your Budget</h3><p>Flexible planning to deliver the most luxurious experience within your financial comfort zone.</p></div>
         </div>
     </section>
 
-    <section class="cta-banner" style="background: linear-gradient(rgba(6, 19, 38, 0.9), rgba(6, 19, 38, 0.9)); padding: 80px 20px;">
-        <div class="cta-content">
-            <h2>Let's Bring Your Vision to Life</h2>
-            <p>Our experts are ready to craft a tailored experience just for you.</p>
-            <a href="contact.html" class="btn-gold">Book a Free Consultation</a>
-        </div>
+    <section class="section-padding" style="background: linear-gradient(rgba(6, 19, 38, 0.9), rgba(6, 19, 38, 0.9));">
+        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px;">Let's Bring Your Vision to Life</h2>
+        <p style="color: var(--text-grey); font-size: 1.1rem; margin-bottom: 30px;">Our experts are ready to craft a tailored experience just for you.</p>
+        <a href="contact.html" class="btn-gold">Book a Free Consultation</a>
     </section>
 
     <footer>
@@ -131,5 +131,22 @@
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = mobileMenu.querySelector('i');
+            if(mobileMenu && navMenu) {
+                mobileMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll');
+                    if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } 
+                    else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); }
+                });
+                document.querySelectorAll('.nav-list li a').forEach(link => {
+                    link.addEventListener('click', () => { navMenu.classList.remove('active'); document.body.classList.remove('no-scroll'); menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
