@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luxury Event Planning | Avera Events</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html" class="active">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="video-hero">
+        <video autoplay loop muted playsinline poster="images/video-poster.jpg" class="bg-video">
+            <source src="https://res.cloudinary.com/ord0oppa/video/upload/Timeline_1_v78ufv.mp4" type="video/mp4">
+        </video>
+        
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            <h1>Moments Made Masterpieces</h1>
+            
+            <div class="typing-container">
+                <span class="static-text">We Craft </span>
+                <span id="typed-text" class="dynamic-text"></span><span class="cursor">|</span>
+            </div>
+
+            <a href="contact.html" class="btn-gold animate-btn">Start Planning Today</a>
+        </div>
+    </section>
+
+    <section class="badges-section">
+        <div class="badges-container">
+            <div class="badge-card">
+                <div class="badge-icon">👑</div>
+                <h3>Bespoke Luxury</h3>
+                <p>Every concept is tailored specifically to your unique personality and vision.</p>
+            </div>
+            <div class="badge-card">
+                <div class="badge-icon">✨</div>
+                <h3>Meticulous Planning</h3>
+                <p>We manage every single detail, from lighting blueprints to guest coordination.</p>
+            </div>
+            <div class="badge-card">
+                <div class="badge-icon">🥂</div>
+                <h3>Flawless Execution</h3>
+                <p>Sit back and enjoy your masterpiece while our team handles the magic.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-padding slider-section">
+        <h2 class="section-title">Latest Masterpieces</h2>
+        <p style="color: var(--text-grey); margin-bottom: 50px; letter-spacing: 1px;">Swipe to experience our recent luxury creations.</p>
+        
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="images/slide1.jpg" alt="Latest Luxury Event 1">
+                    <div class="slide-overlay"><h4>Grand Weddings</h4></div>
+                </div>
+                <div class="slide">
+                    <img src="images/slide2.jpg" alt="Latest Luxury Event 2">
+                    <div class="slide-overlay"><h4>Corporate Galas</h4></div>
+                </div>
+                <div class="slide">
+                    <img src="images/slide3.jpg" alt="Latest Luxury Event 3">
+                    <div class="slide-overlay"><h4>Bespoke Birthdays</h4></div>
+                </div>
+                <div class="slide">
+                    <img src="images/slide4.jpg" alt="Latest Luxury Event 4">
+                    <div class="slide-overlay"><h4>Intimate Proposals</h4></div>
+                </div>
+                <div class="slide">
+                    <img src="images/slide5.jpg" alt="Latest Luxury Event 5">
+                    <div class="slide-overlay"><h4>Theme Night Setups</h4></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-banner">
+        <div class="cta-content">
+            <h2>Ready to Elevate Your Next Event?</h2>
+            <p>Let's turn your dream into a breathtaking reality with Sri Lanka's premium event planners.</p>
+            <a href="contact.html" class="btn-gold-outline">Get a Bespoke Quote</a>
+        </div>
+    </section>
+
+    <div id="servicesPopup" class="services-popup">
+        <button class="close-popup" onclick="closePopup()">&times;</button>
+        <h3 style="color: var(--accent-gold); margin-bottom: 10px; font-family: 'Playfair Display', serif;">Looking for more?</h3>
+        <p style="color: var(--text-grey); font-size: 0.9rem; margin-bottom: 15px;">Discover our full range of custom event planning and styling services tailored just for you.</p>
+        <a href="services.html" class="btn-gold" style="padding: 8px 20px; font-size: 0.8rem; border-radius: 4px;">Explore Services</a>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
+        <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
+    </footer>
+
+    <script>
+        // Popup Display Delay (3 Seconds)
+        setTimeout(function() {
+            document.getElementById('servicesPopup').classList.add('show');
+        }, 3000);
+
+        function closePopup() {
+            document.getElementById('servicesPopup').classList.remove('show');
+        }
+
+        // Typewriter Effect Configuration
+        const words = [
+            "Social & Family Celebrations.",
+            "Corporate & Educational Events.",
+            "Virtual & Hybrid Events.",
+            "Micro-Events & Custom Gatherings."
+        ];
+        
+        let wordIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedTextSpan = document.getElementById("typed-text");
+
+        function typeEffect() {
+            const currentWord = words[wordIndex];
+            
+            if (isDeleting) {
+                typedTextSpan.textContent = currentWord.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedTextSpan.textContent = currentWord.substring(0, charIndex + 1);
+                charIndex++;
+            }
+
+            let typeSpeed = isDeleting ? 50 : 100;
+
+            if (!isDeleting && charIndex === currentWord.length) {
+                typeSpeed = 2500; // Hold word for 2.5s
+                isDeleting = true;
+            } else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                wordIndex = (wordIndex + 1) % words.length;
+                typeSpeed = 400;
+            }
+
+            setTimeout(typeEffect, typeSpeed);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            if(words.length) setTimeout(typeEffect, 1000);
+        });
+    </script>
+</body>
+</html>

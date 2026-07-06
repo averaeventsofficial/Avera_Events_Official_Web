@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Us | Avera Events</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        /* Contact Page Specific Styles */
+        .contact-wrapper {
+            display: grid;
+            grid-template-columns: 3fr 2fr;
+            gap: 50px;
+            max-width: 1100px;
+            margin: 0 auto;
+            align-items: stretch;
+        }
+
+        .contact-form-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--gold-border);
+            border-radius: 12px;
+            padding: 50px 40px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5);
+            backdrop-filter: blur(10px);
+            text-align: left;
+        }
+
+        .contact-info-card {
+            background: linear-gradient(145deg, rgba(10,28,54,0.9), rgba(6,19,38,0.9));
+            border-top: 3px solid var(--accent-gold);
+            border-radius: 12px;
+            padding: 50px 40px;
+            text-align: left;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            border-left: 1px solid var(--gold-border);
+            border-right: 1px solid var(--gold-border);
+            border-bottom: 1px solid var(--gold-border);
+        }
+
+        .custom-input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(229, 169, 61, 0.3);
+            color: var(--text-white);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(229, 169, 61, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .custom-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Info Item Styles */
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 35px;
+        }
+
+        .info-icon {
+            font-size: 1.8rem;
+            color: var(--accent-gold);
+            margin-right: 20px;
+            margin-top: 5px;
+        }
+
+        .info-text h4 {
+            color: var(--text-white);
+            margin-bottom: 5px;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+        }
+
+        .info-text p {
+            color: var(--text-grey);
+            font-size: 0.95rem;
+        }
+
+        /* Floating WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 40px;
+            right: 40px;
+            background-color: #25d366;
+            color: #FFF;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 35px;
+            box-shadow: 0px 5px 20px rgba(37, 211, 102, 0.5);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            color: #FFF;
+        }
+
+        @media (max-width: 992px) {
+            .contact-wrapper { grid-template-columns: 1fr; }
+            .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 30px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <header>
+        <div class="logo">
+            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
+            </a>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="portfolio.html">Portfolio</a></li>
+                <li><a href="reviews.html">Reviews</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Header Section -->
+    <section class="section-padding" style="margin-top: 80px; padding-bottom: 40px;">
+        <h1 class="section-title">Get in Touch</h1>
+        <p style="color: var(--text-grey); font-size: 1.1rem;">Drop us a message, and let's start planning your next masterpiece.</p>
+    </section>
+
+    <!-- Contact Form & Info Section -->
+    <section class="section-padding" style="padding-top: 0;">
+        <div class="contact-wrapper">
+            
+            <!-- Left: Contact Form -->
+            <div class="contact-form-card">
+                <form id="whatsappForm">
+                    <div>
+                        <label class="form-label">Your Name</label>
+                        <input type="text" id="contactName" class="custom-input" placeholder="e.g. John Doe" required>
+                    </div>
+                    <div>
+                        <label class="form-label">Email Address</label>
+                        <input type="email" id="contactEmail" class="custom-input" placeholder="e.g. john@example.com" required>
+                    </div>
+                    <div>
+                        <label class="form-label">Event Type & Expected Date</label>
+                        <input type="text" id="contactEvent" class="custom-input" placeholder="e.g. Wedding on Dec 12, 2026" required>
+                    </div>
+                    <div>
+                        <label class="form-label">Tell us about your vision</label>
+                        <textarea id="contactMessage" class="custom-input" rows="5" placeholder="Share your ideas, theme, or requirements..." required></textarea>
+                    </div>
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-gold" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                        <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Send Inquiry via WhatsApp
+                    </button>
+                </form>
+            </div>
+
+            <!-- Right: Direct Contact Info -->
+            <div class="contact-info-card">
+                <h3 style="color: var(--accent-gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 1.8rem;">Direct Contact</h3>
+                
+                <div class="info-item">
+                    <i class="fab fa-whatsapp info-icon"></i>
+                    <div class="info-text">
+                        <h4>WhatsApp / Call</h4>
+                        <p>+94 76 639 0768</p>
+                        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 5px;">We usually reply within 2 hours.</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="far fa-envelope info-icon"></i>
+                    <div class="info-text">
+                        <h4>Email Us</h4>
+                        <p>avera.eventsofficial@gmail.com</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="fas fa-map-marker-alt info-icon"></i>
+                    <div class="info-text">
+                        <h4>Location</h4>
+                        <p>Kandy, Sri Lanka</p>
+                        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 5px;">Available for events island-wide.</p>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/94766390768?text=Hello%20Avera%20Events,%20I%20would%20like%20to%20know%20more%20about%20your%20services!" class="whatsapp-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
+        <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
+    </footer>
+
+    <!-- JavaScript to Handle WhatsApp Redirection -->
+    <script>
+        document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+            e.preventDefault(); // Prevent standard form submission
+            
+            // Get form values
+            const name = document.getElementById("contactName").value;
+            const email = document.getElementById("contactEmail").value;
+            const eventInfo = document.getElementById("contactEvent").value;
+            const message = document.getElementById("contactMessage").value;
+            
+            // Your WhatsApp Number (Without + or 00)
+            const waNumber = "94766390768";
+            
+            // Format the WhatsApp Message
+            const waText = `✨ *New Inquiry from Avera Events Website* ✨%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Event Details:* ${eventInfo}%0A*Vision/Message:* ${message}`;
+            
+            // Create the WhatsApp API URL
+            const waUrl = `https://wa.me/${waNumber}?text=${waText}`;
+            
+            // Redirect user to WhatsApp in a new tab
+            window.open(waUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
