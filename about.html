@@ -5,184 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About Us | Avera Events</title>
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
     <style>
-        /* About Page Specific Styles */
-        .about-hero {
-            margin-top: 80px; 
-            padding: 120px 20px;
-            background: linear-gradient(rgba(10, 28, 54, 0.85), rgba(10, 28, 54, 0.95)), url('images/slide2.jpg') center/cover;
-            text-align: center;
-            border-bottom: 1px solid var(--gold-border);
-        }
-
-        .about-hero h1 {
-            font-size: 3.8rem;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-        }
-
-        /* Our Story Split Section */
-        .story-section {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-            align-items: center;
-        }
-
-        .story-image {
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--gold-border);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            position: relative;
-        }
-
-        .story-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-        }
-
-        .story-content {
-            text-align: left;
-        }
-
-        .story-content h2 {
-            font-size: 2.5rem;
-            color: var(--accent-gold);
-            margin-bottom: 25px;
-        }
-
-        .story-content p {
-            color: var(--text-grey);
-            font-size: 1.05rem;
-            line-height: 1.8;
-            margin-bottom: 20px;
-        }
-
-        /* Core Values Section */
-        .values-section {
-            background-color: var(--dark-blue-bg);
-            border-top: 1px solid var(--gold-border);
-            border-bottom: 1px solid var(--gold-border);
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 40px;
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-
-        .value-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(229, 169, 61, 0.15);
-            padding: 40px 30px;
-            border-radius: 8px;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .value-card:hover {
-            border-color: var(--accent-gold);
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.05);
-        }
-
-        .value-icon {
-            font-size: 2.5rem;
-            color: var(--accent-gold);
-            margin-bottom: 20px;
-        }
-
-        /* Team Section (Placeholders for the 4 Owners) */
-        .team-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
-            max-width: 1200px;
-            margin: 0 auto;
-            margin-top: 50px;
-        }
-
-        .team-card {
-            background: linear-gradient(145deg, rgba(10,28,54,0.6), rgba(6,19,38,0.9));
-            border: 1px solid var(--gold-border);
-            border-radius: 8px;
-            overflow: hidden;
-            text-align: center;
-            transition: transform 0.3s;
-        }
-
-        .team-card:hover {
-            transform: translateY(-8px);
-            border-color: var(--accent-gold);
-        }
-
-        .team-image-placeholder {
-            width: 100%;
-            height: 300px;
-            background: rgba(255, 255, 255, 0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-bottom: 2px solid var(--accent-gold);
-        }
-
-        .team-image-placeholder i {
-            font-size: 4rem;
-            color: rgba(229, 169, 61, 0.3);
-        }
-
-        .team-info {
-            padding: 25px 15px;
-        }
-
-        .team-info h4 {
-            color: var(--text-white);
-            font-size: 1.2rem;
-            margin-bottom: 5px;
-            letter-spacing: 1px;
-        }
-
-        .team-info p {
-            color: var(--accent-gold);
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        /* Responsive Design */
-        @media (max-width: 1024px) {
-            .team-grid { grid-template-columns: repeat(2, 1fr); }
-            .story-section { grid-template-columns: 1fr; text-align: center; }
-            .story-content { text-align: center; }
-        }
-
-        @media (max-width: 768px) {
-            .team-grid { grid-template-columns: 1fr; }
-            .about-hero h1 { font-size: 2.8rem; }
-        }
+        .about-hero { margin-top: 80px; padding: 120px 20px; background: linear-gradient(rgba(10, 28, 54, 0.85), rgba(10, 28, 54, 0.95)), url('images/slide2.jpg') center/cover; text-align: center; border-bottom: 1px solid var(--gold-border); }
+        .about-hero h1 { font-size: 3.8rem; color: var(--accent-gold); margin-bottom: 20px; }
+        .story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; max-width: 1200px; margin: 0 auto; align-items: center; }
+        .story-image { border-radius: 12px; overflow: hidden; border: 1px solid var(--gold-border); box-shadow: 0 20px 40px rgba(0,0,0,0.5); position: relative; }
+        .story-image img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .story-content { text-align: left; } .story-content h2 { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 25px; } .story-content p { color: var(--text-grey); font-size: 1.05rem; line-height: 1.8; margin-bottom: 20px; }
+        .values-section { background-color: var(--dark-blue-bg); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; margin-top: 50px; }
+        .value-card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(229, 169, 61, 0.15); padding: 40px 30px; border-radius: 8px; text-align: center; transition: all 0.3s ease; }
+        .value-card:hover { border-color: var(--accent-gold); transform: translateY(-5px); background: rgba(255, 255, 255, 0.05); } .value-icon { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px; }
+        .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1200px; margin: 0 auto; margin-top: 50px; }
+        .team-card { background: linear-gradient(145deg, rgba(10,28,54,0.6), rgba(6,19,38,0.9)); border: 1px solid var(--gold-border); border-radius: 8px; overflow: hidden; text-align: center; transition: transform 0.3s; }
+        .team-card:hover { transform: translateY(-8px); border-color: var(--accent-gold); }
+        .team-image-placeholder { width: 100%; height: 300px; background: rgba(255, 255, 255, 0.05); display: flex; align-items: center; justify-content: center; border-bottom: 2px solid var(--accent-gold); }
+        .team-image-placeholder i { font-size: 4rem; color: rgba(229, 169, 61, 0.3); } .team-info { padding: 25px 15px; } .team-info h4 { color: var(--text-white); font-size: 1.2rem; margin-bottom: 5px; letter-spacing: 1px; } .team-info p { color: var(--accent-gold); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1.5px; }
+        @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } .story-section { grid-template-columns: 1fr; text-align: center; } .story-content { text-align: center; } }
+        @media (max-width: 768px) { .team-grid { grid-template-columns: 1fr; } .about-hero h1 { font-size: 2.8rem; } }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
-                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
-            </a>
+            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
         </div>
-        <nav>
-            <ul>
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        <nav id="nav-menu">
+            <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html" class="active">About Us</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -193,19 +44,14 @@
         </nav>
     </header>
 
-    <!-- About Hero Section -->
     <section class="about-hero">
         <h1>The Story of Avera</h1>
         <p style="color: var(--text-grey); font-size: 1.15rem; max-width: 700px; margin: 0 auto;">Redefining luxury event management in Sri Lanka with passion, precision, and a touch of modern elegance.</p>
     </section>
 
-    <!-- Our Story Section -->
     <section class="section-padding">
         <div class="story-section">
-            <div class="story-image">
-                <!-- Using a slide image as a placeholder for the story visual -->
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783349123/Avera_wsdocu.png" alt="Avera Events Story">
-            </div>
+            <div class="story-image"><img src="images/slide3.jpg" alt="Avera Events Story"></div>
             <div class="story-content">
                 <h2>Our Journey to Perfection</h2>
                 <p>Avera Events was born from a shared passion for crafting unforgettable moments. We realized that true luxury isn't just about beautiful decorations; it's about the seamless experience, the meticulous attention to detail, and the peace of mind our clients feel on their most important days.</p>
@@ -215,98 +61,54 @@
         </div>
     </section>
 
-    <!-- Core Values Section -->
     <section class="values-section section-padding">
         <h2 class="section-title">The Avera Standard</h2>
         <p style="color: var(--text-grey);">The core principles that guide every event we curate.</p>
-        
         <div class="values-grid">
-            <div class="value-card">
-                <i class="fas fa-gem value-icon"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Playfair Display', serif;">Uncompromised Elegance</h3>
-                <p style="color: var(--text-grey); font-size: 0.95rem;">We source the finest materials and designs to create atmospheres that breathe luxury and sophistication.</p>
-            </div>
-            <div class="value-card">
-                <i class="fas fa-crosshairs value-icon"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Playfair Display', serif;">Absolute Precision</h3>
-                <p style="color: var(--text-grey); font-size: 0.95rem;">From timing to table settings, every element is meticulously planned and executed without a single flaw.</p>
-            </div>
-            <div class="value-card">
-                <i class="fas fa-heart value-icon"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Playfair Display', serif;">Client-Centric Approach</h3>
-                <p style="color: var(--text-grey); font-size: 0.95rem;">Your vision is our blueprint. We listen, adapt, and go above and beyond to exceed your expectations.</p>
-            </div>
+            <div class="value-card"><i class="fas fa-gem value-icon"></i><h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Playfair Display', serif;">Uncompromised Elegance</h3><p style="color: var(--text-grey); font-size: 0.95rem;">We source the finest materials and designs to create atmospheres that breathe luxury and sophistication.</p></div>
+            <div class="value-card"><i class="fas fa-crosshairs value-icon"></i><h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Playfair Display', serif;">Absolute Precision</h3><p style="color: var(--text-grey); font-size: 0.95rem;">From timing to table settings, every element is meticulously planned and executed without a single flaw.</p></div>
+            <div class="value-card"><i class="fas fa-heart value-icon"></i><h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Playfair Display', serif;">Client-Centric Approach</h3><p style="color: var(--text-grey); font-size: 0.95rem;">Your vision is our blueprint. We listen, adapt, and go above and beyond to exceed your expectations.</p></div>
         </div>
     </section>
 
-    <!-- Team Section (4 Owners Placeholders) -->
     <section class="section-padding">
         <h2 class="section-title">Meet the Visionaries</h2>
         <p style="color: var(--text-grey); margin-bottom: 20px;">The four masterminds working behind the scenes to bring your dreams to life.</p>
-        
         <div class="team-grid">
-            <!-- Owner 1 Placeholder -->
-            <div class="team-card">
-                <div class="team-image-placeholder">
-                    <i class="far fa-user"></i>
-                    <!-- When you have real photos, replace the <i> tag with an image tag like this: -->
-                    <!-- <img src="images/owner1.jpg" alt="Owner 1" style="width:100%; height:100%; object-fit:cover;"> -->
-                </div>
-                <div class="team-info">
-                    <h4>Director Name</h4>
-                    <p>Co-Founder & Event Director</p>
-                </div>
-            </div>
-
-            <!-- Owner 2 Placeholder -->
-            <div class="team-card">
-                <div class="team-image-placeholder">
-                    <i class="far fa-user"></i>
-                </div>
-                <div class="team-info">
-                    <h4>Director Name</h4>
-                    <p>Co-Founder & Creative Head</p>
-                </div>
-            </div>
-
-            <!-- Owner 3 Placeholder -->
-            <div class="team-card">
-                <div class="team-image-placeholder">
-                    <i class="far fa-user"></i>
-                </div>
-                <div class="team-info">
-                    <h4>Director Name</h4>
-                    <p>Co-Founder & Operations</p>
-                </div>
-            </div>
-
-            <!-- Owner 4 Placeholder -->
-            <div class="team-card">
-                <div class="team-image-placeholder">
-                    <i class="far fa-user"></i>
-                </div>
-                <div class="team-info">
-                    <h4>Director Name</h4>
-                    <p>Co-Founder & Client Relations</p>
-                </div>
-            </div>
+            <div class="team-card"><div class="team-image-placeholder"><i class="far fa-user"></i></div><div class="team-info"><h4>Director Name</h4><p>Co-Founder & Event Director</p></div></div>
+            <div class="team-card"><div class="team-image-placeholder"><i class="far fa-user"></i></div><div class="team-info"><h4>Director Name</h4><p>Co-Founder & Creative Head</p></div></div>
+            <div class="team-card"><div class="team-image-placeholder"><i class="far fa-user"></i></div><div class="team-info"><h4>Director Name</h4><p>Co-Founder & Operations</p></div></div>
+            <div class="team-card"><div class="team-image-placeholder"><i class="far fa-user"></i></div><div class="team-info"><h4>Director Name</h4><p>Co-Founder & Client Relations</p></div></div>
         </div>
     </section>
 
-    <!-- CTA Section -->
-    <section class="cta-banner" style="background: linear-gradient(rgba(6, 19, 38, 0.9), rgba(6, 19, 38, 0.9)); padding: 80px 20px; border-top: 1px solid var(--gold-border);">
-        <div class="cta-content" style="max-width: 800px; margin: 0 auto; text-align: center;">
-            <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px;">Let's Create History Together</h2>
-            <p style="color: var(--text-grey); font-size: 1.1rem; margin-bottom: 30px;">Partner with Avera Events for a stress-free, luxurious event planning experience.</p>
-            <a href="contact.html" class="btn-gold">Contact The Team</a>
-        </div>
+    <section class="section-padding" style="background: linear-gradient(rgba(6, 19, 38, 0.9), rgba(6, 19, 38, 0.9)); border-top: 1px solid var(--gold-border);">
+        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px;">Let's Create History Together</h2>
+        <p style="color: var(--text-grey); font-size: 1.1rem; margin-bottom: 30px;">Partner with Avera Events for a stress-free, luxurious event planning experience.</p>
+        <a href="contact.html" class="btn-gold">Contact The Team</a>
     </section>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = mobileMenu.querySelector('i');
+            if(mobileMenu && navMenu) {
+                mobileMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll');
+                    if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } 
+                    else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); }
+                });
+                document.querySelectorAll('.nav-list li a').forEach(link => {
+                    link.addEventListener('click', () => { navMenu.classList.remove('active'); document.body.classList.remove('no-scroll'); menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); });
+                });
+            }
+        });
+    </script>
 </body>
 </html>
