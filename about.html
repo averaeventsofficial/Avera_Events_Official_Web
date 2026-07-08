@@ -6,239 +6,129 @@
     <title>About Us | Avera Events</title>
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
-    <!-- FontAwesome & AOS Animation CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    
     <style>
         .about-hero { margin-top: 85px; padding: 150px 20px; background-color: var(--dark-blue-bg); text-align: center; border-bottom: 1px solid var(--gold-border); }
         .about-hero h1 { font-size: 4rem; color: var(--accent-gold); margin-bottom: 20px; font-family: 'Playfair Display', serif; }
-        
         .story-section { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; max-width: 1200px; margin: 0 auto; align-items: center; }
         .story-image { border-radius: 2px; overflow: hidden; border: 1px solid var(--gold-border); position: relative; }
         .story-image img { width: 100%; height: 100%; object-fit: cover; display: block; filter: brightness(0.85); transition: 1s ease; }
         .story-image:hover img { filter: brightness(1); transform: scale(1.03); }
-        
-        .story-content { text-align: left; } 
-        .story-content h2 { font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 25px; } 
-        .story-content p { color: var(--text-grey); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.8; }
-        
-        .values-section { background-color: var(--dark-blue-bg); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
-        .values-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 50px; max-width: 1200px; margin: 50px auto 0; }
-        .value-card { background: var(--card-bg); border: 1px solid rgba(229, 169, 61, 0.1); padding: 50px 40px; border-radius: 2px; text-align: center; transition: all 0.4s ease; }
-        .value-card:hover { border-color: var(--accent-gold); transform: translateY(-10px); background: rgba(255, 255, 255, 0.03); } 
-        .value-icon { font-size: 3rem; color: var(--accent-gold); margin-bottom: 25px; }
+        .story-content { text-align: left; } .story-content h2 { font-size: 2.8rem; color: var(--accent-gold); margin-bottom: 25px; } .story-content p { color: var(--text-grey); font-size: 1.05rem; margin-bottom: 20px; line-height: 1.8; }
         
         .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 30px; max-width: 1200px; margin: 60px auto 0; }
         .team-card { background: linear-gradient(145deg, rgba(4,13,26,0.8), rgba(6,19,38,0.9)); border: 1px solid var(--gold-border); border-radius: 2px; overflow: hidden; text-align: center; transition: transform 0.4s; }
         .team-card:hover { transform: translateY(-10px); border-color: var(--accent-gold); }
-        
         .team-image-box { width: 100%; height: 350px; overflow: hidden; border-bottom: 1px solid var(--gold-border); background: rgba(255, 255, 255, 0.02); }
         .team-image-box img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(20%); transition: transform 0.6s ease, filter 0.6s ease; }
         .team-card:hover .team-image-box img { transform: scale(1.05); filter: grayscale(0%); }
-        
-        .team-info { padding: 30px 15px; } 
-        .team-info h4 { color: var(--text-white); font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; } 
-        .team-info p { color: var(--accent-gold); font-size: 0.85rem; letter-spacing: 1.5px; }
+        .team-info { padding: 30px 15px; } .team-info h4 { color: var(--text-white); font-size: 1.2rem; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 2px; } .team-info p { color: var(--accent-gold); font-size: 0.85rem; letter-spacing: 1.5px; }
         
         @media (max-width: 1024px) { .team-grid { grid-template-columns: repeat(2, 1fr); } .story-section { grid-template-columns: 1fr; text-align: center; } .story-content { text-align: center; } }
         @media (max-width: 768px) { .team-grid { grid-template-columns: 1fr; } .about-hero h1 { font-size: 2.8rem; } }
     </style>
 </head>
 <body>
-    <!-- 🟢 Custom Gold Cursor HTML (මෙතන තමයි Cursor එක තියෙන්නේ) -->
-    <div class="cursor-dot"></div>
-    <div class="cursor-outline"></div>
+    <!-- Luxury Preloader -->
+    <div id="preloader"><img src="images/Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
 
-    <!-- Navigation -->
     <header>
-        <div class="logo">
-            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:26px; font-weight:400; letter-spacing:3px; text-decoration:none;">
-                AVERA<span style="font-size:10px; display:block; letter-spacing:8px; color:var(--text-grey); font-family:'Montserrat', sans-serif; font-weight:300; margin-top:5px;">EVENTS</span>
-            </a>
-        </div>
+        <div class="logo"><a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:26px; font-weight:400; letter-spacing:3px; text-decoration:none;">AVERA<span style="font-size:10px; display:block; letter-spacing:8px; color:var(--text-grey); font-family:'Montserrat', sans-serif; font-weight:300; margin-top:5px;">EVENTS</span></a></div>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html" class="hover-link">Home</a></li>
-                <li><a href="about.html" class="active hover-link">About Us</a></li>
-                <li><a href="services.html" class="hover-link">Services</a></li>
-                <li><a href="portfolio.html" class="hover-link">Portfolio</a></li>
-                <li><a href="reviews.html" class="hover-link">Reviews</a></li>
-                <li><a href="contact.html" class="hover-link">Contact Us</a></li>
+                <li><a href="index.html" class="hover-link" data-en="Home" data-si="මුල් පිටුව">Home</a></li>
+                <li><a href="about.html" class="active hover-link" data-en="About Us" data-si="අපි ගැන">About Us</a></li>
+                <li><a href="services.html" class="hover-link" data-en="Services" data-si="සේවාවන්">Services</a></li>
+                <li><a href="portfolio.html" class="hover-link" data-en="Portfolio" data-si="නිර්මාණ">Portfolio</a></li>
+                <li><a href="reviews.html" class="hover-link" data-en="Reviews" data-si="ප්‍රතිචාර">Reviews</a></li>
+                <li><a href="contact.html" class="hover-link" data-en="Contact Us" data-si="විමසීම්">Contact Us</a></li>
+                <div class="lang-toggle"><button class="lang-btn active hover-link" onclick="switchLang('en', this)">EN</button><span class="lang-sep">|</span><button class="lang-btn hover-link" onclick="switchLang('si', this)">SI</button></div>
             </ul>
         </nav>
     </header>
 
-    <!-- Hero Section -->
     <section class="about-hero">
-        <h1 data-aos="fade-down" data-aos-duration="1200">The Story of Avera</h1>
-        <p data-aos="fade-up" data-aos-delay="300" style="color: var(--text-grey); font-size: 1.15rem; max-width: 700px; margin: 0 auto; font-weight: 300; letter-spacing: 1px;">Redefining luxury event management in Sri Lanka with passion, precision, and a touch of modern elegance.</p>
+        <h1 data-aos="fade-down" data-en="The Story of Avera" data-si="අපේ කතාව">The Story of Avera</h1>
+        <p data-aos="fade-up" data-aos-delay="300" style="color: var(--text-grey); font-size: 1.15rem; max-width: 700px; margin: 0 auto; font-weight: 300;" data-en="Redefining luxury event management in Sri Lanka with passion, precision, and a touch of modern elegance." data-si="ශ්‍රී ලංකාවේ සුඛෝපභෝගී සාද කළමනාකරණය නව මානයකට ගෙන යාම.">Redefining luxury event management in Sri Lanka with passion, precision, and a touch of modern elegance.</p>
     </section>
 
-    <!-- Our Journey Section -->
-    <section class="section-padding">
-        <div class="story-section">
-            <div class="story-image hover-link" data-aos="fade-right">
-                <img src="images/slide3.jpg" alt="Avera Events Story">
+    <!-- NEW: Interactive Process Timeline -->
+    <section class="section-padding" style="background-color: var(--dark-blue-bg); border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border);">
+        <h2 class="section-title" data-aos="fade-up" data-en="How We Create Magic" data-si="අපේ ක්‍රියාවලිය">How We Create Magic</h2>
+        <p style="color: var(--text-grey); letter-spacing: 1px; margin-bottom: 20px;" data-aos="fade-up" data-aos-delay="100" data-en="Our proven 4-step process to guarantee a flawless masterpiece." data-si="සාර්ථකත්වයට මඟ පෙන්වන අපගේ පියවර 4ක ක්‍රියාවලිය.">Our proven 4-step process to guarantee a flawless masterpiece.</p>
+        
+        <div class="timeline">
+            <!-- Step 1 -->
+            <div class="timeline-item timeline-left" data-aos="fade-right" data-aos-delay="200">
+                <div class="timeline-content hover-link">
+                    <span class="step">STEP 01</span>
+                    <h3 data-en="The Consultation" data-si="මූලික සාකච්ඡාව">The Consultation</h3>
+                    <p data-en="We sit down with you to understand your vision, your personality, and the exact vibe you want for your event. No details are too small." data-si="ඔබේ දැක්ම සහ පෞරුෂය අවබෝධ කරගැනීමට අපි ඔබ සමඟ සාකච්ඡා කරමු.">We sit down with you to understand your vision, your personality, and the exact vibe you want for your event.</p>
+                </div>
             </div>
-            <div class="story-content" data-aos="fade-left" data-aos-delay="200">
-                <h2>Our Journey to Perfection</h2>
-                <p>Avera Events was born from a shared passion for crafting unforgettable moments. We realized that true luxury isn't just about beautiful decorations; it's about the seamless experience, the meticulous attention to detail, and the peace of mind our clients feel on their most important days.</p>
-                <p>What started as a vision among four passionate individuals has now evolved into Sri Lanka's premium event management partnership. We blend modern aesthetics with flawless execution, ensuring that every event we touch becomes a masterpiece.</p>
-                <a href="portfolio.html" class="btn-gold-outline hover-link" style="margin-top: 20px;">View Our Masterpieces</a>
+            <!-- Step 2 -->
+            <div class="timeline-item timeline-right" data-aos="fade-left" data-aos-delay="300">
+                <div class="timeline-content hover-link">
+                    <span class="step">STEP 02</span>
+                    <h3 data-en="Concept & Design" data-si="සැලසුම් කිරීම">Concept & Design</h3>
+                    <p data-en="Our aesthetics team translates your ideas into a visual blueprint, selecting the finest color palettes, lighting, and floral arrangements." data-si="අපගේ නිර්මාණ කණ්ඩායම ඔබේ අදහස් දෘශ්‍ය සැලසුමක් බවට පත් කරයි.">Our aesthetics team translates your ideas into a visual blueprint, selecting the finest color palettes, lighting, and floral arrangements.</p>
+                </div>
             </div>
-        </div>
-    </section>
-
-    <!-- The Avera Standard -->
-    <section class="values-section section-padding">
-        <h2 class="section-title" data-aos="fade-up">The Avera Standard</h2>
-        <p style="color: var(--text-grey); letter-spacing: 1px;" data-aos="fade-up" data-aos-delay="100">The core principles that guide every event we curate.</p>
-        <div class="values-grid">
-            <div class="value-card hover-link" data-aos="fade-up" data-aos-delay="200">
-                <i class="fas fa-gem value-icon"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; font-size: 1.2rem;">UNCOMPROMISED ELEGANCE</h3>
-                <p style="color: var(--text-grey);">We source the finest materials and designs to create atmospheres that breathe luxury and sophistication.</p>
+            <!-- Step 3 -->
+            <div class="timeline-item timeline-left" data-aos="fade-right" data-aos-delay="400">
+                <div class="timeline-content hover-link">
+                    <span class="step">STEP 03</span>
+                    <h3 data-en="Meticulous Sourcing" data-si="ක්‍රමානුකූල සංවිධානය">Meticulous Sourcing</h3>
+                    <p data-en="We negotiate and coordinate with premium vendors, securing the absolute best resources across Sri Lanka to match your standard." data-si="ඔබගේ ප්‍රමිතියට ගැළපෙන පරිදි අපි ශ්‍රී ලංකාවේ හොඳම සම්පත් සපයන්නන් සම්බන්ධීකරණය කරමු.">We negotiate and coordinate with premium vendors, securing the absolute best resources across Sri Lanka to match your standard.</p>
+                </div>
             </div>
-            <div class="value-card hover-link" data-aos="fade-up" data-aos-delay="400">
-                <i class="fas fa-crosshairs value-icon"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; font-size: 1.2rem;">ABSOLUTE PRECISION</h3>
-                <p style="color: var(--text-grey);">From timing to table settings, every element is meticulously planned and executed without a single flaw.</p>
-            </div>
-            <div class="value-card hover-link" data-aos="fade-up" data-aos-delay="600">
-                <i class="fas fa-heart value-icon"></i>
-                <h3 style="color: var(--text-white); margin-bottom: 15px; font-family: 'Montserrat', sans-serif; letter-spacing: 2px; font-size: 1.2rem;">CLIENT-CENTRIC</h3>
-                <p style="color: var(--text-grey);">Your vision is our blueprint. We listen, adapt, and go above and beyond to exceed your expectations.</p>
+            <!-- Step 4 -->
+            <div class="timeline-item timeline-right" data-aos="fade-left" data-aos-delay="500">
+                <div class="timeline-content hover-link">
+                    <span class="step">STEP 04</span>
+                    <h3 data-en="Flawless Execution" data-si="දෝෂ රහිත ක්‍රියාත්මක කිරීම">Flawless Execution</h3>
+                    <p data-en="On the big day, you are a guest at your own event. We handle the groundwork, ensuring the timeline flows perfectly without a hitch." data-si="ඔබගේ විශේෂ දිනයේදී සියලුම මෙහෙයුම් කටයුතු අපි විසින් සිදුකරනු ලැබේ.">On the big day, you are a guest at your own event. We handle the groundwork, ensuring the timeline flows perfectly without a hitch.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Team Section -->
     <section class="section-padding">
-        <h2 class="section-title" data-aos="fade-up">Meet the Visionaries</h2>
-        <p style="color: var(--text-grey); letter-spacing: 1px;" data-aos="fade-up" data-aos-delay="100">The masterminds behind the scenes, bringing your dreams to life.</p>
-        
+        <h2 class="section-title" data-aos="fade-up" data-en="Meet the Visionaries" data-si="අපේ කණ්ඩායම">Meet the Visionaries</h2>
         <div class="team-grid">
-            <!-- Owner 1 -->
-            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="200">
-                <div class="team-image-box">
-                    <img src="images/owner1.jpg" alt="Pasindu Fonseka">
-                </div>
-                <div class="team-info">
-                    <h4>Pasindu Fonseka</h4>
-                    <p>Co-Founder &<br>Managing Director</p>
-                </div>
-            </div>
-
-            <!-- Owner 2 -->
-            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="300">
-                <div class="team-image-box">
-                    <img src="images/owner2.jpg" alt="Director 2">
-                </div>
-                <div class="team-info">
-                    <h4>නම මෙතනට</h4>
-                    <p>Co-Founder &<br>Executive Director</p>
-                </div>
-            </div>
-
-            <!-- Owner 3 -->
-            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="400">
-                <div class="team-image-box">
-                    <img src="images/owner3.jpg" alt="Director 3">
-                </div>
-                <div class="team-info">
-                    <h4>නම මෙතනට</h4>
-                    <p>Co-Founder &<br>Director of Event Ops</p>
-                </div>
-            </div>
-
-            <!-- Owner 4 -->
-            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="500">
-                <div class="team-image-box">
-                    <img src="images/owner4.jpg" alt="Director 4">
-                </div>
-                <div class="team-info">
-                    <h4>නම මෙතනට</h4>
-                    <p>Co-Founder &<br>Director of Aesthetics</p>
-                </div>
-            </div>
+            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="200"><div class="team-image-box"><img src="images/owner1.jpg" alt="Pasindu Fonseka"></div><div class="team-info"><h4>Pasindu Fonseka</h4><p>Managing Director</p></div></div>
+            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="300"><div class="team-image-box"><img src="images/owner2.jpg" alt="Director"></div><div class="team-info"><h4>Name Here</h4><p>Executive Director</p></div></div>
+            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="400"><div class="team-image-box"><img src="images/owner3.jpg" alt="Director"></div><div class="team-info"><h4>Name Here</h4><p>Director of Event Ops</p></div></div>
+            <div class="team-card hover-link" data-aos="zoom-in" data-aos-delay="500"><div class="team-image-box"><img src="images/owner4.jpg" alt="Director"></div><div class="team-info"><h4>Name Here</h4><p>Director of Aesthetics</p></div></div>
         </div>
     </section>
 
-    <!-- Bottom CTA Banner -->
-    <section class="section-padding" style="background: linear-gradient(rgba(4, 13, 26, 0.95), rgba(4, 13, 26, 0.95)); border-top: 1px solid var(--gold-border);">
-        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px;" data-aos="fade-up">Let's Create History Together</h2>
-        <p style="color: var(--text-grey); font-size: 1.1rem; margin-bottom: 30px;" data-aos="fade-up" data-aos-delay="100">Partner with Avera Events for a stress-free, luxurious event planning experience.</p>
-        <a href="contact.html" class="btn-gold hover-link" data-aos="fade-up" data-aos-delay="200">Contact The Team</a>
-    </section>
-
-    <!-- Footer -->
     <footer>
-        <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:20px; font-weight:400; letter-spacing:3px; text-decoration:none; display: block; margin-bottom: 20px;">AVERA EVENTS</a>
-        <p style="font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px;">&copy; 2026 Avera Events. All Rights Reserved.</p>
-        <p style="font-size: 0.85rem; color: var(--text-grey); margin-top: 5px; letter-spacing: 1px;">Kandy, Sri Lanka | +94 76 639 0768</p>
+        <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
+        <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 5px; letter-spacing: 1px;">Kandy, Sri Lanka | +94 76 639 0768</p>
     </footer>
 
-    <!-- Scripts (AOS, Cursor, Mobile Menu) -->
+    <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Init AOS Animations
-        AOS.init({ duration: 1000, once: true, offset: 100 });
+        AOS.init({ duration: 1000, once: true });
+        window.addEventListener('load', function() { setTimeout(function() { document.body.classList.add('loaded'); }, 1500); });
         
-        // 🟢 Custom Cursor Logic
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        
-        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
-            window.addEventListener('mousemove', (e) => {
-                cursorDot.style.left = `${e.clientX}px`;
-                cursorDot.style.top = `${e.clientY}px`;
-                setTimeout(() => {
-                    cursorOutline.style.left = `${e.clientX}px`;
-                    cursorOutline.style.top = `${e.clientY}px`;
-                }, 50);
-            });
-            
-            document.querySelectorAll('a, button, .hover-link').forEach(el => {
-                el.addEventListener('mouseenter', () => {
-                    cursorOutline.style.width = '60px';
-                    cursorOutline.style.height = '60px';
-                    cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)';
-                });
-                el.addEventListener('mouseleave', () => {
-                    cursorOutline.style.width = '35px';
-                    cursorOutline.style.height = '35px';
-                    cursorOutline.style.backgroundColor = 'transparent';
-                });
-            });
-        }
+        const cursorDot = document.querySelector('.cursor-dot'); const cursorOutline = document.querySelector('.cursor-outline');
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) { window.addEventListener('mousemove', (e) => { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50); }); document.querySelectorAll('a, button, .hover-link').forEach(el => { el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; }); el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; }); }); }
 
-        // Mobile Menu Logic
-        const mobileMenu = document.getElementById('mobile-menu'); 
-        const navMenu = document.getElementById('nav-menu'); 
-        const menuIcon = mobileMenu.querySelector('i');
-        
-        if(mobileMenu && navMenu) {
-            mobileMenu.addEventListener('click', () => {
-                navMenu.classList.toggle('active'); 
-                document.body.classList.toggle('no-scroll');
-                if(navMenu.classList.contains('active')) { 
-                    menuIcon.classList.remove('fa-bars'); 
-                    menuIcon.classList.add('fa-times'); 
-                } else { 
-                    menuIcon.classList.remove('fa-times'); 
-                    menuIcon.classList.add('fa-bars'); 
-                }
-            });
-            
-            document.querySelectorAll('.nav-list li a').forEach(link => {
-                link.addEventListener('click', () => { 
-                    navMenu.classList.remove('active'); 
-                    document.body.classList.remove('no-scroll'); 
-                    menuIcon.classList.remove('fa-times'); 
-                    menuIcon.classList.add('fa-bars'); 
-                });
+        const mobileMenu = document.getElementById('mobile-menu'); const navMenu = document.getElementById('nav-menu'); const menuIcon = mobileMenu.querySelector('i');
+        if(mobileMenu && navMenu) { mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } }); }
+
+        function switchLang(lang, btn) {
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+            document.querySelectorAll('[data-en]').forEach(el => {
+                if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } 
+                else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; }
             });
         }
     </script>
