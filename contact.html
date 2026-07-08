@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* Contact Page Specific Styles */
@@ -141,10 +143,13 @@
     </style>
 </head>
 <body>
-    <!-- Navigation (Updated with Mobile Menu) -->
+    <!-- Cursor Elements -->
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
+    <!-- Navigation -->
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
                 AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
             </a>
         </div>
@@ -154,20 +159,20 @@
         
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="contact.html" class="active">Contact Us</a></li>
+                <li><a href="index.html" class="hover-link">Home</a></li>
+                <li><a href="about.html" class="hover-link">About Us</a></li>
+                <li><a href="services.html" class="hover-link">Services</a></li>
+                <li><a href="portfolio.html" class="hover-link">Portfolio</a></li>
+                <li><a href="reviews.html" class="hover-link">Reviews</a></li>
+                <li><a href="contact.html" class="active hover-link">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Header Section -->
     <section class="section-padding" style="margin-top: 80px; padding-bottom: 40px;">
-        <h1 class="section-title">Get in Touch</h1>
-        <p style="color: var(--text-grey); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Drop us a message, and let's start planning your next masterpiece.</p>
+        <h1 class="section-title" data-aos="fade-down">Get in Touch</h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="color: var(--text-grey); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Drop us a message, and let's start planning your next masterpiece.</p>
     </section>
 
     <!-- Contact Form & Info Section -->
@@ -175,7 +180,7 @@
         <div class="contact-wrapper">
             
             <!-- Left: Contact Form -->
-            <div class="contact-form-card">
+            <div class="contact-form-card" data-aos="fade-right" data-aos-delay="300">
                 <form id="whatsappForm">
                     <div>
                         <label class="form-label">Your Name</label>
@@ -194,14 +199,14 @@
                         <textarea id="contactMessage" class="custom-input" rows="5" placeholder="Share your ideas, theme, or requirements..." required></textarea>
                     </div>
                     <!-- Submit Button -->
-                    <button type="submit" class="btn-gold" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                    <button type="submit" class="btn-gold hover-link" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
                         <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Send Inquiry via WhatsApp
                     </button>
                 </form>
             </div>
 
             <!-- Right: Direct Contact Info & Map -->
-            <div class="contact-info-card">
+            <div class="contact-info-card" data-aos="fade-left" data-aos-delay="500">
                 <div>
                     <h3 style="color: var(--accent-gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 1.8rem;">Direct Contact</h3>
                     
@@ -242,7 +247,7 @@
     </section>
 
     <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/94766390768?text=Hello%20Avera%20Events,%20I%20would%20like%20to%20know%20more%20about%20your%20services!" class="whatsapp-float" target="_blank">
+    <a href="https://wa.me/94766390768?text=Hello%20Avera%20Events,%20I%20would%20like%20to%20know%20more%20about%20your%20services!" class="whatsapp-float hover-link" target="_blank">
         <i class="fab fa-whatsapp"></i>
     </a>
 
@@ -252,8 +257,26 @@
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
-    <!-- Scripts (Mobile Menu & WhatsApp) -->
+    <!-- AOS & Custom Cursor Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        // Init AOS
+        AOS.init({ duration: 1000, once: true, offset: 50 });
+
+        // Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
+            });
+            document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; });
+                el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; });
+            });
+        }
+
         // Mobile Menu Logic
         document.addEventListener("DOMContentLoaded", function() {
             const mobileMenu = document.getElementById('mobile-menu');
