@@ -5,22 +5,117 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Client Reviews | Avera Events</title>
     <link rel="stylesheet" href="style.css">
+    <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
-        .review-form-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--gold-border); border-radius: 12px; padding: 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); max-width: 650px; margin: 0 auto; text-align: left; }
-        .review-form-card h3 { color: var(--accent-gold); font-size: 1.8rem; margin-bottom: 25px; text-align: center; }
-        .testimonial-card { background: linear-gradient(145deg, rgba(10,28,54,0.9), rgba(6,19,38,0.9)); border-top: 3px solid var(--accent-gold); padding: 40px 30px; border-radius: 8px; position: relative; text-align: center; transition: transform 0.3s; border-left: 1px solid var(--gold-border); border-right: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); box-shadow: 0 10px 20px rgba(0,0,0,0.3); }
-        .testimonial-card:hover { transform: translateY(-5px); }
-        .quote-icon { font-size: 5rem; color: rgba(229, 169, 61, 0.1); position: absolute; top: -10px; left: 20px; font-family: 'Playfair Display', serif; line-height: 1; }
-        .reviews-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
+        /* Form Card Styling */
+        .review-form-card { 
+            background: rgba(255, 255, 255, 0.03); 
+            border: 1px solid var(--gold-border); 
+            border-radius: 12px; 
+            padding: 50px 40px; 
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5); 
+            backdrop-filter: blur(10px); 
+            max-width: 700px; 
+            margin: 0 auto; 
+            text-align: left; 
+        }
+        
+        .review-form-card h3 { 
+            color: var(--accent-gold); 
+            font-size: 2rem; 
+            margin-bottom: 30px; 
+            text-align: center; 
+            font-family: 'Playfair Display', serif;
+        }
+
+        /* Custom Inputs (Same Premium Look as Contact Page) */
+        .custom-input {
+            width: 100%;
+            padding: 16px;
+            background: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(229, 169, 61, 0.3);
+            color: var(--text-white);
+            border-radius: 6px;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            margin-bottom: 25px;
+        }
+
+        .custom-input:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 10px rgba(229, 169, 61, 0.2);
+            background: rgba(0, 0, 0, 0.4);
+        }
+
+        .custom-input::placeholder { color: rgba(255, 255, 255, 0.3); }
+
+        .form-label {
+            display: block;
+            margin-bottom: 10px;
+            color: var(--accent-gold);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Testimonial Cards Layout */
+        .reviews-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); 
+            gap: 40px; 
+            max-width: 1200px; 
+            margin: 0 auto; 
+        }
+
+        .testimonial-card { 
+            background: linear-gradient(145deg, rgba(10,28,54,0.9), rgba(6,19,38,0.9)); 
+            border-top: 3px solid var(--accent-gold); 
+            padding: 40px 30px; 
+            border-radius: 8px; 
+            position: relative; 
+            text-align: center; 
+            transition: transform 0.3s; 
+            border-left: 1px solid var(--gold-border); 
+            border-right: 1px solid var(--gold-border); 
+            border-bottom: 1px solid var(--gold-border); 
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3); 
+        }
+        
+        .testimonial-card:hover { transform: translateY(-8px); border-color: var(--accent-gold); }
+        
+        .quote-icon { 
+            font-size: 5rem; 
+            color: rgba(229, 169, 61, 0.1); 
+            position: absolute; 
+            top: -10px; 
+            left: 20px; 
+            font-family: 'Playfair Display', serif; 
+            line-height: 1; 
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 768px) {
+            .review-form-card { padding: 40px 25px; }
+            .review-form-card h3 { font-size: 1.8rem; }
+            .testimonial-card { padding: 35px 25px; }
+            .reviews-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+    <!-- Navigation with Mobile Menu -->
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
+            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
+            </a>
         </div>
+        
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        
         <nav id="nav-menu">
             <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
@@ -33,17 +128,25 @@
         </nav>
     </header>
 
-    <section class="section-padding" style="margin-top: 80px; padding-bottom: 30px;">
+    <!-- Header Section -->
+    <section class="section-padding" style="margin-top: 80px; padding-bottom: 40px;">
         <h1 class="section-title">Client Love</h1>
-        <p style="color: var(--text-grey); margin-bottom: 20px; font-size: 1.1rem;">Read what our clients have to say, or share your own Avera experience with us.</p>
+        <p style="color: var(--text-grey); margin-bottom: 20px; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Read what our clients have to say, or share your own Avera experience with us.</p>
     </section>
 
-    <section class="section-padding" style="padding-top: 0; padding-bottom: 60px;">
+    <!-- Review Form Section -->
+    <section class="section-padding" style="padding-top: 0; padding-bottom: 80px;">
         <div class="review-form-card">
             <h3>Leave a Review</h3>
             <form id="reviewForm">
-                <div><label class="form-label">Your Name</label><input type="text" id="reviewerName" class="custom-input" placeholder="e.g. Sarah & John" required></div>
-                <div><label class="form-label">Event Type</label><input type="text" id="reviewEvent" class="custom-input" placeholder="e.g. Elegant Wedding Setup" required></div>
+                <div>
+                    <label class="form-label">Your Name</label>
+                    <input type="text" id="reviewerName" class="custom-input" placeholder="e.g. Sarah & John" required>
+                </div>
+                <div>
+                    <label class="form-label">Event Type</label>
+                    <input type="text" id="reviewEvent" class="custom-input" placeholder="e.g. Elegant Wedding Setup" required>
+                </div>
                 <div>
                     <label class="form-label">Rating</label>
                     <select id="reviewRating" class="custom-input" style="cursor: pointer;" required>
@@ -52,67 +155,154 @@
                         <option value="⭐⭐⭐" style="color: black;">⭐⭐⭐ (3 Stars) - Good</option>
                     </select>
                 </div>
-                <div><label class="form-label">Your Experience</label><textarea id="reviewMessage" class="custom-input" rows="4" placeholder="Tell us about the magic we created together..." required></textarea></div>
-                <button type="submit" class="btn-gold" id="submitBtn" style="width: 100%; padding: 16px; font-size: 1rem;">Publish My Review</button>
-                <p id="successMessage" style="color: #F3C75F; margin-top: 20px; display: none; text-align: center; font-weight: 500;">✨ Thank you! Your review has been published.</p>
+                <div>
+                    <label class="form-label">Your Experience</label>
+                    <textarea id="reviewMessage" class="custom-input" rows="5" placeholder="Tell us about the magic we created together..." required></textarea>
+                </div>
+                <button type="submit" class="btn-gold" id="submitBtn" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                    <i class="fas fa-paper-plane"></i> Publish My Review
+                </button>
+                <p id="successMessage" style="color: #4BB543; margin-top: 25px; display: none; text-align: center; font-weight: 500; font-size: 1.1rem;">
+                    ✨ Thank you! Your review has been published successfully.
+                </p>
             </form>
         </div>
     </section>
 
-    <section class="section-padding" style="padding-top: 20px; background-color: var(--dark-blue-bg);">
-        <h2 class="section-title" style="font-size: 2rem; margin-bottom: 50px;">Recent Experiences</h2>
+    <!-- Dynamic Reviews Grid -->
+    <section class="section-padding" style="padding-top: 80px; background-color: var(--dark-blue-bg); border-top: 1px solid var(--gold-border);">
+        <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 60px;">Recent Experiences</h2>
         <div class="reviews-grid" id="reviewsContainer">
-            <p style="color: var(--text-grey); grid-column: 1 / -1;">Fetching latest masterpieces...</p>
+            <p style="color: var(--text-grey); grid-column: 1 / -1; font-size: 1.2rem;">Fetching latest masterpieces...</p>
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
-    <!-- Scripts (Mobile Menu & Firebase) -->
+    <!-- Mobile Menu Script -->
     <script>
-        // Mobile Menu
         document.addEventListener("DOMContentLoaded", function() {
-            const mobileMenu = document.getElementById('mobile-menu'); const navMenu = document.getElementById('nav-menu'); const menuIcon = mobileMenu.querySelector('i');
+            const mobileMenu = document.getElementById('mobile-menu'); 
+            const navMenu = document.getElementById('nav-menu'); 
+            const menuIcon = mobileMenu.querySelector('i');
+            
             if(mobileMenu && navMenu) {
-                mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } });
-                document.querySelectorAll('.nav-list li a').forEach(link => { link.addEventListener('click', () => { navMenu.classList.remove('active'); document.body.classList.remove('no-scroll'); menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); }); });
+                mobileMenu.addEventListener('click', () => { 
+                    navMenu.classList.toggle('active'); 
+                    document.body.classList.toggle('no-scroll'); 
+                    if(navMenu.classList.contains('active')) { 
+                        menuIcon.classList.remove('fa-bars'); 
+                        menuIcon.classList.add('fa-times'); 
+                    } else { 
+                        menuIcon.classList.remove('fa-times'); 
+                        menuIcon.classList.add('fa-bars'); 
+                    } 
+                });
+                
+                document.querySelectorAll('.nav-list li a').forEach(link => { 
+                    link.addEventListener('click', () => { 
+                        navMenu.classList.remove('active'); 
+                        document.body.classList.remove('no-scroll'); 
+                        menuIcon.classList.remove('fa-times'); 
+                        menuIcon.classList.add('fa-bars'); 
+                    }); 
+                });
             }
         });
     </script>
+
+    <!-- Firebase SDK & Logic (Cleanly Formatted) -->
     <script type="module">
-        // Firebase
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyAv-SoG3q9eOvcGdiBgxtS-GGel5KmbHlc", authDomain: "avera-events.firebaseapp.com", projectId: "avera-events", storageBucket: "avera-events.firebasestorage.app", messagingSenderId: "295738255118", appId: "1:295738255118:web:e0b43d84703799c6bc195f", measurementId: "G-V5PKFT57RR" };
-        const app = initializeApp(firebaseConfig); const db = getFirestore(app);
+        const firebaseConfig = { 
+            apiKey: "AIzaSyAv-SoG3q9eOvcGdiBgxtS-GGel5KmbHlc", 
+            authDomain: "avera-events.firebaseapp.com", 
+            projectId: "avera-events", 
+            storageBucket: "avera-events.firebasestorage.app", 
+            messagingSenderId: "295738255118", 
+            appId: "1:295738255118:web:e0b43d84703799c6bc195f", 
+            measurementId: "G-V5PKFT57RR" 
+        };
+        
+        const app = initializeApp(firebaseConfig); 
+        const db = getFirestore(app);
 
+        // Fetch and display reviews from Firestore
         async function loadReviews() {
             const container = document.getElementById("reviewsContainer");
             try {
                 const q = query(collection(db, "reviews"), orderBy("createdAt", "desc"));
                 const querySnapshot = await getDocs(q);
+                
                 container.innerHTML = ""; 
-                if (querySnapshot.empty) { container.innerHTML = "<p style='color: var(--text-grey); grid-column: 1 / -1;'>Be the first to share your Avera experience!</p>"; return; }
+                
+                if (querySnapshot.empty) { 
+                    container.innerHTML = "<p style='color: var(--text-grey); grid-column: 1 / -1; font-size: 1.1rem;'>Be the first to share your Avera experience!</p>"; 
+                    return; 
+                }
+                
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
-                    const reviewCard = `<div class="testimonial-card"><div class="quote-icon">&ldquo;</div><div style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 2px;">${data.rating}</div><p style="font-style: italic; font-size: 1.05rem; margin-bottom: 25px; color: var(--text-white); line-height: 1.8; position: relative; z-index: 2;">"${data.message}"</p><h4 style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px;">- ${data.name}</h4><p style="color: var(--text-grey); font-size: 0.85rem; margin-top: 5px;">${data.event}</p></div>`;
+                    const reviewCard = `
+                        <div class="testimonial-card">
+                            <div class="quote-icon">&ldquo;</div>
+                            <div style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 2px;">${data.rating}</div>
+                            <p style="font-style: italic; font-size: 1.05rem; margin-bottom: 25px; color: var(--text-white); line-height: 1.8; position: relative; z-index: 2;">"${data.message}"</p>
+                            <h4 style="color: var(--accent-gold); text-transform: uppercase; letter-spacing: 1px;">- ${data.name}</h4>
+                            <p style="color: var(--text-grey); font-size: 0.85rem; margin-top: 5px;">${data.event}</p>
+                        </div>
+                    `;
                     container.innerHTML += reviewCard;
                 });
-            } catch (error) { console.error(error); container.innerHTML = "<p style='color: #ff4c4c; grid-column: 1 / -1;'>Error loading reviews. Please check your connection.</p>"; }
+            } catch (error) { 
+                console.error("Firebase Error:", error); 
+                container.innerHTML = "<p style='color: #ff4c4c; grid-column: 1 / -1;'>Error loading reviews. Please check your connection.</p>"; 
+            }
         }
 
+        // Submit new review to Firestore
         document.getElementById("reviewForm").addEventListener("submit", async (e) => {
-            e.preventDefault(); const submitBtn = document.getElementById("submitBtn"); submitBtn.textContent = "Publishing..."; submitBtn.disabled = true;
+            e.preventDefault(); 
+            const submitBtn = document.getElementById("submitBtn"); 
+            submitBtn.innerHTML = "<i class='fas fa-spinner fa-spin'></i> Publishing..."; 
+            submitBtn.disabled = true;
+            
             try {
-                await addDoc(collection(db, "reviews"), { name: document.getElementById("reviewerName").value, event: document.getElementById("reviewEvent").value, rating: document.getElementById("reviewRating").value, message: document.getElementById("reviewMessage").value, createdAt: serverTimestamp() });
-                document.getElementById("successMessage").style.display = "block"; document.getElementById("reviewForm").reset(); loadReviews();
-                setTimeout(() => { document.getElementById("successMessage").style.display = "none"; submitBtn.textContent = "Publish My Review"; submitBtn.disabled = false; }, 3000);
-            } catch (error) { console.error(error); alert("Error! Check Firebase rules."); submitBtn.textContent = "Publish My Review"; submitBtn.disabled = false; }
+                await addDoc(collection(db, "reviews"), { 
+                    name: document.getElementById("reviewerName").value, 
+                    event: document.getElementById("reviewEvent").value, 
+                    rating: document.getElementById("reviewRating").value, 
+                    message: document.getElementById("reviewMessage").value, 
+                    createdAt: serverTimestamp() 
+                });
+                
+                document.getElementById("successMessage").style.display = "block"; 
+                document.getElementById("reviewForm").reset(); 
+                
+                // Reload reviews to show the new one
+                loadReviews();
+                
+                setTimeout(() => { 
+                    document.getElementById("successMessage").style.display = "none"; 
+                    submitBtn.innerHTML = "<i class='fas fa-paper-plane'></i> Publish My Review"; 
+                    submitBtn.disabled = false; 
+                }, 4000);
+                
+            } catch (error) { 
+                console.error("Submission Error:", error); 
+                alert("Oops! Something went wrong. Please check your Firebase rules."); 
+                submitBtn.innerHTML = "<i class='fas fa-paper-plane'></i> Publish My Review"; 
+                submitBtn.disabled = false; 
+            }
         });
+
+        // Load reviews when page loads
         document.addEventListener("DOMContentLoaded", loadReviews);
     </script>
 </body>
