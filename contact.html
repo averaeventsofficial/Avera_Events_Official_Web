@@ -14,7 +14,7 @@
             display: grid;
             grid-template-columns: 3fr 2fr;
             gap: 50px;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
             align-items: stretch;
         }
@@ -37,7 +37,7 @@
             text-align: left;
             display: flex;
             flex-direction: column;
-            justify-content: center;
+            justify-content: space-between;
             box-shadow: 0 10px 30px rgba(0,0,0,0.4);
             border-left: 1px solid var(--gold-border);
             border-right: 1px solid var(--gold-border);
@@ -78,7 +78,7 @@
         .info-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 35px;
+            margin-bottom: 30px;
         }
 
         .info-icon {
@@ -126,22 +126,33 @@
             color: #FFF;
         }
 
+        /* Responsive Design Settings */
         @media (max-width: 992px) {
             .contact-wrapper { grid-template-columns: 1fr; }
+            .contact-form-card, .contact-info-card { padding: 40px 30px; }
             .whatsapp-float { bottom: 20px; right: 20px; width: 50px; height: 50px; font-size: 30px; }
+        }
+        
+        @media (max-width: 576px) {
+            .contact-form-card, .contact-info-card { padding: 30px 20px; }
+            .section-title { font-size: 2.3rem; }
         }
     </style>
 </head>
 <body>
-    <!-- Navigation -->
+    <!-- Navigation (Updated with Mobile Menu) -->
     <header>
         <div class="logo">
             <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
                 AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
             </a>
         </div>
-        <nav>
-            <ul>
+        
+        <!-- Hamburger Icon -->
+        <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
+        
+        <nav id="nav-menu">
+            <ul class="nav-list">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="about.html">About Us</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -155,11 +166,11 @@
     <!-- Header Section -->
     <section class="section-padding" style="margin-top: 80px; padding-bottom: 40px;">
         <h1 class="section-title">Get in Touch</h1>
-        <p style="color: var(--text-grey); font-size: 1.1rem;">Drop us a message, and let's start planning your next masterpiece.</p>
+        <p style="color: var(--text-grey); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Drop us a message, and let's start planning your next masterpiece.</p>
     </section>
 
     <!-- Contact Form & Info Section -->
-    <section class="section-padding" style="padding-top: 0;">
+    <section class="section-padding" style="padding-top: 0; padding-bottom: 80px;">
         <div class="contact-wrapper">
             
             <!-- Left: Contact Form -->
@@ -188,34 +199,41 @@
                 </form>
             </div>
 
-            <!-- Right: Direct Contact Info -->
+            <!-- Right: Direct Contact Info & Map -->
             <div class="contact-info-card">
-                <h3 style="color: var(--accent-gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 1.8rem;">Direct Contact</h3>
-                
-                <div class="info-item">
-                    <i class="fab fa-whatsapp info-icon"></i>
-                    <div class="info-text">
-                        <h4>WhatsApp / Call</h4>
-                        <p>+94 76 639 0768</p>
-                        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 5px;">We usually reply within 2 hours.</p>
+                <div>
+                    <h3 style="color: var(--accent-gold); margin-bottom: 30px; font-family: 'Playfair Display', serif; font-size: 1.8rem;">Direct Contact</h3>
+                    
+                    <div class="info-item">
+                        <i class="fab fa-whatsapp info-icon"></i>
+                        <div class="info-text">
+                            <h4>WhatsApp / Call</h4>
+                            <p>+94 76 639 0768</p>
+                            <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 5px;">We usually reply within 2 hours.</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item">
+                        <i class="far fa-envelope info-icon"></i>
+                        <div class="info-text">
+                            <h4>Email Us</h4>
+                            <p>avera.eventsofficial@gmail.com</p>
+                        </div>
+                    </div>
+
+                    <div class="info-item" style="margin-bottom: 0;">
+                        <i class="fas fa-map-marker-alt info-icon"></i>
+                        <div class="info-text">
+                            <h4>Location</h4>
+                            <p>Kandy, Sri Lanka</p>
+                            <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 5px;">Available for events island-wide.</p>
+                        </div>
                     </div>
                 </div>
 
-                <div class="info-item">
-                    <i class="far fa-envelope info-icon"></i>
-                    <div class="info-text">
-                        <h4>Email Us</h4>
-                        <p>avera.eventsofficial@gmail.com</p>
-                    </div>
-                </div>
-
-                <div class="info-item">
-                    <i class="fas fa-map-marker-alt info-icon"></i>
-                    <div class="info-text">
-                        <h4>Location</h4>
-                        <p>Kandy, Sri Lanka</p>
-                        <p style="font-size: 0.85rem; opacity: 0.7; margin-top: 5px;">Available for events island-wide.</p>
-                    </div>
+                <!-- Premium Dark Mode Embedded Map -->
+                <div style="margin-top: 30px; border-radius: 8px; overflow: hidden; border: 1px solid var(--gold-border);">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1m3!1d126743.58585973344!2d80.56214534158485!3d7.294628588825227!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae366266498acd3%3A0x411a3818a1e03c35!2sKandy!5e0!3m2!1sen!2slk!4v1700000000000!5m2!1sen!2slk" width="100%" height="200" style="border:0; filter: invert(90%) hue-rotate(180deg) brightness(80%) contrast(120%);" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
             </div>
             
@@ -233,28 +251,51 @@
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
-    <!-- JavaScript to Handle WhatsApp Redirection -->
+    <!-- Scripts (Mobile Menu & WhatsApp) -->
     <script>
-        document.getElementById("whatsappForm").addEventListener("submit", function(e) {
-            e.preventDefault(); // Prevent standard form submission
+        // Mobile Menu Logic
+        document.addEventListener("DOMContentLoaded", function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navMenu = document.getElementById('nav-menu');
+            const menuIcon = mobileMenu.querySelector('i');
             
-            // Get form values
+            if(mobileMenu && navMenu) {
+                mobileMenu.addEventListener('click', () => {
+                    navMenu.classList.toggle('active');
+                    document.body.classList.toggle('no-scroll');
+                    if(navMenu.classList.contains('active')) {
+                        menuIcon.classList.remove('fa-bars');
+                        menuIcon.classList.add('fa-times');
+                    } else {
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    }
+                });
+                
+                document.querySelectorAll('.nav-list li a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        navMenu.classList.remove('active');
+                        document.body.classList.remove('no-scroll');
+                        menuIcon.classList.remove('fa-times');
+                        menuIcon.classList.add('fa-bars');
+                    });
+                });
+            }
+        });
+
+        // WhatsApp Form Logic
+        document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+            e.preventDefault(); 
+            
             const name = document.getElementById("contactName").value;
             const email = document.getElementById("contactEmail").value;
             const eventInfo = document.getElementById("contactEvent").value;
             const message = document.getElementById("contactMessage").value;
             
-            // Your WhatsApp Number (Without + or 00)
             const waNumber = "94766390768";
-            
-            // Format the WhatsApp Message
             const waText = `✨ *New Inquiry from Avera Events Website* ✨%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Event Details:* ${eventInfo}%0A*Vision/Message:* ${message}`;
             
-            // Create the WhatsApp API URL
-            const waUrl = `https://wa.me/${waNumber}?text=${waText}`;
-            
-            // Redirect user to WhatsApp in a new tab
-            window.open(waUrl, '_blank');
+            window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
         });
     </script>
 </body>
