@@ -8,6 +8,8 @@
     <link rel="stylesheet" href="style.css">
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
         /* Form Card Styling */
@@ -107,10 +109,13 @@
     </style>
 </head>
 <body>
+    <!-- Cursor Elements -->
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
     <!-- Navigation with Mobile Menu -->
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
+            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
                 AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
             </a>
         </div>
@@ -119,25 +124,25 @@
         
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="reviews.html" class="active">Reviews</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="index.html" class="hover-link">Home</a></li>
+                <li><a href="about.html" class="hover-link">About Us</a></li>
+                <li><a href="services.html" class="hover-link">Services</a></li>
+                <li><a href="portfolio.html" class="hover-link">Portfolio</a></li>
+                <li><a href="reviews.html" class="active hover-link">Reviews</a></li>
+                <li><a href="contact.html" class="hover-link">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Header Section -->
     <section class="section-padding" style="margin-top: 80px; padding-bottom: 40px;">
-        <h1 class="section-title">Client Love</h1>
-        <p style="color: var(--text-grey); margin-bottom: 20px; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Read what our clients have to say, or share your own Avera experience with us.</p>
+        <h1 class="section-title" data-aos="fade-down">Client Love</h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="color: var(--text-grey); margin-bottom: 20px; font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Read what our clients have to say, or share your own Avera experience with us.</p>
     </section>
 
     <!-- Review Form Section -->
     <section class="section-padding" style="padding-top: 0; padding-bottom: 80px;">
-        <div class="review-form-card">
+        <div class="review-form-card" data-aos="zoom-in" data-aos-delay="300">
             <h3>Leave a Review</h3>
             <form id="reviewForm">
                 <div>
@@ -160,7 +165,7 @@
                     <label class="form-label">Your Experience</label>
                     <textarea id="reviewMessage" class="custom-input" rows="5" placeholder="Tell us about the magic we created together..." required></textarea>
                 </div>
-                <button type="submit" class="btn-gold" id="submitBtn" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                <button type="submit" class="btn-gold hover-link" id="submitBtn" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
                     <i class="fas fa-paper-plane"></i> Publish My Review
                 </button>
                 <p id="successMessage" style="color: #4BB543; margin-top: 25px; display: none; text-align: center; font-weight: 500; font-size: 1.1rem;">
@@ -172,8 +177,8 @@
 
     <!-- Dynamic Reviews Grid -->
     <section class="section-padding" style="padding-top: 80px; background-color: var(--dark-blue-bg); border-top: 1px solid var(--gold-border);">
-        <h2 class="section-title" style="font-size: 2.5rem; margin-bottom: 60px;">Recent Experiences</h2>
-        <div class="reviews-grid" id="reviewsContainer">
+        <h2 class="section-title" data-aos="fade-up" style="font-size: 2.5rem; margin-bottom: 60px;">Recent Experiences</h2>
+        <div class="reviews-grid" id="reviewsContainer" data-aos="fade-up" data-aos-delay="200">
             <p style="color: var(--text-grey); grid-column: 1 / -1; font-size: 1.2rem;">Fetching latest masterpieces...</p>
         </div>
     </section>
@@ -184,8 +189,24 @@
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- AOS & Custom Cursor Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init({ duration: 1000, once: true, offset: 50 });
+        
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
+            });
+            document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; });
+                el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; });
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const mobileMenu = document.getElementById('mobile-menu'); 
             const navMenu = document.getElementById('nav-menu'); 
@@ -216,7 +237,7 @@
         });
     </script>
 
-    <!-- Firebase SDK & Logic (Cleanly Formatted) -->
+    <!-- Firebase SDK & Logic -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query, orderBy } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
@@ -251,7 +272,7 @@
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     const reviewCard = `
-                        <div class="testimonial-card">
+                        <div class="testimonial-card hover-link" data-aos="fade-up">
                             <div class="quote-icon">&ldquo;</div>
                             <div style="color: var(--accent-gold); font-size: 1.2rem; margin-bottom: 15px; letter-spacing: 2px;">${data.rating}</div>
                             <p style="font-style: italic; font-size: 1.05rem; margin-bottom: 25px; color: var(--text-white); line-height: 1.8; position: relative; z-index: 2;">"${data.message}"</p>
