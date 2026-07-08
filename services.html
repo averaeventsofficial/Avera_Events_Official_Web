@@ -7,6 +7,8 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         .page-hero { margin-top: 80px; padding: 100px 20px; background: linear-gradient(rgba(10, 28, 54, 0.85), rgba(10, 28, 54, 0.95)), url('images/slide5.jpg') center/cover; text-align: center; border-bottom: 1px solid var(--gold-border); }
         .page-hero-content { max-width: 800px; margin: 0 auto; }
@@ -34,35 +36,38 @@
     </style>
 </head>
 <body>
+    <!-- Cursor Elements -->
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
+            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
         </div>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html" class="active">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="index.html" class="hover-link">Home</a></li>
+                <li><a href="about.html" class="hover-link">About Us</a></li>
+                <li><a href="services.html" class="active hover-link">Services</a></li>
+                <li><a href="portfolio.html" class="hover-link">Portfolio</a></li>
+                <li><a href="reviews.html" class="hover-link">Reviews</a></li>
+                <li><a href="contact.html" class="hover-link">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="page-hero">
         <div class="page-hero-content">
-            <h1>Boutique Event Services</h1>
-            <p>Specializing in intimate, highly curated, and bespoke gatherings. We focus on the finest details, ensuring your exclusive events are flawlessly executed without the stress.</p>
+            <h1 data-aos="fade-down">Boutique Event Services</h1>
+            <p data-aos="fade-up" data-aos-delay="200">Specializing in intimate, highly curated, and bespoke gatherings. We focus on the finest details, ensuring your exclusive events are flawlessly executed without the stress.</p>
         </div>
     </section>
 
     <section class="services-wrapper section-padding">
         <!-- Service 1: Intimate Social Gatherings -->
         <div class="service-row">
-            <div class="service-image"><img src="images/slide1.jpg" alt="Intimate Social Gatherings"></div>
-            <div class="service-text">
+            <div class="service-image hover-link" data-aos="fade-right"><img src="images/slide1.jpg" alt="Intimate Social Gatherings"></div>
+            <div class="service-text" data-aos="fade-left" data-aos-delay="200">
                 <h2><span>01.</span> Intimate Social Gatherings</h2>
                 <p class="service-intro">Perfect for those who prefer quality over quantity. We design elegant, small-scale parties that feel personal, exclusive, and breathtakingly beautiful.</p>
                 <ul class="features-list">
@@ -75,8 +80,8 @@
 
         <!-- Service 2: Boutique Corporate Meetings -->
         <div class="service-row reverse">
-            <div class="service-image"><img src="images/slide2.jpg" alt="Boutique Corporate Meetings"></div>
-            <div class="service-text">
+            <div class="service-image hover-link" data-aos="fade-left"><img src="images/slide2.jpg" alt="Boutique Corporate Meetings"></div>
+            <div class="service-text" data-aos="fade-right" data-aos-delay="200">
                 <h2><span>02.</span> Boutique Corporate Meetings</h2>
                 <p class="service-intro">Elevate your professional gatherings. We provide high-end, distraction-free environments for your most important business discussions.</p>
                 <ul class="features-list">
@@ -89,8 +94,8 @@
 
         <!-- Service 3: Virtual & Hybrid Events -->
         <div class="service-row">
-            <div class="service-image"><img src="images/slide3.jpg" alt="Virtual and Hybrid Events"></div>
-            <div class="service-text">
+            <div class="service-image hover-link" data-aos="fade-right"><img src="images/slide3.jpg" alt="Virtual and Hybrid Events"></div>
+            <div class="service-text" data-aos="fade-left" data-aos-delay="200">
                 <h2><span>03.</span> Virtual & Hybrid Events</h2>
                 <p class="service-intro">Seamlessly connecting your audience. We provide high-quality virtual event hosting with zero interruptions, powered by Premium Zoom.</p>
                 <ul class="features-list">
@@ -103,8 +108,8 @@
 
         <!-- Service 4: Romantic Proposals & Pop-ups -->
         <div class="service-row reverse">
-            <div class="service-image"><img src="images/slide4.jpg" alt="Romantic Proposals and Pop-ups"></div>
-            <div class="service-text">
+            <div class="service-image hover-link" data-aos="fade-left"><img src="images/slide4.jpg" alt="Romantic Proposals and Pop-ups"></div>
+            <div class="service-text" data-aos="fade-right" data-aos-delay="200">
                 <h2><span>04.</span> Romantic Proposals & Pop-ups</h2>
                 <p class="service-intro">For life's most magical moments. We create picture-perfect, temporary setups that guarantee a breathtaking experience and stunning photographs.</p>
                 <ul class="features-list">
@@ -118,20 +123,20 @@
 
     <!-- Why Choose Us? -->
     <section class="why-choose-us section-padding">
-        <h2 class="section-title">The Avera Advantage</h2>
-        <p style="color: var(--text-grey); margin-bottom: 50px;">Why our boutique approach is perfect for your next event.</p>
+        <h2 class="section-title" data-aos="fade-up">The Avera Advantage</h2>
+        <p style="color: var(--text-grey); margin-bottom: 50px;" data-aos="fade-up" data-aos-delay="100">Why our boutique approach is perfect for your next event.</p>
         <div class="badges-container">
-            <div class="badge-card"><div class="badge-icon">🔍</div><h3>Detail Obsessed</h3><p>By focusing on smaller events, we guarantee absolute perfection in every tiny detail, from napkin folds to lighting.</p></div>
-            <div class="badge-card"><div class="badge-icon">💎</div><h3>Exclusive Vibe</h3><p>We transform ordinary spaces into luxurious, highly personalized environments that feel incredibly premium.</p></div>
-            <div class="badge-card"><div class="badge-icon">🤝</div><h3>Stress-Free Planning</h3><p>We handle the heavy lifting, allowing you to actually sit back and enjoy your intimate gathering with your guests.</p></div>
+            <div class="badge-card" data-aos="fade-up" data-aos-delay="200"><div class="badge-icon">🔍</div><h3>Detail Obsessed</h3><p>By focusing on smaller events, we guarantee absolute perfection in every tiny detail, from napkin folds to lighting.</p></div>
+            <div class="badge-card" data-aos="fade-up" data-aos-delay="300"><div class="badge-icon">💎</div><h3>Exclusive Vibe</h3><p>We transform ordinary spaces into luxurious, highly personalized environments that feel incredibly premium.</p></div>
+            <div class="badge-card" data-aos="fade-up" data-aos-delay="400"><div class="badge-icon">🤝</div><h3>Stress-Free Planning</h3><p>We handle the heavy lifting, allowing you to actually sit back and enjoy your intimate gathering with your guests.</p></div>
         </div>
     </section>
 
     <!-- Call to Action -->
     <section class="section-padding" style="background: linear-gradient(rgba(6, 19, 38, 0.9), rgba(6, 19, 38, 0.9));">
-        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px;">Ready for an Unforgettable Experience?</h2>
-        <p style="color: var(--text-grey); font-size: 1.1rem; margin-bottom: 30px;">Let us craft a bespoke, intimate masterpiece just for you.</p>
-        <a href="contact.html" class="btn-gold">Book Your Consultation</a>
+        <h2 style="font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 20px;" data-aos="fade-up">Ready for an Unforgettable Experience?</h2>
+        <p style="color: var(--text-grey); font-size: 1.1rem; margin-bottom: 30px;" data-aos="fade-up" data-aos-delay="100">Let us craft a bespoke, intimate masterpiece just for you.</p>
+        <a href="contact.html" class="btn-gold hover-link" data-aos="fade-up" data-aos-delay="200">Book Your Consultation</a>
     </section>
 
     <footer>
@@ -139,8 +144,24 @@
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
-    <!-- Mobile Menu Script -->
+    <!-- AOS & Custom Cursor Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init({ duration: 1000, once: true, offset: 50 });
+        
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
+            });
+            document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; });
+                el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; });
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const mobileMenu = document.getElementById('mobile-menu');
             const navMenu = document.getElementById('nav-menu');
