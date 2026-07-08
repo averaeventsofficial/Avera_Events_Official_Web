@@ -4,53 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Event Planning | Avera Events</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
     <style>
         .video-hero { height: 100vh; position: relative; overflow: hidden; display: flex; flex-direction: column; justify-content: center; align-items: center; }
         .bg-video { position: absolute; top: 50%; left: 50%; min-width: 100%; min-height: 100%; width: auto; height: auto; transform: translate(-50%, -50%); z-index: 0; object-fit: cover; }
-        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(10, 28, 54, 0.65), rgba(10, 28, 54, 0.95)); z-index: 1; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(rgba(4, 13, 26, 0.7), rgba(4, 13, 26, 0.95)); z-index: 1; }
         .hero-content { position: relative; z-index: 2; text-align: center; width: 100%; padding: 0 20px; }
-        .hero-content h1 { font-size: 4.5rem; color: var(--accent-gold); text-shadow: 0 4px 15px rgba(0,0,0,0.4); }
-        .typing-container { font-size: 2rem; margin: 25px 0 45px 0; font-family: 'Playfair Display', serif; min-height: 45px; letter-spacing: 0.5px; }
-        .static-text { color: var(--text-white); } .dynamic-text { color: var(--accent-gold); font-weight: 600; }
-        .cursor { color: var(--accent-gold); font-weight: 600; animation: blink 0.8s infinite; }
+        .hero-content h1 { font-size: 5rem; color: var(--accent-gold); text-shadow: 0 10px 30px rgba(0,0,0,0.5); font-style: italic; }
+        .typing-container { font-size: 1.5rem; margin: 30px 0 50px 0; font-family: 'Montserrat', sans-serif; font-weight: 300; min-height: 45px; letter-spacing: 2px; text-transform: uppercase; }
+        .static-text { color: var(--text-grey); } .dynamic-text { color: var(--text-white); font-weight: 400; }
+        .cursor { color: var(--accent-gold); font-weight: 400; animation: blink 0.8s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
-        .badges-section { background-color: var(--dark-blue-bg); padding: 80px 50px; border-bottom: 1px solid var(--gold-border); }
-        .badges-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
-        .badge-card { text-align: center; padding: 20px; } .badge-icon { font-size: 2.5rem; margin-bottom: 15px; }
-        .badge-card h3 { color: var(--accent-gold); font-size: 1.4rem; margin-bottom: 12px; } .badge-card p { color: var(--text-grey); font-size: 0.95rem; }
+        
+        .badges-section { background-color: var(--dark-blue-bg); padding: 100px 50px; }
+        .badges-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 50px; max-width: 1200px; margin: 0 auto; }
+        .badge-card { text-align: center; padding: 30px 20px; transition: transform 0.5s ease; } 
+        .badge-card:hover { transform: translateY(-10px); }
+        .badge-icon { font-size: 2.5rem; margin-bottom: 25px; color: var(--accent-gold); }
+        .badge-card h3 { color: var(--text-white); font-size: 1.3rem; margin-bottom: 15px; text-transform: uppercase; font-family: 'Montserrat', sans-serif; font-weight: 400; letter-spacing: 2px; } 
+        .badge-card p { color: var(--text-grey); font-size: 0.95rem; line-height: 1.8; }
+        
         .slider-container { width: 100%; max-width: 1200px; margin: 0 auto; position: relative; }
-        .slider { display: flex; gap: 25px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 20px 10px; }
+        .slider { display: flex; gap: 30px; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; padding: 40px 10px; }
         .slider::-webkit-scrollbar { display: none; }
-        .slide { min-width: 320px; max-width: 360px; height: 450px; scroll-snap-align: center; border-radius: 8px; overflow: hidden; background: var(--card-bg); border: 1px solid var(--gold-border); flex: 0 0 auto; position: relative; box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-        .slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s cubic-bezier(0.25, 1, 0.5, 1); }
-        .slide-overlay { position: absolute; bottom: 0; left: 0; width: 100%; padding: 30px 20px; background: linear-gradient(transparent, rgba(10, 28, 54, 0.95)); z-index: 2; text-align: left; }
-        .slide-overlay h4 { color: var(--accent-gold); font-size: 1.3rem; } .slide:hover img { transform: scale(1.08); }
-        .cta-banner { background: linear-gradient(rgba(6, 19, 38, 0.85), rgba(6, 19, 38, 0.85)), url('images/slide1.jpg') center/cover fixed; padding: 100px 20px; text-align: center; border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
-        .cta-content h2 { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 15px; } .cta-content p { color: var(--text-grey); font-size: 1.1rem; margin-bottom: 35px; max-width: 700px; margin-left: auto; margin-right: auto; }
-        .services-popup { position: fixed; bottom: -350px; right: 30px; width: 340px; background: rgba(10, 28, 54, 0.98); border: 1px solid var(--accent-gold); padding: 30px 25px; border-radius: 8px; box-shadow: 0 20px 50px rgba(0,0,0,0.7); z-index: 1500; transition: bottom 0.8s cubic-bezier(0.165, 0.84, 0.44, 1); text-align: left; backdrop-filter: blur(10px); }
-        .services-popup.show { bottom: 30px; } .close-popup { position: absolute; top: 12px; right: 18px; background: none; border: none; color: var(--text-grey); font-size: 26px; cursor: pointer; transition: color 0.3s; } .close-popup:hover { color: var(--accent-gold); }
-        @media (max-width: 768px) { .hero-content h1 { font-size: 2.3rem; } .typing-container { font-size: 1.1rem; min-height: 35px; } .services-popup { right: 15px; width: calc(100% - 30px); } }
+        
+        .slide { min-width: 340px; max-width: 380px; height: 500px; scroll-snap-align: center; overflow: hidden; background: var(--card-bg); flex: 0 0 auto; position: relative; cursor: none; }
+        /* Ken Burns Hover Effect */
+        .slide img { width: 100%; height: 100%; object-fit: cover; transition: transform 2s cubic-bezier(0.25, 1, 0.5, 1); filter: brightness(0.8); }
+        .slide-overlay { position: absolute; bottom: -50px; left: 0; width: 100%; padding: 40px 30px; background: linear-gradient(transparent, rgba(4, 13, 26, 1)); z-index: 2; text-align: center; transition: bottom 0.5s ease; }
+        .slide-overlay h4 { color: var(--accent-gold); font-size: 1.4rem; font-style: italic; } 
+        .slide:hover img { transform: scale(1.1); filter: brightness(1); }
+        .slide:hover .slide-overlay { bottom: 0; }
+        
+        .cta-banner { background: linear-gradient(rgba(4, 13, 26, 0.9), rgba(4, 13, 26, 0.9)), url('images/slide1.jpg') center/cover fixed; padding: 150px 20px; text-align: center; }
+        .cta-content h2 { font-size: 3.5rem; color: #fff; margin-bottom: 20px; font-style: italic; } 
+        .cta-content p { color: var(--text-grey); font-size: 1.1rem; margin-bottom: 40px; max-width: 600px; margin-left: auto; margin-right: auto; }
+        
+        @media (max-width: 768px) { .hero-content h1 { font-size: 3rem; } .typing-container { font-size: 1rem; } .section-title { font-size: 2.2rem; } .cta-content h2 { font-size: 2.5rem; } }
     </style>
 </head>
 <body>
+
+    <div class="cursor-dot"></div>
+    <div class="cursor-outline"></div>
+
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
-                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
+            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:26px; font-weight:400; letter-spacing:3px; text-decoration:none;">
+                AVERA<span style="font-size:10px; display:block; letter-spacing:8px; color:var(--text-grey); font-family:'Montserrat', sans-serif; font-weight:300; margin-top: 5px;">EVENTS</span>
             </a>
         </div>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html" class="active">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html">Portfolio</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="index.html" class="active hover-link">Home</a></li>
+                <li><a href="about.html" class="hover-link">About Us</a></li>
+                <li><a href="services.html" class="hover-link">Services</a></li>
+                <li><a href="portfolio.html" class="hover-link">Portfolio</a></li>
+                <li><a href="reviews.html" class="hover-link">Reviews</a></li>
+                <li><a href="contact.html" class="hover-link">Contact Us</a></li>
             </ul>
         </nav>
     </header>
@@ -60,108 +76,141 @@
             <source src="https://res.cloudinary.com/ord0oppa/video/upload/Timeline_1_v78ufv.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
-        <div class="hero-content">
+        <div class="hero-content" data-aos="fade-up" data-aos-duration="1500">
             <h1>Moments Made Masterpieces</h1>
             <div class="typing-container">
-                <span class="static-text">We Craft </span>
+                <span class="static-text">Bespoke </span>
                 <span id="typed-text" class="dynamic-text"></span><span class="cursor">|</span>
             </div>
-            <a href="contact.html" class="btn-gold">Start Planning Today</a>
+            <a href="contact.html" class="btn-gold hover-link" data-aos="fade-up" data-aos-delay="300">Start Planning</a>
         </div>
     </section>
 
     <section class="badges-section">
         <div class="badges-container">
-            <div class="badge-card"><div class="badge-icon">👑</div><h3>Bespoke Luxury</h3><p>Every concept is tailored specifically to your unique personality and vision.</p></div>
-            <div class="badge-card"><div class="badge-icon">✨</div><h3>Meticulous Planning</h3><p>We manage every single detail, from lighting blueprints to guest coordination.</p></div>
-            <div class="badge-card"><div class="badge-icon">🥂</div><h3>Flawless Execution</h3><p>Sit back and enjoy your masterpiece while our team handles the magic.</p></div>
+            <div class="badge-card" data-aos="fade-up" data-aos-delay="100">
+                <div class="badge-icon"><i class="fas fa-gem"></i></div>
+                <h3>Bespoke Luxury</h3>
+                <p>Every concept is meticulously tailored to reflect your unique personality, blending modern aesthetics with timeless elegance.</p>
+            </div>
+            <div class="badge-card" data-aos="fade-up" data-aos-delay="300">
+                <div class="badge-icon"><i class="fas fa-compass"></i></div>
+                <h3>Absolute Precision</h3>
+                <p>We choreograph every single detail, from architectural lighting blueprints to seamless guest coordination.</p>
+            </div>
+            <div class="badge-card" data-aos="fade-up" data-aos-delay="500">
+                <div class="badge-icon"><i class="fas fa-glass-cheers"></i></div>
+                <h3>Flawless Execution</h3>
+                <p>Sit back and immerse yourself in the experience. Our elite team handles the magic behind the scenes.</p>
+            </div>
         </div>
     </section>
 
     <section class="section-padding">
-        <h2 class="section-title">Latest Masterpieces</h2>
-        <p style="color: var(--text-grey); margin-bottom: 50px; letter-spacing: 1px;">Swipe to experience our recent luxury creations.</p>
-        <div class="slider-container">
+        <h2 class="section-title" data-aos="fade-up">Recent Creations</h2>
+        <p style="color: var(--text-grey); margin-bottom: 60px; font-weight: 300; letter-spacing: 1px;" data-aos="fade-up" data-aos-delay="200">A glimpse into the extraordinary moments we've curated.</p>
+        
+        <div class="slider-container" data-aos="fade-in" data-aos-delay="400">
             <div class="slider">
-                <div class="slide"><img src="images/slide1.jpg" alt="Latest Luxury Event 1"><div class="slide-overlay"><h4>Grand Weddings</h4></div></div>
-                <div class="slide"><img src="images/slide2.jpg" alt="Latest Luxury Event 2"><div class="slide-overlay"><h4>Corporate Galas</h4></div></div>
-                <div class="slide"><img src="images/slide3.jpg" alt="Latest Luxury Event 3"><div class="slide-overlay"><h4>Bespoke Birthdays</h4></div></div>
-                <div class="slide"><img src="images/slide4.jpg" alt="Latest Luxury Event 4"><div class="slide-overlay"><h4>Intimate Proposals</h4></div></div>
-                <div class="slide"><img src="images/slide5.jpg" alt="Latest Luxury Event 5"><div class="slide-overlay"><h4>Theme Night Setups</h4></div></div>
+                <div class="slide hover-link"><img src="images/slide1.jpg" alt="Latest Luxury Event 1"><div class="slide-overlay"><h4>Intimate Weddings</h4></div></div>
+                <div class="slide hover-link"><img src="images/slide2.jpg" alt="Latest Luxury Event 2"><div class="slide-overlay"><h4>Corporate Galas</h4></div></div>
+                <div class="slide hover-link"><img src="images/slide3.jpg" alt="Latest Luxury Event 3"><div class="slide-overlay"><h4>Bespoke Birthdays</h4></div></div>
+                <div class="slide hover-link"><img src="images/slide4.jpg" alt="Latest Luxury Event 4"><div class="slide-overlay"><h4>Romantic Proposals</h4></div></div>
+                <div class="slide hover-link"><img src="images/slide5.jpg" alt="Latest Luxury Event 5"><div class="slide-overlay"><h4>Private Dinners</h4></div></div>
             </div>
         </div>
     </section>
 
     <section class="cta-banner">
-        <div class="cta-content">
-            <h2>Ready to Elevate Your Next Event?</h2>
-            <p>Let's turn your dream into a breathtaking reality with Sri Lanka's premium event planners.</p>
-            <a href="contact.html" class="btn-gold-outline">Get a Bespoke Quote</a>
+        <div class="cta-content" data-aos="zoom-in" data-aos-duration="1200">
+            <h2>Elevate Your Experience</h2>
+            <p>Transform your vision into a breathtaking reality with Sri Lanka's premium boutique event planners.</p>
+            <a href="contact.html" class="btn-gold-outline hover-link" style="margin-top: 20px;">Request a Consultation</a>
         </div>
     </section>
 
-    <div id="servicesPopup" class="services-popup">
-        <button class="close-popup" onclick="closePopup()">&times;</button>
-        <h3 style="color: var(--accent-gold); margin-bottom: 10px; font-family: 'Playfair Display', serif;">Looking for more?</h3>
-        <p style="color: var(--text-grey); font-size: 0.9rem; margin-bottom: 15px;">Discover our full range of custom event planning and styling services tailored just for you.</p>
-        <a href="services.html" class="btn-gold" style="padding: 8px 20px; font-size: 0.8rem;">Explore Services</a>
-    </div>
-
     <footer>
-        <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
-        <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
+        <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:20px; font-weight:400; letter-spacing:3px; text-decoration:none; display: block; margin-bottom: 20px;">AVERA EVENTS</a>
+        <p style="font-size: 0.85rem; color: var(--text-grey); letter-spacing: 1px;">&copy; 2026 Avera Events. All Rights Reserved.</p>
+        <p style="font-size: 0.85rem; color: var(--text-grey); margin-top: 5px; letter-spacing: 1px;">Kandy, Sri Lanka | +94 76 639 0768</p>
     </footer>
 
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // Mobile Menu Logic
-        document.addEventListener("DOMContentLoaded", function() {
-            const mobileMenu = document.getElementById('mobile-menu');
-            const navMenu = document.getElementById('nav-menu');
-            const menuIcon = mobileMenu.querySelector('i');
-            if(mobileMenu && navMenu) {
-                mobileMenu.addEventListener('click', () => {
-                    navMenu.classList.toggle('active');
-                    document.body.classList.toggle('no-scroll');
-                    if(navMenu.classList.contains('active')) {
-                        menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times');
-                    } else {
-                        menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars');
-                    }
-                });
-                document.querySelectorAll('.nav-list li a').forEach(link => {
-                    link.addEventListener('click', () => {
-                        navMenu.classList.remove('active'); document.body.classList.remove('no-scroll');
-                        menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars');
-                    });
-                });
-            }
-        });
+        // Initialize AOS Animation Library
+        AOS.init({ duration: 1000, once: true, offset: 100 });
 
-        // Popup Display Delay (3 Seconds)
-        setTimeout(function() { document.getElementById('servicesPopup').classList.add('show'); }, 3000);
-        function closePopup() { document.getElementById('servicesPopup').classList.remove('show'); }
+        // Custom Cursor Logic
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`;
+                cursorDot.style.top = `${e.clientY}px`;
+                
+                // Add a slight delay to the outline for a smooth trailing effect
+                setTimeout(() => {
+                    cursorOutline.style.left = `${e.clientX}px`;
+                    cursorOutline.style.top = `${e.clientY}px`;
+                }, 50);
+            });
+
+            // Hover effect on links and buttons
+            const hoverElements = document.querySelectorAll('a, button, .hover-link');
+            hoverElements.forEach(el => {
+                el.addEventListener('mouseenter', () => {
+                    cursorOutline.style.width = '60px';
+                    cursorOutline.style.height = '60px';
+                    cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)';
+                });
+                el.addEventListener('mouseleave', () => {
+                    cursorOutline.style.width = '35px';
+                    cursorOutline.style.height = '35px';
+                    cursorOutline.style.backgroundColor = 'transparent';
+                });
+            });
+        }
+
+        // Mobile Menu Logic
+        const mobileMenu = document.getElementById('mobile-menu');
+        const navMenu = document.getElementById('nav-menu');
+        const menuIcon = mobileMenu.querySelector('i');
+        
+        if(mobileMenu && navMenu) {
+            mobileMenu.addEventListener('click', () => {
+                navMenu.classList.toggle('active');
+                document.body.classList.toggle('no-scroll');
+                if(navMenu.classList.contains('active')) {
+                    menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times');
+                } else {
+                    menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars');
+                }
+            });
+        }
 
         // Typewriter Effect Configuration
-        const words = ["Social & Family Celebrations.", "Corporate & Educational Events.", "Virtual & Hybrid Events.", "Micro-Events & Custom Gatherings."];
+        const words = ["Social & Family Gatherings", "Boutique Corporate Meetings", "Virtual & Hybrid Events", "Romantic Pop-ups"];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
         const typedTextSpan = document.getElementById("typed-text");
 
         function typeEffect() {
+            if(!typedTextSpan) return;
             const currentWord = words[wordIndex];
             if (isDeleting) {
                 typedTextSpan.textContent = currentWord.substring(0, charIndex - 1); charIndex--;
             } else {
                 typedTextSpan.textContent = currentWord.substring(0, charIndex + 1); charIndex++;
             }
-            let typeSpeed = isDeleting ? 50 : 100;
+            let typeSpeed = isDeleting ? 40 : 80;
             if (!isDeleting && charIndex === currentWord.length) {
                 typeSpeed = 2500; isDeleting = true;
             } else if (isDeleting && charIndex === 0) {
-                isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 400;
+                isDeleting = false; wordIndex = (wordIndex + 1) % words.length; typeSpeed = 500;
             }
             setTimeout(typeEffect, typeSpeed);
         }
-        document.addEventListener("DOMContentLoaded", function() { if(words.length) setTimeout(typeEffect, 1000); });
+        if(words.length) setTimeout(typeEffect, 1500);
     </script>
 </body>
 </html>
