@@ -7,36 +7,42 @@
     <link rel="icon" type="image/png" href="favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <style>
         .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; max-width: 1200px; margin: 50px auto 0; }
-        .portfolio-item { height: 250px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-grey); border: 1px dashed var(--accent-gold); }
+        .portfolio-item { height: 250px; background: rgba(255,255,255,0.05); border-radius: 8px; display: flex; align-items: center; justify-content: center; color: var(--text-grey); border: 1px dashed var(--accent-gold); transition: all 0.3s ease; }
+        .portfolio-item:hover { border-color: var(--accent-gold); transform: translateY(-5px); background: rgba(255,255,255,0.08); }
     </style>
 </head>
 <body>
+    <!-- Cursor Elements -->
+    <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
     <header>
         <div class="logo">
-            <a href="index.html" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
+            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a>
         </div>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="services.html">Services</a></li>
-                <li><a href="portfolio.html" class="active">Portfolio</a></li>
-                <li><a href="reviews.html">Reviews</a></li>
-                <li><a href="contact.html">Contact Us</a></li>
+                <li><a href="index.html" class="hover-link">Home</a></li>
+                <li><a href="about.html" class="hover-link">About Us</a></li>
+                <li><a href="services.html" class="hover-link">Services</a></li>
+                <li><a href="portfolio.html" class="active hover-link">Portfolio</a></li>
+                <li><a href="reviews.html" class="hover-link">Reviews</a></li>
+                <li><a href="contact.html" class="hover-link">Contact Us</a></li>
             </ul>
         </nav>
     </header>
 
     <section class="section-padding" style="margin-top: 80px; min-height: 80vh;">
-        <h1 class="section-title">Our Creations</h1>
-        <p style="color: var(--text-grey);">A glimpse into the magical moments we've crafted. (Full Gallery Coming Soon)</p>
+        <h1 class="section-title" data-aos="fade-down">Our Creations</h1>
+        <p style="color: var(--text-grey);" data-aos="fade-up" data-aos-delay="200">A glimpse into the magical moments we've crafted. (Full Gallery Coming Soon)</p>
         <div class="portfolio-grid">
-            <div class="portfolio-item">Gallery Update in Progress...</div>
-            <div class="portfolio-item">Gallery Update in Progress...</div>
-            <div class="portfolio-item">Gallery Update in Progress...</div>
+            <div class="portfolio-item hover-link" data-aos="zoom-in" data-aos-delay="300">Gallery Update in Progress...</div>
+            <div class="portfolio-item hover-link" data-aos="zoom-in" data-aos-delay="400">Gallery Update in Progress...</div>
+            <div class="portfolio-item hover-link" data-aos="zoom-in" data-aos-delay="500">Gallery Update in Progress...</div>
         </div>
     </section>
 
@@ -45,7 +51,24 @@
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
     </footer>
 
+    <!-- AOS & Custom Cursor Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
+        AOS.init({ duration: 1000, once: true, offset: 50 });
+        
+        const cursorDot = document.querySelector('.cursor-dot');
+        const cursorOutline = document.querySelector('.cursor-outline');
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
+            window.addEventListener('mousemove', (e) => {
+                cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
+                setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
+            });
+            document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => {
+                el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; });
+                el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; });
+            });
+        }
+
         document.addEventListener("DOMContentLoaded", function() {
             const mobileMenu = document.getElementById('mobile-menu');
             const navMenu = document.getElementById('nav-menu');
