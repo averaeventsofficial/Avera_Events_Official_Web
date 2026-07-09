@@ -27,7 +27,21 @@
         .badge-card h3 { color: var(--accent-gold); font-size: 1.4rem; margin-bottom: 12px; } .badge-card p { color: var(--text-grey); font-size: 0.95rem; }
         .cta-banner { background: linear-gradient(rgba(6, 19, 38, 0.85), rgba(6, 19, 38, 0.85)), url('images/slide1.jpg') center/cover fixed; padding: 100px 20px; text-align: center; border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
         .cta-content h2 { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 15px; } .cta-content p { color: var(--text-grey); font-size: 1.1rem; margin-bottom: 35px; max-width: 700px; margin-left: auto; margin-right: auto; }
+        
+        /* Instagram Feed Section */
+        .insta-section { background-color: var(--primary-blue); border-top: 1px solid var(--gold-border); }
+        .insta-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; max-width: 1200px; margin: 50px auto 0; }
+        .insta-item { position: relative; overflow: hidden; border-radius: 4px; aspect-ratio: 1 / 1; border: 1px solid rgba(255,255,255,0.05); display: block; }
+        .insta-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s ease; filter: brightness(0.9); }
+        .insta-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 13, 26, 0.8); display: flex; justify-content: center; align-items: center; opacity: 0; transition: all 0.4s ease; backdrop-filter: blur(2px); }
+        .insta-overlay i { color: var(--accent-gold); font-size: 2.5rem; transform: scale(0.5); transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .insta-item:hover img { transform: scale(1.1); filter: brightness(1); }
+        .insta-item:hover .insta-overlay { opacity: 1; }
+        .insta-item:hover .insta-overlay i { transform: scale(1); }
+
+        @media (max-width: 992px) { .insta-grid { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .hero-content h1 { font-size: 2.3rem; } .typing-container { font-size: 1.1rem; } .action-buttons { flex-direction: column; } }
+        @media (max-width: 576px) { .insta-grid { grid-template-columns: 1fr; gap: 20px; padding: 0 20px; } }
     </style>
 </head>
 <body>
@@ -89,7 +103,7 @@
                 <span id="typed-text" class="dynamic-text"></span><span class="cursor">|</span>
             </div>
             
-            <!-- NEW Specialized Buttons -->
+            <!-- Specialized Buttons -->
             <div class="action-buttons" data-aos="fade-up" data-aos-delay="300">
                 <a href="contact.html#quote-builder" class="btn-gold hover-link" data-en="Build Your Package" data-si="පැකේජය සකසන්න">Build Your Package</a>
                 <a href="contact.html#availability-calendar" class="btn-gold-outline hover-link" style="border-color: #fff; color: #fff;" data-en="Check Availability" data-si="දින පරීක්ෂා කරන්න">Check Availability</a>
@@ -98,14 +112,44 @@
         </div>
     </section>
 
-    <!-- (Rest of the index.html sections stay the same as before) -->
-    <!-- Badges Section & CTA Banner -->
+    <!-- Badges Section -->
     <section class="badges-section">
         <div class="badges-container">
             <div class="badge-card" data-aos="fade-up" data-aos-delay="100"><div class="badge-icon">👑</div><h3 data-en="Bespoke Luxury" data-si="සුවිශේෂී සුඛෝපභෝගීත්වය">Bespoke Luxury</h3><p data-en="Every concept is tailored specifically to your unique personality and vision." data-si="ඔබේ සුවිශේෂී පෞරුෂයට සහ දැක්මට ගැළපෙන පරිදි සෑම සැලසුමක්ම නිර්මාණය කෙරේ.">Every concept is tailored specifically to your unique personality and vision.</p></div>
             <div class="badge-card" data-aos="fade-up" data-aos-delay="300"><div class="badge-icon">✨</div><h3 data-en="Meticulous Planning" data-si="ක්‍රමානුකූල සැලසුම්">Meticulous Planning</h3><p data-en="We manage every single detail, from lighting blueprints to guest coordination." data-si="ආලෝකකරණයේ සිට අමුත්තන් සම්බන්ධීකරණය දක්වා සෑම දෙයක්ම අපි කළමනාකරණය කරමු.">We manage every single detail, from lighting blueprints to guest coordination.</p></div>
             <div class="badge-card" data-aos="fade-up" data-aos-delay="500"><div class="badge-icon">🥂</div><h3 data-en="Flawless Execution" data-si="දෝෂ රහිත ක්‍රියාත්මක කිරීම">Flawless Execution</h3><p data-en="Sit back and enjoy your masterpiece while our team handles the magic." data-si="අපේ කණ්ඩායම මෙහෙයුම් සිදුකරන අතරතුර ඔබ විවේකීව සාදය භුක්ති විඳින්න.">Sit back and enjoy your masterpiece while our team handles the magic.</p></div>
         </div>
+    </section>
+
+    <!-- Instagram Feed Section -->
+    <section class="section-padding insta-section">
+        <h2 class="section-title" data-aos="fade-up" data-en="Follow Our Journey" data-si="අප හා එක්වන්න">Follow Our Journey</h2>
+        <p data-aos="fade-up" data-aos-delay="100" style="color: var(--accent-gold); font-family: 'Montserrat', sans-serif; letter-spacing: 2px; text-transform: uppercase; font-size: 0.9rem;">
+            <a href="https://www.instagram.com/avera_events_official?utm_source=qr" target="_blank" class="hover-link" style="color: var(--accent-gold); text-decoration: none;">
+                <i class="fab fa-instagram"></i> @avera_events_official
+            </a>
+        </p>
+        
+        <div class="insta-grid">
+            <a href="https://www.instagram.com/avera_events_official?utm_source=qr" target="_blank" class="insta-item hover-link" data-aos="zoom-in" data-aos-delay="200">
+                <img src="images/slide1.jpg" alt="Avera Instagram Setup">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/avera_events_official?utm_source=qr" target="_blank" class="insta-item hover-link" data-aos="zoom-in" data-aos-delay="300">
+                <img src="images/slide2.jpg" alt="Avera Instagram Setup">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/avera_events_official?utm_source=qr" target="_blank" class="insta-item hover-link" data-aos="zoom-in" data-aos-delay="400">
+                <img src="images/slide3.jpg" alt="Avera Instagram Setup">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+            <a href="https://www.instagram.com/avera_events_official?utm_source=qr" target="_blank" class="insta-item hover-link" data-aos="zoom-in" data-aos-delay="500">
+                <img src="images/slide4.jpg" alt="Avera Instagram Setup">
+                <div class="insta-overlay"><i class="fab fa-instagram"></i></div>
+            </a>
+        </div>
+        
+        <a href="https://www.instagram.com/avera_events_official?utm_source=qr" target="_blank" class="btn-gold-outline hover-link" data-aos="fade-up" style="margin-top: 40px;" data-en="View More on Instagram" data-si="තවත් ඡායාරූප බලන්න">View More on Instagram</a>
     </section>
 
     <footer>
@@ -150,10 +194,17 @@
         if(mobileMenu && navMenu) { mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } }); }
 
         function switchLang(lang, btn) {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            
             document.querySelectorAll('[data-en]').forEach(el => {
-                if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } 
-                else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; }
+                if(lang === 'si' && el.getAttribute('data-si')) {
+                    el.innerHTML = el.getAttribute('data-si');
+                    document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif";
+                } else {
+                    el.innerHTML = el.getAttribute('data-en');
+                    document.body.style.fontFamily = "'Montserrat', sans-serif";
+                }
             });
         }
 
