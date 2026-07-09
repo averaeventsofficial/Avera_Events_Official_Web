@@ -126,7 +126,13 @@
             <h2>Admin Portal</h2>
             <p style="color: var(--text-grey); margin-bottom: 30px; font-size: 0.9rem;">Authorized Directors Only</p>
             <input type="email" id="email" class="custom-input" placeholder="Email Address">
-            <input type="password" id="password" class="custom-input" placeholder="Password">
+            
+            <!-- Show/Hide Password Implementation -->
+            <div style="position: relative;">
+                <input type="password" id="password" class="custom-input" placeholder="Password" style="padding-right: 45px;">
+                <i class="fas fa-eye" id="togglePassword" onclick="togglePwd()" style="position: absolute; right: 15px; top: 18px; color: var(--text-grey); cursor: pointer; transition: 0.3s; font-size: 1.1rem;"></i>
+            </div>
+
             <button class="btn-gold" id="loginBtn" style="width: 100%;">Access System</button>
             <p id="loginError" style="color: #ff4c4c; margin-top: 15px; font-size: 0.85rem; display: none;">Invalid credentials!</p>
         </div>
@@ -164,7 +170,7 @@
                 </div>
             </div>
 
-            <!-- TAB 2: Manage Bookings (Skipped inner content for brevity, assumed intact as previous) -->
+            <!-- TAB 2: Manage Bookings -->
             <div id="bookings" class="admin-section">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="color: var(--accent-gold);">Event Bookings & Calendar Control</h3>
@@ -311,12 +317,9 @@
                 </div>
             </div>
 
-            <!-- Other Tabs (Vendors, Financials omitted from HTML text to save space, but logically kept) -->
-
         </div>
     </div>
 
-    <!-- Firebase SDK (Omitted imports for brevity, assumes same as before) -->
     <script type="module">
         // Basic Navigation (Tab Switcher)
         window.switchTab = (tabId, element) => {
@@ -327,14 +330,30 @@
             document.getElementById(tabId).classList.add('active');
         };
 
+        // Show / Hide Password Function
+        window.togglePwd = () => {
+            const pwd = document.getElementById("password");
+            const icon = document.getElementById("togglePassword");
+            if (pwd.type === "password") {
+                pwd.type = "text";
+                icon.classList.remove("fa-eye");
+                icon.classList.add("fa-eye-slash");
+                icon.style.color = "var(--accent-gold)";
+            } else {
+                pwd.type = "password";
+                icon.classList.remove("fa-eye-slash");
+                icon.classList.add("fa-eye");
+                icon.style.color = "var(--text-grey)";
+            }
+        };
+
         // Format Currency Helper
         function formatMoney(amount) { return parseFloat(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }); }
 
         // ================= DOCUMENT BUILDER LOGIC =================
         window.onload = () => {
-            // Set today's date automatically
             document.getElementById('docDate').valueAsDate = new Date();
-            addDocItem("Premium Decor Setup", ""); // Add one empty row by default
+            addDocItem("Premium Decor Setup", ""); 
         };
 
         window.updateDocLabels = () => {
@@ -358,7 +377,6 @@
         };
 
         window.generateDocumentPreview = () => {
-            // 1. Get Data
             const type = document.getElementById('docType').value;
             const docNo = document.getElementById('docNo').value || 'N/A';
             const date = document.getElementById('docDate').value || 'N/A';
@@ -366,14 +384,12 @@
             const meta = document.getElementById('docEventMeta').value || '';
             const discount = parseFloat(document.getElementById('docDiscount').value || 0);
 
-            // 2. Populate Header
             document.getElementById('prevDocType').innerText = type;
             document.getElementById('prevDocNo').innerText = docNo;
             document.getElementById('prevDocDate').innerText = date;
             document.getElementById('prevClientName').innerText = client;
             document.getElementById('prevEventMeta').innerText = meta;
 
-            // 3. Process Items
             const tbody = document.getElementById('prevItemsBody');
             tbody.innerHTML = '';
             let subtotal = 0;
@@ -396,7 +412,6 @@
                 }
             });
 
-            // 4. Calculate Totals
             document.getElementById('prevSubtotal').innerText = "Rs. " + formatMoney(subtotal);
             
             const discRow = document.getElementById('prevDiscountRow');
@@ -410,11 +425,8 @@
             const grandTotal = subtotal - discount;
             document.getElementById('prevGrandTotal').innerText = "Rs. " + formatMoney(grandTotal);
 
-            // 5. Show Preview & Print Actions
             document.getElementById('print-preview').style.display = 'block';
             document.getElementById('printActions').style.display = 'block';
-            
-            // Auto scroll to preview
             document.getElementById('printActions').scrollIntoView({ behavior: 'smooth' });
         };
     </script>
