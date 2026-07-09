@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Luxury Event Planning | Avera Events</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/png" href="images/favicon.png">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
@@ -18,30 +18,51 @@
         .static-text { color: var(--text-white); } .dynamic-text { color: var(--accent-gold); font-weight: 600; }
         .cursor { color: var(--accent-gold); font-weight: 600; animation: blink 0.8s infinite; }
         @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
+        
+        .action-buttons { display: flex; gap: 20px; justify-content: center; margin-top: 30px; }
+        
         .badges-section { background-color: var(--dark-blue-bg); padding: 80px 50px; border-bottom: 1px solid var(--gold-border); }
         .badges-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; max-width: 1200px; margin: 0 auto; }
         .badge-card { text-align: center; padding: 20px; } .badge-icon { font-size: 2.5rem; margin-bottom: 15px; }
         .badge-card h3 { color: var(--accent-gold); font-size: 1.4rem; margin-bottom: 12px; } .badge-card p { color: var(--text-grey); font-size: 0.95rem; }
         .cta-banner { background: linear-gradient(rgba(6, 19, 38, 0.85), rgba(6, 19, 38, 0.85)), url('images/slide1.jpg') center/cover fixed; padding: 100px 20px; text-align: center; border-top: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); }
         .cta-content h2 { font-size: 2.5rem; color: var(--accent-gold); margin-bottom: 15px; } .cta-content p { color: var(--text-grey); font-size: 1.1rem; margin-bottom: 35px; max-width: 700px; margin-left: auto; margin-right: auto; }
-        @media (max-width: 768px) { .hero-content h1 { font-size: 2.3rem; } .typing-container { font-size: 1.1rem; } }
+        @media (max-width: 768px) { .hero-content h1 { font-size: 2.3rem; } .typing-container { font-size: 1.1rem; } .action-buttons { flex-direction: column; } }
     </style>
 </head>
 <body>
-    <!-- Luxury Preloader -->
-    <div id="preloader">
-        <img src="Avera ල්.png" alt="Avera Loading" class="loader-logo">
-    </div>
-
-    <!-- Custom Cursor -->
+    <div id="preloader"><img src="images/Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
     <div class="cursor-dot"></div><div class="cursor-outline"></div>
 
-    <header>
-        <div class="logo">
-            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
-                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
-            </a>
+    <!-- Music Player -->
+    <div class="music-player">
+        <!-- Replaced with a beautiful cinematic royalty-free track -->
+        <audio id="bg-music" loop>
+            <source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg">
+        </audio>
+        <button id="music-toggle" class="music-btn hover-link" onclick="toggleMusic()" title="Play Luxury Ambient Music">
+            <i class="fas fa-play"></i>
+        </button>
+    </div>
+
+    <!-- Advanced WhatsApp Widget -->
+    <div class="wa-widget-container">
+        <div class="wa-widget-chat" id="wa-chat">
+            <div class="wa-header">
+                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783399029/WhatsApp_Image_2026-07-07_at_09.44.45_jn5zst.jpg" alt="Pasindu Fonseka">
+                <div><h4>Pasindu Fonseka</h4><p>Typically replies instantly</p></div>
+                <i class="fas fa-times wa-close hover-link" onclick="toggleWa()"></i>
+            </div>
+            <div class="wa-body">
+                <div class="wa-message">Hi there! 👋<br>Looking to plan an unforgettable surprise or event? Let me know how I can help!</div>
+                <a href="https://wa.me/94766390768?text=Hi%20Avera%20Events,%20I%20want%20to%20plan%20a%20surprise!" target="_blank" class="btn-gold hover-link" style="width: 100%; text-align: center; padding: 12px;">Start Chat</a>
+            </div>
         </div>
+        <button class="wa-float-btn hover-link" onclick="toggleWa()"><i class="fab fa-whatsapp"></i></button>
+    </div>
+
+    <header>
+        <div class="logo"><a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a></div>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <nav id="nav-menu">
             <ul class="nav-list">
@@ -51,12 +72,7 @@
                 <li><a href="portfolio.html" class="hover-link" data-en="Portfolio" data-si="නිර්මාණ">Portfolio</a></li>
                 <li><a href="reviews.html" class="hover-link" data-en="Reviews" data-si="ප්‍රතිචාර">Reviews</a></li>
                 <li><a href="contact.html" class="hover-link" data-en="Contact Us" data-si="විමසීම්">Contact Us</a></li>
-                <!-- Language Toggle -->
-                <div class="lang-toggle">
-                    <button class="lang-btn active hover-link" onclick="switchLang('en', this)">EN</button>
-                    <span class="lang-sep">|</span>
-                    <button class="lang-btn hover-link" onclick="switchLang('si', this)">SI</button>
-                </div>
+                <div class="lang-toggle"><button class="lang-btn active hover-link" onclick="switchLang('en', this)">EN</button><span class="lang-sep">|</span><button class="lang-btn hover-link" onclick="switchLang('si', this)">SI</button></div>
             </ul>
         </nav>
     </header>
@@ -72,23 +88,23 @@
                 <span class="static-text" data-en="We Craft " data-si="අපි සැලසුම් කරන්නේ ">We Craft </span>
                 <span id="typed-text" class="dynamic-text"></span><span class="cursor">|</span>
             </div>
-            <a href="contact.html" class="btn-gold hover-link" data-en="Start Planning Today" data-si="ඔබගේ සැලසුම අරඹන්න">Start Planning Today</a>
+            
+            <!-- NEW Specialized Buttons -->
+            <div class="action-buttons" data-aos="fade-up" data-aos-delay="300">
+                <a href="contact.html#quote-builder" class="btn-gold hover-link" data-en="Build Your Package" data-si="පැකේජය සකසන්න">Build Your Package</a>
+                <a href="contact.html#availability-calendar" class="btn-gold-outline hover-link" style="border-color: #fff; color: #fff;" data-en="Check Availability" data-si="දින පරීක්ෂා කරන්න">Check Availability</a>
+            </div>
+
         </div>
     </section>
 
+    <!-- (Rest of the index.html sections stay the same as before) -->
+    <!-- Badges Section & CTA Banner -->
     <section class="badges-section">
         <div class="badges-container">
             <div class="badge-card" data-aos="fade-up" data-aos-delay="100"><div class="badge-icon">👑</div><h3 data-en="Bespoke Luxury" data-si="සුවිශේෂී සුඛෝපභෝගීත්වය">Bespoke Luxury</h3><p data-en="Every concept is tailored specifically to your unique personality and vision." data-si="ඔබේ සුවිශේෂී පෞරුෂයට සහ දැක්මට ගැළපෙන පරිදි සෑම සැලසුමක්ම නිර්මාණය කෙරේ.">Every concept is tailored specifically to your unique personality and vision.</p></div>
             <div class="badge-card" data-aos="fade-up" data-aos-delay="300"><div class="badge-icon">✨</div><h3 data-en="Meticulous Planning" data-si="ක්‍රමානුකූල සැලසුම්">Meticulous Planning</h3><p data-en="We manage every single detail, from lighting blueprints to guest coordination." data-si="ආලෝකකරණයේ සිට අමුත්තන් සම්බන්ධීකරණය දක්වා සෑම දෙයක්ම අපි කළමනාකරණය කරමු.">We manage every single detail, from lighting blueprints to guest coordination.</p></div>
             <div class="badge-card" data-aos="fade-up" data-aos-delay="500"><div class="badge-icon">🥂</div><h3 data-en="Flawless Execution" data-si="දෝෂ රහිත ක්‍රියාත්මක කිරීම">Flawless Execution</h3><p data-en="Sit back and enjoy your masterpiece while our team handles the magic." data-si="අපේ කණ්ඩායම මෙහෙයුම් සිදුකරන අතරතුර ඔබ විවේකීව සාදය භුක්ති විඳින්න.">Sit back and enjoy your masterpiece while our team handles the magic.</p></div>
-        </div>
-    </section>
-
-    <section class="cta-banner">
-        <div class="cta-content" data-aos="zoom-in">
-            <h2 data-en="Ready to Elevate Your Next Event?" data-si="ඔබගේ මීළඟ සාදය සඳහා ඔබ සූදානම්ද?">Ready to Elevate Your Next Event?</h2>
-            <p data-en="Let's turn your dream into a breathtaking reality with Sri Lanka's premium event planners." data-si="ශ්‍රී ලංකාවේ ප්‍රමුඛතම සිදුවීම් සැලසුම්කරුවන් සමඟින් ඔබේ සිහිනය යථාර්ථයක් කරමු.">Let's turn your dream into a breathtaking reality with Sri Lanka's premium event planners.</p>
-            <a href="contact.html" class="btn-gold-outline hover-link" data-en="Get a Bespoke Quote" data-si="මිල ගණන් ලබාගන්න">Get a Bespoke Quote</a>
         </div>
     </section>
 
@@ -100,9 +116,31 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true });
-        
-        // Remove Preloader
         window.addEventListener('load', function() { setTimeout(function() { document.body.classList.add('loaded'); }, 1500); });
+
+        // WhatsApp Toggle Logic
+        function toggleWa() {
+            document.getElementById('wa-chat').classList.toggle('active');
+        }
+
+        // Music Player Logic
+        function toggleMusic() {
+            const music = document.getElementById("bg-music");
+            const btn = document.getElementById("music-toggle");
+            const icon = btn.querySelector("i");
+            
+            if (music.paused) {
+                music.play();
+                btn.classList.add("playing");
+                icon.classList.remove("fa-play");
+                icon.classList.add("fa-pause");
+            } else {
+                music.pause();
+                btn.classList.remove("playing");
+                icon.classList.remove("fa-pause");
+                icon.classList.add("fa-play");
+            }
+        }
 
         // Cursor & Menu Logic
         const cursorDot = document.querySelector('.cursor-dot'); const cursorOutline = document.querySelector('.cursor-outline');
@@ -111,23 +149,14 @@
         const mobileMenu = document.getElementById('mobile-menu'); const navMenu = document.getElementById('nav-menu'); const menuIcon = mobileMenu.querySelector('i');
         if(mobileMenu && navMenu) { mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } }); }
 
-        // Language Translator Script
         function switchLang(lang, btn) {
-            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active');
             document.querySelectorAll('[data-en]').forEach(el => {
-                if(lang === 'si' && el.getAttribute('data-si')) {
-                    el.innerHTML = el.getAttribute('data-si');
-                    document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif";
-                } else {
-                    el.innerHTML = el.getAttribute('data-en');
-                    document.body.style.fontFamily = "'Montserrat', sans-serif";
-                }
+                if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } 
+                else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; }
             });
         }
 
-        // Typewriter 
         const words = ["Social Gatherings.", "Corporate Events.", "Virtual Integrations."];
         let wordIndex = 0, charIndex = 0, isDeleting = false;
         const typedTextSpan = document.getElementById("typed-text");
