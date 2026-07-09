@@ -66,13 +66,16 @@
         /* Custom Popup Modal styling */
         .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 13, 26, 0.85); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
         .custom-modal-overlay.show { opacity: 1; visibility: visible; }
-        .custom-modal-box { background: linear-gradient(145deg, rgba(10,28,54,1), rgba(6,19,38,1)); border: 1px solid var(--accent-gold); border-radius: 8px; padding: 40px 30px; text-align: center; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: translateY(20px); transition: transform 0.3s ease; margin: 20px; }
+        .custom-modal-box { background: linear-gradient(145deg, rgba(10,28,54,1), rgba(6,19,38,1)); border: 1px solid var(--accent-gold); border-radius: 8px; padding: 40px 30px; text-align: center; max-width: 500px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: translateY(20px); transition: transform 0.3s ease; margin: 20px; }
         .custom-modal-overlay.show .custom-modal-box { transform: translateY(0); }
         .custom-modal-icon { font-size: 3rem; color: var(--accent-gold); margin-bottom: 20px; }
-        .custom-modal-title { color: var(--accent-gold); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+        .custom-modal-title { color: var(--accent-gold); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Playfair Display', serif; line-height: 1.4; }
         .custom-modal-text { color: var(--text-white); font-size: 0.95rem; margin-bottom: 30px; line-height: 1.6; }
         .custom-modal-btn { background: var(--accent-gold); color: var(--primary-blue); padding: 12px 35px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; font-family: 'Montserrat', sans-serif; }
         .custom-modal-btn:hover { background: #fff; box-shadow: 0 5px 15px rgba(229,169,61,0.3); }
+
+        /* Cursor fix for Modal overlay */
+        .cursor-dot, .cursor-outline { z-index: 10000 !important; }
 
         @media (max-width: 992px) { .contact-wrapper { grid-template-columns: 1fr; } .input-group-row { flex-direction: column; gap: 0; } }
     </style>
@@ -81,10 +84,10 @@
     <div id="preloader"><img src="Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
     <div class="cursor-dot"></div><div class="cursor-outline"></div>
 
-    <!-- Custom Alert Popup -->
+    <!-- Custom Alert Popup (Bilingual) -->
     <div class="custom-modal-overlay" id="customModal">
         <div class="custom-modal-box">
-            <i class="fas fa-info-circle custom-modal-icon"></i>
+            <i class="fas fa-star custom-modal-icon"></i>
             <h3 class="custom-modal-title" id="modalTitle">Notice</h3>
             <p class="custom-modal-text" id="modalText">Message goes here.</p>
             <button class="custom-modal-btn hover-link" onclick="closeModal()">Got it!</button>
@@ -101,8 +104,8 @@
     <div class="wa-widget-container">
         <div class="wa-widget-chat" id="wa-chat">
             <div class="wa-header">
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783399033/Man_in_blazer_office_202607070939_g2fzbm.jpg" alt="Lakmal Madhushan">
-                <div><h4>Mr. Lakmal Madhushan</h4></h4><p>Typically replies instantly</p></div>
+                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783399029/WhatsApp_Image_2026-07-07_at_09.44.45_jn5zst.jpg" alt="Pasindu Fonseka">
+                <div><h4>Pasindu Fonseka</h4><p>Typically replies instantly</p></div>
                 <i class="fas fa-times wa-close hover-link" onclick="toggleWa()"></i>
             </div>
             <div class="wa-body">
@@ -204,11 +207,10 @@
                             <div class="legend-item"><div class="legend-dot dot-pending"></div> Pending</div>
                             <div class="legend-item"><div class="legend-dot dot-booked"></div> Booked</div>
                         </div>
-                        <p style="font-size: 0.75rem; color: var(--text-grey); text-align: center; margin-top: 15px; font-style: italic;" data-en="* You can still request 'Booked' or 'Pending' dates to join the Waitlist." data-si="* වෙන්කර ඇති දින සඳහාද ඔබට Waitlist එකට එකතු විය හැක.">* You can still request 'Booked' or 'Pending' dates to join the Waitlist.</p>
                     </div>
                 </div>
 
-                <div>
+                <div style="margin-top: 30px;">
                     <div class="info-item"><i class="fab fa-whatsapp info-icon"></i><div class="info-text"><h4>Call / WhatsApp</h4><p>+94 76 639 0768</p></div></div>
                     <div class="info-item" style="margin-bottom: 0;"><i class="far fa-envelope info-icon"></i><div class="info-text"><h4>Email Us</h4><p>avera.eventsofficial@gmail.com</p></div></div>
                 </div>
@@ -227,20 +229,17 @@
         AOS.init({ duration: 1000, once: true, offset: 50 });
         window.addEventListener('load', function() { setTimeout(function() { document.body.classList.add('loaded'); }, 1500); });
         
-        let windowLang = 'en'; // Track language for modal
+        let windowLang = 'en'; // Track language for other parts if needed
 
-        // Custom Modal Logic
+        // Custom Modal Logic (Bilingual Content Inside the Function)
         function showModal(type) {
             const titleEl = document.getElementById('modalTitle');
             const textEl = document.getElementById('modalText');
             
-            if (type === 'booked') {
-                titleEl.innerText = windowLang === 'si' ? "මෙම දිනය වෙන්කර ඇත" : "Date Currently Booked";
-                textEl.innerText = windowLang === 'si' ? "මෙම දිනය දැනටමත් වෙන්කර ඇත. නමුත් ඔබට 'Waitlist' එකට එකතු වීම සඳහා ඉල්ලීමක් කළ හැක. වෙනසක් සිදුවුවහොත් අපි ඔබට දැනුම් දෙන්නෙමු." : "This date is currently BOOKED. However, you can still submit a request to join the Waitlist! We will contact you if a slot opens up.";
-            } else if (type === 'pending') {
-                titleEl.innerText = windowLang === 'si' ? "ඉල්ලීමක් පවතී" : "Pending Request";
-                textEl.innerText = windowLang === 'si' ? "මෙම දිනය සඳහා වෙනත් පාරිභෝගිකයෙකුගේ ඉල්ලීමක් දැනටමත් ලැබී ඇත. ඔබටද 'Waitlist' එකට එකතු වීම සඳහා ඉල්ලීමක් කළ හැක." : "This date has a PENDING request. You can still submit your request to join the Waitlist!";
-            }
+            // Show both languages together for a premium feel
+            titleEl.innerHTML = "High Demand Date<br><span style='font-size: 1.1rem; font-family: sans-serif; letter-spacing: 0px;'>විශේෂ ඉල්ලුමක් පවතින දිනයක්</span>";
+            
+            textEl.innerHTML = "This date currently has high demand. However, you can still submit a request to join our Waitlist. If a slot opens up or if we can accommodate your event, we will notify you immediately.<br><br><span style='font-size: 0.9rem; color: #E5A93D;'>මෙම දිනය සඳහා දැනටමත් ඉහළ ඉල්ලුමක් පවතී! නමුත් ඔබට තවදුරටත් ඉල්ලීමක් කළ හැකි අතර, ඉදිරියේදී මෙම දිනය වෙන්කර දීමට හැකි වුවහොත් අප විසින් ඔබට වහාම දැනුම් දෙනු ඇත.</span>";
             
             document.getElementById('customModal').classList.add('show');
         }
@@ -348,8 +347,10 @@
                     this.classList.add('selected'); 
                     dateInput.value = this.getAttribute('data-full');
                     
-                    if(this.classList.contains('booked')) { showModal('booked'); } 
-                    else if(this.classList.contains('pending')) { showModal('pending'); }
+                    // Show modal if date is booked or pending
+                    if(this.classList.contains('booked') || this.classList.contains('pending')) { 
+                        showModal('booked'); 
+                    } 
                 });
             });
         }
