@@ -10,33 +10,14 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     
     <style>
-        .contact-wrapper {
-            display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px;
-            max-width: 1200px; margin: 0 auto; align-items: stretch;
-        }
-
-        .contact-form-card {
-            background: rgba(255, 255, 255, 0.03); border: 1px solid var(--gold-border);
-            border-radius: 12px; padding: 50px 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px); text-align: left;
-        }
-
-        .contact-info-card {
-            background: linear-gradient(145deg, rgba(10,28,54,0.9), rgba(6,19,38,0.9));
-            border-top: 3px solid var(--accent-gold); border-radius: 12px; padding: 50px 40px;
-            text-align: left; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            border-left: 1px solid var(--gold-border); border-right: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border);
-        }
+        .contact-wrapper { display: grid; grid-template-columns: 1.2fr 1fr; gap: 50px; max-width: 1200px; margin: 0 auto; align-items: stretch; }
+        .contact-form-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--gold-border); border-radius: 12px; padding: 50px 40px; box-shadow: 0 15px 40px rgba(0,0,0,0.5); backdrop-filter: blur(10px); text-align: left; scroll-margin-top: 100px; }
+        .contact-info-card { background: linear-gradient(145deg, rgba(10,28,54,0.9), rgba(6,19,38,0.9)); border-top: 3px solid var(--accent-gold); border-radius: 12px; padding: 50px 40px; text-align: left; display: flex; flex-direction: column; box-shadow: 0 10px 30px rgba(0,0,0,0.4); border-left: 1px solid var(--gold-border); border-right: 1px solid var(--gold-border); border-bottom: 1px solid var(--gold-border); scroll-margin-top: 100px; }
 
         /* Input & Form Styles */
         .input-group-row { display: flex; gap: 20px; }
         .input-group-row > div { flex: 1; }
-        .custom-input {
-            width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.2);
-            border: 1px solid rgba(229, 169, 61, 0.3); color: var(--text-white);
-            border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem;
-            transition: all 0.3s ease; margin-bottom: 25px;
-        }
+        .custom-input { width: 100%; padding: 16px; background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(229, 169, 61, 0.3); color: var(--text-white); border-radius: 6px; font-family: 'Montserrat', sans-serif; font-size: 0.95rem; transition: all 0.3s ease; margin-bottom: 25px; }
         .custom-input:focus { outline: none; border-color: var(--accent-gold); box-shadow: 0 0 10px rgba(229, 169, 61, 0.2); background: rgba(0, 0, 0, 0.4); }
         .custom-input::placeholder { color: rgba(255, 255, 255, 0.3); }
         .form-label { display: block; margin-bottom: 10px; color: var(--accent-gold); font-size: 0.9rem; font-weight: 500; text-transform: uppercase; letter-spacing: 1px; }
@@ -71,63 +52,70 @@
         .info-text h4 { color: var(--text-white); margin-bottom: 3px; font-size: 1rem; letter-spacing: 1px; }
         .info-text p { color: var(--text-grey); font-size: 0.85rem; margin: 0; }
 
-        /* Floating WhatsApp Button */
-        .whatsapp-float { position: fixed; width: 60px; height: 60px; bottom: 40px; right: 40px; background-color: #25d366; color: #FFF; border-radius: 50px; text-align: center; font-size: 35px; box-shadow: 0px 5px 20px rgba(37, 211, 102, 0.5); z-index: 100; display: flex; align-items: center; justify-content: center; text-decoration: none; transition: transform 0.3s; }
-        .whatsapp-float:hover { transform: scale(1.1); color: #FFF; }
-
         @media (max-width: 992px) { .contact-wrapper { grid-template-columns: 1fr; } .input-group-row { flex-direction: column; gap: 0; } }
     </style>
 </head>
 <body>
-    <!-- Cursor Elements -->
+    <div id="preloader"><img src="images/Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
     <div class="cursor-dot"></div><div class="cursor-outline"></div>
 
-    <!-- Navigation -->
-    <header>
-        <div class="logo">
-            <a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">
-                AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span>
-            </a>
+    <!-- Music Player -->
+    <div class="music-player">
+        <audio id="bg-music" loop><source src="https://assets.mixkit.co/music/preview/mixkit-beautiful-dream-493.mp3" type="audio/mpeg"></audio>
+        <button id="music-toggle" class="music-btn hover-link" onclick="toggleMusic()" title="Play Luxury Ambient Music"><i class="fas fa-play"></i></button>
+    </div>
+
+    <!-- Advanced WhatsApp Widget -->
+    <div class="wa-widget-container">
+        <div class="wa-widget-chat" id="wa-chat">
+            <div class="wa-header">
+                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783399029/WhatsApp_Image_2026-07-07_at_09.44.45_jn5zst.jpg" alt="Pasindu Fonseka">
+                <div><h4>Pasindu Fonseka</h4><p>Typically replies instantly</p></div>
+                <i class="fas fa-times wa-close hover-link" onclick="toggleWa()"></i>
+            </div>
+            <div class="wa-body">
+                <div class="wa-message">Hi there! 👋<br>Need help creating a masterpiece?</div>
+                <a href="https://wa.me/94766390768?text=Hi%20Avera%20Events!" target="_blank" class="btn-gold hover-link" style="width: 100%; text-align: center; padding: 12px;">Start Chat</a>
+            </div>
         </div>
+        <button class="wa-float-btn hover-link" onclick="toggleWa()"><i class="fab fa-whatsapp"></i></button>
+    </div>
+
+    <header>
+        <div class="logo"><a href="index.html" class="hover-link" style="color:var(--accent-gold); font-family:'Playfair Display', serif; font-size:24px; font-weight:bold; letter-spacing:2px; text-decoration:none;">AVERA<span style="font-size:12px; display:block; letter-spacing:5px; color:#fff; font-family:'Montserrat', sans-serif; font-weight:300;">EVENTS</span></a></div>
         <div class="menu-toggle" id="mobile-menu"><i class="fas fa-bars"></i></div>
         <nav id="nav-menu">
             <ul class="nav-list">
-                <li><a href="index.html" class="hover-link">Home</a></li>
-                <li><a href="about.html" class="hover-link">About Us</a></li>
-                <li><a href="services.html" class="hover-link">Services</a></li>
-                <li><a href="portfolio.html" class="hover-link">Portfolio</a></li>
-                <li><a href="reviews.html" class="hover-link">Reviews</a></li>
-                <li><a href="contact.html" class="active hover-link">Contact Us</a></li>
+                <li><a href="index.html" class="hover-link" data-en="Home" data-si="මුල් පිටුව">Home</a></li>
+                <li><a href="about.html" class="hover-link" data-en="About Us" data-si="අපි ගැන">About Us</a></li>
+                <li><a href="services.html" class="hover-link" data-en="Services" data-si="සේවාවන්">Services</a></li>
+                <li><a href="portfolio.html" class="hover-link" data-en="Portfolio" data-si="නිර්මාණ">Portfolio</a></li>
+                <li><a href="reviews.html" class="hover-link" data-en="Reviews" data-si="ප්‍රතිචාර">Reviews</a></li>
+                <li><a href="contact.html" class="active hover-link" data-en="Contact Us" data-si="විමසීම්">Contact Us</a></li>
+                <div class="lang-toggle"><button class="lang-btn active hover-link" onclick="switchLang('en', this)">EN</button><span class="lang-sep">|</span><button class="lang-btn hover-link" onclick="switchLang('si', this)">SI</button></div>
             </ul>
         </nav>
     </header>
 
     <section class="section-padding" style="margin-top: 80px; padding-bottom: 40px;">
-        <h1 class="section-title" data-aos="fade-down">Plan Your Surprise</h1>
-        <p data-aos="fade-up" data-aos-delay="200" style="color: var(--text-grey); font-size: 1.1rem; max-width: 600px; margin: 0 auto;">Select your date, build your custom package, and let us handle the magic.</p>
+        <h1 class="section-title" data-aos="fade-down" data-en="Plan Your Surprise" data-si="සැලසුම අරඹන්න">Plan Your Surprise</h1>
+        <p data-aos="fade-up" data-aos-delay="200" style="color: var(--text-grey); font-size: 1.1rem; max-width: 600px; margin: 0 auto;" data-en="Select your date, build your custom package, and let us handle the magic." data-si="ඔබගේ දිනය තෝරාගෙන ඔබේ අවශ්‍යතාවයන් අපට දන්වන්න.">Select your date, build your custom package, and let us handle the magic.</p>
     </section>
 
-    <!-- Custom Quote Builder & Calendar Section -->
     <section class="section-padding" style="padding-top: 0; padding-bottom: 80px;">
         <div class="contact-wrapper">
             
             <!-- Left: Custom Quote Builder Form -->
-            <div class="contact-form-card" data-aos="fade-right" data-aos-delay="300">
+            <div id="quote-builder" class="contact-form-card hover-link" data-aos="fade-right" data-aos-delay="300">
                 <form id="whatsappForm">
                     <div class="input-group-row">
-                        <div>
-                            <label class="form-label">Your Name</label>
-                            <input type="text" id="contactName" class="custom-input" placeholder="e.g. John Doe" required>
-                        </div>
-                        <div>
-                            <label class="form-label">Email Address</label>
-                            <input type="email" id="contactEmail" class="custom-input" placeholder="e.g. john@example.com" required>
-                        </div>
+                        <div><label class="form-label" data-en="Your Name" data-si="ඔබේ නම">Your Name</label><input type="text" id="contactName" class="custom-input" placeholder="e.g. John Doe" required></div>
+                        <div><label class="form-label" data-en="Email Address" data-si="විද්‍යුත් තැපෑල">Email Address</label><input type="email" id="contactEmail" class="custom-input" placeholder="e.g. john@example.com" required></div>
                     </div>
 
                     <div class="input-group-row">
                         <div>
-                            <label class="form-label">Event Type</label>
+                            <label class="form-label" data-en="Event Type" data-si="සිදුවීමේ වර්ගය">Event Type</label>
                             <select id="contactEvent" class="custom-input hover-link" style="cursor: pointer; appearance: none;" required>
                                 <option value="" disabled selected style="color: grey;">Select Event Type...</option>
                                 <option value="Anniversary Surprise" style="color: black;">Anniversary Surprise 💍</option>
@@ -137,27 +125,23 @@
                             </select>
                         </div>
                         <div>
-                            <label class="form-label">Selected Date</label>
-                            <!-- This gets filled automatically when clicking the calendar -->
-                            <input type="text" id="selectedDate" class="custom-input" placeholder="Select a date from calendar 👉" readonly required style="background: rgba(229, 169, 61, 0.1); border-color: var(--accent-gold); cursor: pointer; color: var(--accent-gold); font-weight: bold;">
+                            <label class="form-label" data-en="Selected Date" data-si="තෝරාගත් දිනය">Selected Date</label>
+                            <input type="text" id="selectedDate" class="custom-input hover-link" placeholder="Select from calendar 👉" readonly required style="background: rgba(229, 169, 61, 0.1); border-color: var(--accent-gold); cursor: pointer; color: var(--accent-gold); font-weight: bold;">
                         </div>
                     </div>
 
                     <!-- Package Builder Section -->
-                    <label class="form-label" style="margin-top: 10px;">Build Your Package (Select Services)</label>
+                    <label class="form-label" style="margin-top: 10px;" data-en="Build Your Package (Select Services)" data-si="ඔබට අවශ්‍ය සේවාවන් තෝරන්න">Build Your Package (Select Services)</label>
                     <div class="checkbox-group">
-                        <label class="checkbox-label"><input type="checkbox" class="package-option" value="Room Decor 🌹"><div class="custom-checkbox"></div> Room/Venue Decor 🌹</label>
-                        <label class="checkbox-label"><input type="checkbox" class="package-option" value="Custom Cake 🎂"><div class="custom-checkbox"></div> Premium Custom Cake 🎂</label>
-                        <label class="checkbox-label"><input type="checkbox" class="package-option" value="Candlelit Dinner 🥂"><div class="custom-checkbox"></div> Candlelit Dinner 🥂</label>
-                        <label class="checkbox-label"><input type="checkbox" class="package-option" value="Live Music 🎻"><div class="custom-checkbox"></div> Live Violinist/Music 🎻</label>
-                        <label class="checkbox-label"><input type="checkbox" class="package-option" value="Photography 📸"><div class="custom-checkbox"></div> Photography 📸</label>
-                        <label class="checkbox-label"><input type="checkbox" class="package-option" value="Sparklers/Fireworks ✨"><div class="custom-checkbox"></div> Sparklers & FX ✨</label>
+                        <label class="checkbox-label hover-link"><input type="checkbox" class="package-option" value="Room Decor 🌹"><div class="custom-checkbox"></div> Room Decor 🌹</label>
+                        <label class="checkbox-label hover-link"><input type="checkbox" class="package-option" value="Custom Cake 🎂"><div class="custom-checkbox"></div> Premium Cake 🎂</label>
+                        <label class="checkbox-label hover-link"><input type="checkbox" class="package-option" value="Candlelit Dinner 🥂"><div class="custom-checkbox"></div> Candlelit Dinner 🥂</label>
+                        <label class="checkbox-label hover-link"><input type="checkbox" class="package-option" value="Live Music 🎻"><div class="custom-checkbox"></div> Live Music 🎻</label>
+                        <label class="checkbox-label hover-link"><input type="checkbox" class="package-option" value="Photography 📸"><div class="custom-checkbox"></div> Photography 📸</label>
+                        <label class="checkbox-label hover-link"><input type="checkbox" class="package-option" value="Sparklers/Fireworks ✨"><div class="custom-checkbox"></div> Sparklers & FX ✨</label>
                     </div>
 
-                    <div>
-                        <label class="form-label">Your Vision / Special Requests</label>
-                        <textarea id="contactMessage" class="custom-input" rows="4" placeholder="Tell us more about the vibe you want..." required></textarea>
-                    </div>
+                    <div><label class="form-label" data-en="Your Vision / Special Requests" data-si="ඔබේ අදහස">Your Vision / Special Requests</label><textarea id="contactMessage" class="custom-input hover-link" rows="4" placeholder="Tell us more about the vibe you want..." required></textarea></div>
 
                     <button type="submit" class="btn-gold hover-link" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
                         <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Get My Custom Quote
@@ -166,22 +150,13 @@
             </div>
 
             <!-- Right: Availability Calendar & Contact Info -->
-            <div class="contact-info-card" data-aos="fade-left" data-aos-delay="500">
-                
-                <!-- Availability Calendar UI -->
+            <div id="availability-calendar" class="contact-info-card hover-link" data-aos="fade-left" data-aos-delay="500">
                 <div>
-                    <h3 style="color: var(--accent-gold); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.6rem;">Check Availability</h3>
+                    <h3 style="color: var(--accent-gold); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.6rem;" data-en="Check Availability" data-si="දින පරීක්ෂා කරන්න">Check Availability</h3>
                     <div class="calendar-container">
-                        <div class="calendar-header">
-                            <span id="cal-month-year"></span>
-                            <i class="far fa-calendar-alt hover-link" style="cursor: pointer;"></i>
-                        </div>
-                        <div class="calendar-grid">
-                            <div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div>
-                        </div>
-                        <div class="calendar-grid" id="cal-days">
-                            <!-- Days will be generated by JavaScript -->
-                        </div>
+                        <div class="calendar-header"><span id="cal-month-year"></span><i class="far fa-calendar-alt hover-link" style="cursor: pointer;"></i></div>
+                        <div class="calendar-grid"><div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div></div>
+                        <div class="calendar-grid" id="cal-days"></div>
                         <div class="calendar-legend">
                             <div class="legend-item"><div class="legend-dot dot-avail"></div> Available</div>
                             <div class="legend-item"><div class="legend-dot dot-booked"></div> Booked</div>
@@ -189,28 +164,15 @@
                     </div>
                 </div>
 
-                <!-- Direct Contact -->
                 <div>
-                    <div class="info-item">
-                        <i class="fab fa-whatsapp info-icon"></i>
-                        <div class="info-text"><h4>Call / WhatsApp</h4><p>+94 76 639 0768</p></div>
-                    </div>
-                    <div class="info-item" style="margin-bottom: 0;">
-                        <i class="far fa-envelope info-icon"></i>
-                        <div class="info-text"><h4>Email Us</h4><p>avera.eventsofficial@gmail.com</p></div>
-                    </div>
+                    <div class="info-item"><i class="fab fa-whatsapp info-icon"></i><div class="info-text"><h4>Call / WhatsApp</h4><p>+94 76 639 0768</p></div></div>
+                    <div class="info-item" style="margin-bottom: 0;"><i class="far fa-envelope info-icon"></i><div class="info-text"><h4>Email Us</h4><p>avera.eventsofficial@gmail.com</p></div></div>
                 </div>
             </div>
             
         </div>
     </section>
 
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/94766390768?text=Hello%20Avera%20Events,%20I%20would%20like%20to%20know%20more%20about%20your%20services!" class="whatsapp-float hover-link" target="_blank">
-        <i class="fab fa-whatsapp"></i>
-    </a>
-
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Avera Events. All Rights Reserved.</p>
         <p style="font-size: 0.9rem; color: var(--text-grey); margin-top: 10px; letter-spacing: 1px;">Kandy, Sri Lanka | WhatsApp: 076 639 0768</p>
@@ -219,104 +181,52 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1000, once: true, offset: 50 });
+        window.addEventListener('load', function() { setTimeout(function() { document.body.classList.add('loaded'); }, 1500); });
+        
+        function toggleWa() { document.getElementById('wa-chat').classList.toggle('active'); }
+        function toggleMusic() { const m = document.getElementById("bg-music"); const b = document.getElementById("music-toggle"); const i = b.querySelector("i"); if (m.paused) { m.play(); b.classList.add("playing"); i.classList.replace("fa-play", "fa-pause"); } else { m.pause(); b.classList.remove("playing"); i.classList.replace("fa-pause", "fa-play"); } }
 
-        // Cursor Logic
-        const cursorDot = document.querySelector('.cursor-dot');
-        const cursorOutline = document.querySelector('.cursor-outline');
-        if (window.innerWidth > 992 && cursorDot && cursorOutline) {
-            window.addEventListener('mousemove', (e) => {
-                cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`;
-                setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50);
-            });
-            document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => {
-                el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; });
-                el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; });
-            });
-        }
+        const cursorDot = document.querySelector('.cursor-dot'); const cursorOutline = document.querySelector('.cursor-outline');
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) { window.addEventListener('mousemove', (e) => { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50); }); document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => { el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; }); el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; }); }); }
 
-        // Mobile Menu Logic
-        const mobileMenu = document.getElementById('mobile-menu');
-        const navMenu = document.getElementById('nav-menu');
-        const menuIcon = mobileMenu.querySelector('i');
-        if(mobileMenu && navMenu) {
-            mobileMenu.addEventListener('click', () => {
-                navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll');
-                if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } 
-                else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); }
-            });
-        }
+        const mobileMenu = document.getElementById('mobile-menu'); const navMenu = document.getElementById('nav-menu'); const menuIcon = mobileMenu.querySelector('i');
+        if(mobileMenu && navMenu) { mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } }); }
 
-        // --- CALENDAR LOGIC ---
+        function switchLang(lang, btn) { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('[data-en]').forEach(el => { if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; } }); }
+
+        // Calendar Logic
         function renderCalendar() {
-            const calGrid = document.getElementById('cal-days');
-            const monthYear = document.getElementById('cal-month-year');
-            const dateInput = document.getElementById('selectedDate');
-            
-            const date = new Date();
-            const year = date.getFullYear();
-            const month = date.getMonth();
-            
+            const calGrid = document.getElementById('cal-days'); const monthYear = document.getElementById('cal-month-year'); const dateInput = document.getElementById('selectedDate');
+            const date = new Date(); const year = date.getFullYear(); const month = date.getMonth();
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             monthYear.textContent = `${monthNames[month]} ${year}`;
-            
-            const firstDay = new Date(year, month, 1).getDay();
-            const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const today = date.getDate();
-            
+            const firstDay = new Date(year, month, 1).getDay(); const daysInMonth = new Date(year, month + 1, 0).getDate(); const today = date.getDate();
             calGrid.innerHTML = '';
             
-            // Randomly pick a few upcoming days to show as "Booked" for FOMO Marketing
             const bookedDays = [today + 2, today + 6, today + 9, today + 14]; 
-
-            // Empty slots before 1st of month
-            for (let i = 0; i < firstDay; i++) {
-                calGrid.innerHTML += `<div class="calendar-day empty"></div>`;
-            }
-            
-            // Generate Days
+            for (let i = 0; i < firstDay; i++) { calGrid.innerHTML += `<div class="calendar-day empty"></div>`; }
             for (let i = 1; i <= daysInMonth; i++) {
                 let statusClass = '';
-                // Past days and randomly selected days are booked
-                if (i < today || bookedDays.includes(i)) {
-                    statusClass = 'booked';
-                }
+                if (i < today || bookedDays.includes(i)) { statusClass = 'booked'; }
                 calGrid.innerHTML += `<div class="calendar-day ${statusClass} hover-link" data-day="${i}">${i}</div>`;
             }
             
-            // Handle Date Click
             document.querySelectorAll('.calendar-day:not(.booked):not(.empty)').forEach(day => {
                 day.addEventListener('click', function() {
                     document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                    this.classList.add('selected');
-                    const selectedDay = this.getAttribute('data-day');
-                    dateInput.value = `${selectedDay} ${monthNames[month]} ${year}`;
+                    this.classList.add('selected'); dateInput.value = `${this.getAttribute('data-day')} ${monthNames[month]} ${year}`;
                 });
             });
         }
         document.addEventListener("DOMContentLoaded", renderCalendar);
 
-        // --- SUBMIT FORM & GENERATE WHATSAPP MESSAGE ---
         document.getElementById("whatsappForm").addEventListener("submit", function(e) {
             e.preventDefault(); 
-            
-            const name = document.getElementById("contactName").value;
-            const email = document.getElementById("contactEmail").value;
-            const eventType = document.getElementById("contactEvent").value;
-            const date = document.getElementById("selectedDate").value;
-            const message = document.getElementById("contactMessage").value;
-            
-            // Get selected package checkboxes
-            let selectedServices = [];
-            document.querySelectorAll('.package-option:checked').forEach(cb => {
-                selectedServices.push(cb.value);
-            });
+            const name = document.getElementById("contactName").value; const email = document.getElementById("contactEmail").value; const eventType = document.getElementById("contactEvent").value; const date = document.getElementById("selectedDate").value; const message = document.getElementById("contactMessage").value;
+            let selectedServices = []; document.querySelectorAll('.package-option:checked').forEach(cb => { selectedServices.push(cb.value); });
             const servicesText = selectedServices.length > 0 ? selectedServices.join("%0A✅ ") : "No specific packages selected yet.";
-            
             const waNumber = "94766390768";
-            
-            // Constructing a beautiful Premium WhatsApp Message
             const waText = `✨ *New Custom Quote Request | Avera Events* ✨%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Event:* ${eventType}%0A*Date:* ${date}%0A%0A*📦 Selected Packages:*%0A✅ ${servicesText}%0A%0A*📝 Client Vision:*%0A"${message}"`;
-            
             window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
         });
     </script>
