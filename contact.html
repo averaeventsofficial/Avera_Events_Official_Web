@@ -31,20 +31,28 @@
         .checkbox-label input:checked + .custom-checkbox { background: var(--accent-gold); }
         .checkbox-label input:checked + .custom-checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-blue); font-size: 12px; }
 
-        /* Custom Availability Calendar */
-        .calendar-container { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(229, 169, 61, 0.2); border-radius: 8px; padding: 25px; margin-bottom: 40px; }
+        /* Custom Availability Calendar - Updated for Pending Status */
+        .calendar-container { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(229, 169, 61, 0.2); border-radius: 8px; padding: 25px; margin-bottom: 40px; position: relative; }
         .calendar-header { display: flex; justify-content: space-between; align-items: center; color: var(--accent-gold); margin-bottom: 20px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 1px; font-size: 1.1rem; }
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
         .day-name { color: var(--text-grey); font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
         .calendar-day { padding: 10px 0; border-radius: 4px; font-size: 0.9rem; cursor: pointer; color: var(--text-white); border: 1px solid transparent; transition: all 0.3s; }
+        
         .calendar-day:hover:not(.booked):not(.empty) { border-color: var(--accent-gold); background: rgba(229, 169, 61, 0.1); }
-        .calendar-day.booked { color: rgba(255, 76, 76, 0.5); text-decoration: line-through; cursor: not-allowed; background: rgba(255, 76, 76, 0.05); }
+        
+        /* New Status Colors */
+        .calendar-day.pending { background: rgba(229, 169, 61, 0.4); border-color: var(--accent-gold); color: #fff; }
+        .calendar-day.booked { color: rgba(255, 76, 76, 0.5); text-decoration: line-through; cursor: not-allowed; background: rgba(255, 76, 76, 0.05); border-color: transparent; }
         .calendar-day.selected { background: var(--accent-gold); color: var(--primary-blue); font-weight: bold; box-shadow: 0 0 15px rgba(229, 169, 61, 0.4); transform: scale(1.1); }
-        .calendar-legend { display: flex; gap: 20px; margin-top: 20px; font-size: 0.8rem; justify-content: center; color: var(--text-grey); }
-        .legend-item { display: flex; align-items: center; gap: 8px; }
+        
+        .calendar-legend { display: flex; gap: 15px; margin-top: 20px; font-size: 0.8rem; justify-content: center; color: var(--text-grey); flex-wrap: wrap; }
+        .legend-item { display: flex; align-items: center; gap: 5px; }
         .legend-dot { width: 10px; height: 10px; border-radius: 50%; }
-        .dot-avail { background: var(--accent-gold); }
+        .dot-avail { background: transparent; border: 1px solid var(--text-grey); }
+        .dot-pending { background: rgba(229, 169, 61, 0.8); }
         .dot-booked { background: rgba(255, 76, 76, 0.7); }
+
+        #cal-loader { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4,13,26,0.8); display: flex; justify-content: center; align-items: center; border-radius: 8px; z-index: 10; color: var(--accent-gold); display: none; }
 
         /* Direct Contact Info */
         .info-item { display: flex; align-items: center; margin-bottom: 20px; }
@@ -56,7 +64,7 @@
     </style>
 </head>
 <body>
-    <div id="preloader"><img src="Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
+    <div id="preloader"><img src="images/Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
     <div class="cursor-dot"></div><div class="cursor-outline"></div>
 
     <!-- Music Player -->
@@ -107,10 +115,10 @@
             
             <!-- Left: Custom Quote Builder Form -->
             <div id="quote-builder" class="contact-form-card hover-link" data-aos="fade-right" data-aos-delay="300">
-                <form id="whatsappForm">
+                <form id="bookingForm">
                     <div class="input-group-row">
                         <div><label class="form-label" data-en="Your Name" data-si="ඔබේ නම">Your Name</label><input type="text" id="contactName" class="custom-input" placeholder="e.g. John Doe" required></div>
-                        <div><label class="form-label" data-en="Email Address" data-si="විද්‍යුත් තැපෑල">Email Address</label><input type="email" id="contactEmail" class="custom-input" placeholder="e.g. john@example.com" required></div>
+                        <div><label class="form-label" data-en="Phone Number" data-si="දුරකථන අංකය">Phone Number</label><input type="tel" id="contactPhone" class="custom-input" placeholder="e.g. 077 123 4567" required></div>
                     </div>
 
                     <div class="input-group-row">
@@ -143,9 +151,10 @@
 
                     <div><label class="form-label" data-en="Your Vision / Special Requests" data-si="ඔබේ අදහස">Your Vision / Special Requests</label><textarea id="contactMessage" class="custom-input hover-link" rows="4" placeholder="Tell us more about the vibe you want..." required></textarea></div>
 
-                    <button type="submit" class="btn-gold hover-link" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
-                        <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Get My Custom Quote
+                    <button type="submit" id="submitBtn" class="btn-gold hover-link" style="width: 100%; padding: 18px; font-size: 1rem; display: flex; justify-content: center; align-items: center; gap: 10px;">
+                        <i class="fab fa-whatsapp" style="font-size: 1.3rem;"></i> Request Booking & Get Quote
                     </button>
+                    <p id="formStatus" style="color: var(--accent-gold); text-align: center; margin-top: 15px; display: none;"></p>
                 </form>
             </div>
 
@@ -154,13 +163,16 @@
                 <div>
                     <h3 style="color: var(--accent-gold); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.6rem;" data-en="Check Availability" data-si="දින පරීක්ෂා කරන්න">Check Availability</h3>
                     <div class="calendar-container">
-                        <div class="calendar-header"><span id="cal-month-year"></span><i class="far fa-calendar-alt hover-link" style="cursor: pointer;"></i></div>
+                        <div id="cal-loader"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
+                        <div class="calendar-header"><span id="cal-month-year"></span></div>
                         <div class="calendar-grid"><div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div></div>
                         <div class="calendar-grid" id="cal-days"></div>
                         <div class="calendar-legend">
                             <div class="legend-item"><div class="legend-dot dot-avail"></div> Available</div>
+                            <div class="legend-item"><div class="legend-dot dot-pending"></div> Pending Request</div>
                             <div class="legend-item"><div class="legend-dot dot-booked"></div> Booked</div>
                         </div>
+                        <p style="font-size: 0.75rem; color: var(--text-grey); text-align: center; margin-top: 15px; font-style: italic;">* You can still request 'Pending' dates to join the waitlist.</p>
                     </div>
                 </div>
 
@@ -193,42 +205,164 @@
         if(mobileMenu && navMenu) { mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } }); }
 
         function switchLang(lang, btn) { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('[data-en]').forEach(el => { if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; } }); }
+    </script>
 
-        // Calendar Logic
+    <!-- Firebase Integration for Calendar & Bookings -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = { 
+            apiKey: "AIzaSyAv-SoG3q9eOvcGdiBgxtS-GGel5KmbHlc", 
+            authDomain: "avera-events.firebaseapp.com", 
+            projectId: "avera-events", 
+            storageBucket: "avera-events.firebasestorage.app", 
+            messagingSenderId: "295738255118", 
+            appId: "1:295738255118:web:e0b43d84703799c6bc195f" 
+        };
+        const app = initializeApp(firebaseConfig); 
+        const db = getFirestore(app);
+
+        let bookingStatusMap = {};
+
+        // Fetch bookings from Firebase to color the calendar
+        async function fetchBookings() {
+            document.getElementById('cal-loader').style.display = 'flex';
+            try {
+                const q = query(collection(db, "bookings"));
+                const snapshot = await getDocs(q);
+                snapshot.forEach(doc => {
+                    const data = doc.data();
+                    // Store date as key and status as value (e.g., "15 July 2026": "pending")
+                    if(data.date && data.status) {
+                        bookingStatusMap[data.date] = data.status; 
+                    }
+                });
+            } catch (error) {
+                console.error("Error fetching calendar data:", error);
+            }
+            renderCalendar();
+            document.getElementById('cal-loader').style.display = 'none';
+        }
+
+        // Calendar Logic with Firebase Integration
         function renderCalendar() {
-            const calGrid = document.getElementById('cal-days'); const monthYear = document.getElementById('cal-month-year'); const dateInput = document.getElementById('selectedDate');
-            const date = new Date(); const year = date.getFullYear(); const month = date.getMonth();
+            const calGrid = document.getElementById('cal-days'); 
+            const monthYear = document.getElementById('cal-month-year'); 
+            const dateInput = document.getElementById('selectedDate');
+            
+            const date = new Date();
+            const year = date.getFullYear();
+            const month = date.getMonth();
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            
             monthYear.textContent = `${monthNames[month]} ${year}`;
-            const firstDay = new Date(year, month, 1).getDay(); const daysInMonth = new Date(year, month + 1, 0).getDate(); const today = date.getDate();
+            
+            const firstDay = new Date(year, month, 1).getDay();
+            const daysInMonth = new Date(year, month + 1, 0).getDate();
+            const today = date.getDate();
+            
             calGrid.innerHTML = '';
             
-            const bookedDays = [today + 2, today + 6, today + 9, today + 14]; 
+            // Empty slots before 1st of month
             for (let i = 0; i < firstDay; i++) { calGrid.innerHTML += `<div class="calendar-day empty"></div>`; }
+            
+            // Generate Days
             for (let i = 1; i <= daysInMonth; i++) {
                 let statusClass = '';
-                if (i < today || bookedDays.includes(i)) { statusClass = 'booked'; }
-                calGrid.innerHTML += `<div class="calendar-day ${statusClass} hover-link" data-day="${i}">${i}</div>`;
+                const dateString = `${i} ${monthNames[month]} ${year}`;
+                
+                if (i < today) {
+                    statusClass = 'booked'; // Past days disabled
+                } else if (bookingStatus = bookingStatusMap(dateString)) {
+                     // Get status from Firebase data
+                    statusClass = bookingStatusMap(dateString);
+                }
+
+                function getBookingStatusClass(dateStr) {
+                    if (bookingStatusMap[dateStr] === 'approved') return 'booked';
+                    if (bookingStatusMap[dateStr] === 'pending') return 'pending';
+                    return '';
+                }
+                
+                if(i >= today) {
+                     statusClass = getBookingStatusClass(dateString);
+                }
+
+                calGrid.innerHTML += `<div class="calendar-day ${statusClass} hover-link" data-day="${i}" data-full="${dateString}">${i}</div>`;
             }
             
+            // Allow selection on available and pending days
             document.querySelectorAll('.calendar-day:not(.booked):not(.empty)').forEach(day => {
                 day.addEventListener('click', function() {
                     document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
-                    this.classList.add('selected'); dateInput.value = `${this.getAttribute('data-day')} ${monthNames[month]} ${year}`;
+                    this.classList.add('selected'); 
+                    dateInput.value = this.getAttribute('data-full');
+                    
+                    if(this.classList.contains('pending')) {
+                        alert("✨ This date has a pending request from another client. You can still submit your request to join the Waitlist!");
+                    }
                 });
             });
         }
-        document.addEventListener("DOMContentLoaded", renderCalendar);
 
-        document.getElementById("whatsappForm").addEventListener("submit", function(e) {
+        // Form Submit -> Save to Firebase -> Redirect to WhatsApp
+        document.getElementById("bookingForm").addEventListener("submit", async function(e) {
             e.preventDefault(); 
-            const name = document.getElementById("contactName").value; const email = document.getElementById("contactEmail").value; const eventType = document.getElementById("contactEvent").value; const date = document.getElementById("selectedDate").value; const message = document.getElementById("contactMessage").value;
-            let selectedServices = []; document.querySelectorAll('.package-option:checked').forEach(cb => { selectedServices.push(cb.value); });
-            const servicesText = selectedServices.length > 0 ? selectedServices.join("%0A✅ ") : "No specific packages selected yet.";
-            const waNumber = "94766390768";
-            const waText = `✨ *New Custom Quote Request | Avera Events* ✨%0A%0A*Name:* ${name}%0A*Email:* ${email}%0A*Event:* ${eventType}%0A*Date:* ${date}%0A%0A*📦 Selected Packages:*%0A✅ ${servicesText}%0A%0A*📝 Client Vision:*%0A"${message}"`;
-            window.open(`https://wa.me/${waNumber}?text=${waText}`, '_blank');
+            const submitBtn = document.getElementById('submitBtn');
+            const statusText = document.getElementById('formStatus');
+            
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+            submitBtn.disabled = true;
+
+            const name = document.getElementById("contactName").value; 
+            const phone = document.getElementById("contactPhone").value; 
+            const eventType = document.getElementById("contactEvent").value; 
+            const date = document.getElementById("selectedDate").value; 
+            const message = document.getElementById("contactMessage").value;
+            
+            let selectedServices = []; 
+            document.querySelectorAll('.package-option:checked').forEach(cb => { selectedServices.push(cb.value); });
+            const servicesText = selectedServices.length > 0 ? selectedServices.join("\n✅ ") : "No specific packages selected.";
+
+            try {
+                // Save to Firebase Firestore
+                await addDoc(collection(db, "bookings"), { 
+                    name: name, 
+                    phone: phone,
+                    eventType: eventType, 
+                    date: date,
+                    services: selectedServices,
+                    message: message, 
+                    status: "pending", // ALWAYS DEFAULT TO PENDING
+                    createdAt: serverTimestamp() 
+                });
+
+                statusText.innerText = "Request saved! Redirecting to WhatsApp...";
+                statusText.style.display = "block";
+
+                // Construct WhatsApp Message
+                const waNumber = "94766390768";
+                const waMsg = `✨ *New Booking Request | Avera Events* ✨\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event:* ${eventType}\n*Date:* ${date}\n\n*📦 Selected Packages:*\n✅ ${servicesText}\n\n*📝 Client Vision:*\n"${message}"`;
+                const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
+                
+                setTimeout(() => {
+                    window.open(waUrl, '_blank');
+                    window.location.reload(); // Refresh page to update calendar
+                }, 1500);
+
+            } catch(error) {
+                console.error("Firebase save error:", error);
+                statusText.innerText = "Error saving request. Please try again.";
+                statusText.style.color = "red";
+                statusText.style.display = "block";
+                submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Request Booking & Get Quote';
+                submitBtn.disabled = false;
+            }
         });
+
+        // Initialize App
+        document.addEventListener("DOMContentLoaded", fetchBookings);
     </script>
 </body>
 </html>
