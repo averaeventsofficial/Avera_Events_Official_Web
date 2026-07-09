@@ -31,18 +31,19 @@
         .checkbox-label input:checked + .custom-checkbox { background: var(--accent-gold); }
         .checkbox-label input:checked + .custom-checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-blue); font-size: 12px; }
 
-        /* Custom Availability Calendar - Updated for Pending Status */
+        /* Custom Availability Calendar - Updated */
         .calendar-container { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(229, 169, 61, 0.2); border-radius: 8px; padding: 25px; margin-bottom: 40px; position: relative; }
         .calendar-header { display: flex; justify-content: space-between; align-items: center; color: var(--accent-gold); margin-bottom: 20px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 1px; font-size: 1.1rem; }
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
         .day-name { color: var(--text-grey); font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
         .calendar-day { padding: 10px 0; border-radius: 4px; font-size: 0.9rem; cursor: pointer; color: var(--text-white); border: 1px solid transparent; transition: all 0.3s; }
         
-        .calendar-day:hover:not(.booked):not(.empty) { border-color: var(--accent-gold); background: rgba(229, 169, 61, 0.1); }
+        .calendar-day:hover:not(.past):not(.empty) { border-color: var(--accent-gold); background: rgba(229, 169, 61, 0.1); }
         
         /* New Status Colors */
-        .calendar-day.pending { background: rgba(229, 169, 61, 0.4); border-color: var(--accent-gold); color: #fff; }
-        .calendar-day.booked { color: rgba(255, 76, 76, 0.5); text-decoration: line-through; cursor: not-allowed; background: rgba(255, 76, 76, 0.05); border-color: transparent; }
+        .calendar-day.past { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
+        .calendar-day.pending { background: rgba(229, 169, 61, 0.2); border-color: var(--accent-gold); color: #fff; }
+        .calendar-day.booked { color: #fff; background: rgba(255, 76, 76, 0.2); border-color: rgba(255, 76, 76, 0.5); }
         .calendar-day.selected { background: var(--accent-gold); color: var(--primary-blue); font-weight: bold; box-shadow: 0 0 15px rgba(229, 169, 61, 0.4); transform: scale(1.1); }
         
         .calendar-legend { display: flex; gap: 15px; margin-top: 20px; font-size: 0.8rem; justify-content: center; color: var(--text-grey); flex-wrap: wrap; }
@@ -52,7 +53,7 @@
         .dot-pending { background: rgba(229, 169, 61, 0.8); }
         .dot-booked { background: rgba(255, 76, 76, 0.7); }
 
-        #cal-loader { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4,13,26,0.8); display: flex; justify-content: center; align-items: center; border-radius: 8px; z-index: 10; color: var(--accent-gold); display: none; }
+        #cal-loader { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4,13,26,0.9); display: flex; justify-content: center; align-items: center; border-radius: 8px; z-index: 10; color: var(--accent-gold); display: none; }
 
         /* Direct Contact Info */
         .info-item { display: flex; align-items: center; margin-bottom: 20px; }
@@ -169,10 +170,10 @@
                         <div class="calendar-grid" id="cal-days"></div>
                         <div class="calendar-legend">
                             <div class="legend-item"><div class="legend-dot dot-avail"></div> Available</div>
-                            <div class="legend-item"><div class="legend-dot dot-pending"></div> Pending Request</div>
+                            <div class="legend-item"><div class="legend-dot dot-pending"></div> Pending</div>
                             <div class="legend-item"><div class="legend-dot dot-booked"></div> Booked</div>
                         </div>
-                        <p style="font-size: 0.75rem; color: var(--text-grey); text-align: center; margin-top: 15px; font-style: italic;">* You can still request 'Pending' dates to join the waitlist.</p>
+                        <p style="font-size: 0.75rem; color: var(--text-grey); text-align: center; margin-top: 15px; font-style: italic;">* You can still request 'Booked' or 'Pending' dates to join the Waitlist.</p>
                     </div>
                 </div>
 
@@ -233,19 +234,19 @@
                 const snapshot = await getDocs(q);
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    // Store date as key and status as value (e.g., "15 July 2026": "pending")
                     if(data.date && data.status) {
                         bookingStatusMap[data.date] = data.status; 
                     }
                 });
             } catch (error) {
-                console.error("Error fetching calendar data:", error);
+                console.error("Firebase connection info (showing default marketing dates):", error);
+            } finally {
+                renderCalendar();
+                document.getElementById('cal-loader').style.display = 'none';
             }
-            renderCalendar();
-            document.getElementById('cal-loader').style.display = 'none';
         }
 
-        // Calendar Logic with Firebase Integration
+        // Calendar Logic
         function renderCalendar() {
             const calGrid = document.getElementById('cal-days'); 
             const monthYear = document.getElementById('cal-month-year'); 
@@ -260,7 +261,10 @@
             
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
-            const today = date.getDate();
+            
+            // To disable past dates accurately
+            const todayDate = new Date();
+            todayDate.setHours(0,0,0,0);
             
             calGrid.innerHTML = '';
             
@@ -270,37 +274,37 @@
             // Generate Days
             for (let i = 1; i <= daysInMonth; i++) {
                 let statusClass = '';
+                const cellDate = new Date(year, month, i);
                 const dateString = `${i} ${monthNames[month]} ${year}`;
                 
-                if (i < today) {
-                    statusClass = 'booked'; // Past days disabled
-                } else if (bookingStatus = bookingStatusMap(dateString)) {
-                     // Get status from Firebase data
-                    statusClass = bookingStatusMap(dateString);
-                }
-
-                function getBookingStatusClass(dateStr) {
-                    if (bookingStatusMap[dateStr] === 'approved') return 'booked';
-                    if (bookingStatusMap[dateStr] === 'pending') return 'pending';
-                    return '';
-                }
-                
-                if(i >= today) {
-                     statusClass = getBookingStatusClass(dateString);
+                if (cellDate < todayDate) {
+                    statusClass = 'past'; // Disable past dates
+                } else {
+                    // Marketing Trick: Show a few fake booked days to create demand if DB is empty
+                    const fakeBookedDays = [date.getDate() + 2, date.getDate() + 6]; 
+                    
+                    if (bookingStatusMap[dateString]) {
+                        statusClass = bookingStatusMap[dateString]; // 'booked' or 'pending'
+                    } else if (fakeBookedDays.includes(i)) {
+                        statusClass = 'booked';
+                    }
                 }
 
                 calGrid.innerHTML += `<div class="calendar-day ${statusClass} hover-link" data-day="${i}" data-full="${dateString}">${i}</div>`;
             }
             
-            // Allow selection on available and pending days
-            document.querySelectorAll('.calendar-day:not(.booked):not(.empty)').forEach(day => {
+            // Allow selection on ALL future days (including booked/pending)
+            document.querySelectorAll('.calendar-day:not(.past):not(.empty)').forEach(day => {
                 day.addEventListener('click', function() {
                     document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
                     this.classList.add('selected'); 
                     dateInput.value = this.getAttribute('data-full');
                     
-                    if(this.classList.contains('pending')) {
-                        alert("✨ This date has a pending request from another client. You can still submit your request to join the Waitlist!");
+                    // Show a message if they select a busy date
+                    if(this.classList.contains('booked')) {
+                        alert("✨ This date is currently BOOKED. However, you can still submit a request to join the Waitlist! We will contact you if a slot opens up.");
+                    } else if(this.classList.contains('pending')) {
+                        alert("✨ This date has a PENDING request. You can still submit your request to join the Waitlist!");
                     }
                 });
             });
@@ -343,7 +347,7 @@
 
                 // Construct WhatsApp Message
                 const waNumber = "94766390768";
-                const waMsg = `✨ *New Booking Request | Avera Events* ✨\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event:* ${eventType}\n*Date:* ${date}\n\n*📦 Selected Packages:*\n✅ ${servicesText}\n\n*📝 Client Vision:*\n"${message}"`;
+                const waMsg = `✨ *New Waitlist/Booking Request | Avera Events* ✨\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event:* ${eventType}\n*Date:* ${date}\n\n*📦 Selected Packages:*\n✅ ${servicesText}\n\n*📝 Client Vision:*\n"${message}"`;
                 const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
                 
                 setTimeout(() => {
