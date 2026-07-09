@@ -45,7 +45,6 @@
         .logout-btn { background: transparent; color: #ff4c4c; border: 1px solid #ff4c4c; padding: 8px 15px; border-radius: 4px; cursor: pointer; transition: 0.3s; font-size: 0.85rem; }
         .logout-btn:hover { background: #ff4c4c; color: #fff; }
         
-        /* Mobile Menu Button */
         .mobile-menu-btn { display: none; background: transparent; color: var(--accent-gold); border: none; font-size: 1.5rem; cursor: pointer; }
 
         /* Content Sections */
@@ -113,18 +112,17 @@
             .mobile-menu-btn { display: block; }
             .header-bar { gap: 15px; margin-bottom: 25px; }
             .header-bar h2 { font-size: 1.2rem; }
-            #userEmail { display: none; } /* Hide email on small screens to save space */
-            
+            #userEmail { display: none; }
             .doc-row { flex-direction: column; gap: 10px; }
             .doc-row > div { width: 100%; flex: none !important; }
             .finance-grid { grid-template-columns: 1fr; }
-            
-            .finance-row { flex-direction: column; align-items: stretch; }
-            .finance-row .custom-input { width: 100%; }
-            .finance-row .action-btn { align-self: flex-end; margin-top: -5px; }
+            .finance-row { flex-wrap: wrap; }
+            .finance-row > input { width: 100%; }
+            .expense-item-row > input { width: 45%; flex: 1 1 45% !important; }
+            .expense-item-row > .exp-desc { width: 100%; flex: 1 1 100% !important; }
         }
 
-        /* Print Media Query (Kept intact) */
+        /* Print Media Query */
         #print-preview { background: #fff; color: #222; padding: 50px; border-radius: 4px; font-family: 'Montserrat', sans-serif; display: none; margin-top: 30px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
         .inv-header { display: flex; justify-content: space-between; align-items: flex-start; border-bottom: 2px solid #E5A93D; padding-bottom: 20px; margin-bottom: 30px; }
         .inv-logo { width: 150px; }
@@ -227,7 +225,7 @@
                 </div>
             </div>
 
-            <!-- TAB 3: Document Builder (Quotes & Invoices) -->
+            <!-- TAB 3: Document Builder -->
             <div id="documents" class="admin-section">
                 <div class="doc-builder-container">
                     <div class="doc-form-panel">
@@ -244,7 +242,7 @@
                         <hr style="border: none; border-top: 1px solid var(--gold-border); margin: 20px 0;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
                             <h4 style="color: var(--text-white); font-size: 1rem;">Itemized Charges</h4>
-                            <button class="btn-outline" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addDocItem()"><i class="fas fa-plus"></i> Add Item</button>
+                            <button class="btn-outline" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addDocItem()"><i class="fas fa-plus"></i> Add Item Row</button>
                         </div>
                         <div id="docItemsWrapper"></div>
                         <div class="doc-row" style="margin-top: 20px; justify-content: flex-end;">
@@ -287,7 +285,7 @@
                 </div>
             </div>
 
-            <!-- TAB 4: Financials & ROI -->
+            <!-- TAB 4: Financials & ROI (WITH VENDOR PAYMENT TRACKER) -->
             <div id="financials" class="admin-section">
                 <div style="margin-bottom: 30px;">
                     <label class="form-label">Select Event</label>
@@ -296,14 +294,16 @@
                     </select>
                 </div>
                 <div id="finWorkspace" class="finance-grid" style="display: none;">
+                    
+                    <!-- INCOME PANEL -->
                     <div class="finance-panel">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <div><div id="finStatusBadge" class="finance-status fs-ongoing">Ongoing</div><h3 style="color: var(--accent-gold); font-size: 1.1rem;">Income</h3></div>
+                            <div><div id="finStatusBadge" class="finance-status fs-ongoing">Ongoing</div><h3 style="color: var(--accent-gold); font-size: 1.1rem;">Income Tracker</h3></div>
                             <button class="btn-outline" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addIncomeRow()"><i class="fas fa-plus"></i> Add Item</button>
                         </div>
                         <div id="incomeListWrapper"></div>
                         <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gold-border);">
-                            <strong style="color: var(--text-white);">Total:</strong><strong style="color: #25d366;" id="finTotalInc">Rs. 0</strong>
+                            <strong style="color: var(--text-white);">Total Income:</strong><strong style="color: #25d366;" id="finTotalInc">Rs. 0</strong>
                         </div>
                         <div class="summary-box">
                             <p style="color: var(--text-grey); font-size: 0.8rem; text-transform: uppercase;">Net Profit</p>
@@ -314,14 +314,27 @@
                             <button class="btn-gold" style="flex: 1; min-width: 120px;" onclick="saveFinancials('finished')"><i class="fas fa-check-circle"></i> Finish</button>
                         </div>
                     </div>
+
+                    <!-- EXPENSES & VENDOR PAYMENT PANEL -->
                     <div class="finance-panel">
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
-                            <h3 style="color: var(--accent-gold); font-size: 1.1rem;">Expenses</h3>
-                            <button class="btn-outline" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addExpenseRow()"><i class="fas fa-plus"></i> Add Item</button>
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                            <h3 style="color: var(--accent-gold); font-size: 1.1rem;">Vendor Payment Tracker</h3>
+                            <button class="btn-outline" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addExpenseRow()"><i class="fas fa-plus"></i> Add Vendor</button>
                         </div>
+                        <div style="display: flex; font-size: 0.75rem; color: var(--text-grey); text-transform: uppercase; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 10px;">
+                            <span style="flex: 2;">Description</span>
+                            <span style="flex: 1; text-align: center;">Cost</span>
+                            <span style="flex: 1; text-align: center;">Paid</span>
+                            <span style="flex: 1; text-align: right; padding-right: 10px;">Bal.</span>
+                        </div>
+                        
                         <div id="expenseListWrapper"></div>
+                        
                         <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gold-border);">
-                            <strong style="color: var(--text-white);">Total:</strong><strong style="color: #ff4c4c;" id="finTotalExp">Rs. 0</strong>
+                            <strong style="color: var(--text-white);">Total Expenses:</strong><strong style="color: #ff4c4c;" id="finTotalExp">Rs. 0</strong>
+                        </div>
+                        <div style="text-align: right; margin-top: 10px; font-size: 0.85rem;" id="finVendorPayments">
+                            <span style="color:var(--text-grey);">Total Paid: Rs. 0</span> | <span style="color:#ff4c4c; font-weight:bold;">To Pay: Rs. 0</span>
                         </div>
                     </div>
                 </div>
@@ -407,10 +420,8 @@
 
         let allBookingsData = [];
 
-        // Mobile Sidebar Toggle
         window.toggleSidebar = () => { document.querySelector('.sidebar').classList.toggle('active'); };
 
-        // UI Helpers
         window.switchTab = (tabId, element) => {
             document.querySelectorAll('.sidebar-menu li').forEach(li => li.classList.remove('active'));
             if(element) element.classList.add('active');
@@ -426,39 +437,31 @@
         };
         window.closeModal = (id) => document.getElementById(id).classList.remove('active');
 
-        // Login Logic & Auth Observer
         window.togglePwd = () => {
-            const pwd = document.getElementById("password");
-            const icon = document.getElementById("togglePassword");
+            const pwd = document.getElementById("password"); const icon = document.getElementById("togglePassword");
             if (pwd.type === "password") { pwd.type = "text"; icon.classList.replace("fa-eye", "fa-eye-slash"); icon.style.color = "var(--accent-gold)"; } 
             else { pwd.type = "password"; icon.classList.replace("fa-eye-slash", "fa-eye"); icon.style.color = "var(--text-grey)"; }
         };
 
         onAuthStateChanged(auth, (user) => {
             if (user) { 
-                document.getElementById("login-screen").style.display = "none"; 
-                document.getElementById("admin-dashboard").style.display = "block"; 
-                document.getElementById("userEmail").innerText = user.email; 
-                loadData(); 
+                document.getElementById("login-screen").style.display = "none"; document.getElementById("admin-dashboard").style.display = "block"; 
+                document.getElementById("userEmail").innerText = user.email; loadData(); 
             } else { 
-                document.getElementById("login-screen").style.display = "flex"; 
-                document.getElementById("admin-dashboard").style.display = "none"; 
+                document.getElementById("login-screen").style.display = "flex"; document.getElementById("admin-dashboard").style.display = "none"; 
             }
         });
 
         document.getElementById('loginBtn').addEventListener('click', () => {
-            const btn = document.getElementById("loginBtn");
-            btn.innerText = "VERIFYING...";
+            const btn = document.getElementById("loginBtn"); btn.innerText = "VERIFYING...";
             signInWithEmailAndPassword(auth, document.getElementById("email").value, document.getElementById("password").value)
             .then(() => { btn.innerText = "ACCESS SYSTEM"; document.getElementById("loginError").style.display = "none"; })
             .catch(() => { btn.innerText = "ACCESS SYSTEM"; document.getElementById("loginError").style.display = "block"; });
         });
         
         document.getElementById('logoutBtn').addEventListener('click', () => signOut(auth));
-
         function formatMoney(amount) { return parseFloat(amount || 0).toLocaleString('en-US', { minimumFractionDigits: 2 }); }
 
-        // Data Loading Core
         function loadData() {
             // Bookings & Stats
             onSnapshot(query(collection(db, "bookings"), orderBy("createdAt", "desc")), (snapshot) => {
@@ -469,7 +472,6 @@
 
                 snapshot.forEach((docSnap) => {
                     const d = docSnap.data(); d.id = docSnap.id; allBookingsData.push(d);
-                    
                     if(d.status === 'pending') pendingCount++; 
                     if(d.status === 'approved' && d.finStatus !== 'finished') approvedCount++;
                     if(d.finStatus === 'finished') { finishedCount++; if(d.financials && d.financials.profit) totalProfit += parseFloat(d.financials.profit); }
@@ -511,19 +513,16 @@
             });
         }
 
-        // Global Operations
         window.updateBooking = async (id, status) => { await updateDoc(doc(db, "bookings", id), { status }); };
         window.deleteDocFunc = async (col, id) => { if(confirm("Delete this item?")) await deleteDoc(doc(db, col, id)); };
         window.editVendor = (id, name, cat, phone, notes) => {
             document.getElementById('vId').value = id; document.getElementById('vName').value = name;
-            document.getElementById('vCategory').value = cat; document.getElementById('vPhone').value = phone;
-            document.getElementById('vNotes').value = notes; openModal('vendorModal');
+            document.getElementById('vCategory').value = cat; document.getElementById('vPhone').value = phone; document.getElementById('vNotes').value = notes; openModal('vendorModal');
         };
 
         // Form Submit Listeners
         document.getElementById('addBookingForm').addEventListener('submit', async (e) => {
-            e.preventDefault();
-            await addDoc(collection(db, "bookings"), { name: document.getElementById('mbName').value, phone: document.getElementById('mbPhone').value, eventType: document.getElementById('mbType').value, date: document.getElementById('mbDate').value, status: document.getElementById('mbStatus').value, finStatus: 'ongoing', createdAt: serverTimestamp(), message: 'Manual Entry' });
+            e.preventDefault(); await addDoc(collection(db, "bookings"), { name: document.getElementById('mbName').value, phone: document.getElementById('mbPhone').value, eventType: document.getElementById('mbType').value, date: document.getElementById('mbDate').value, status: document.getElementById('mbStatus').value, finStatus: 'ongoing', createdAt: serverTimestamp(), message: 'Manual Entry' });
             closeModal('bookingModal'); document.getElementById('addBookingForm').reset();
         });
         document.getElementById('vendorForm').addEventListener('submit', async (e) => {
@@ -537,7 +536,7 @@
             closeModal('portfolioModal'); document.getElementById('portfolioForm').reset();
         });
 
-        // ---------------- FINANCIALS LOGIC ----------------
+        // ---------------- FINANCIALS LOGIC (UPDATED WITH VENDOR TRACKER) ----------------
         window.loadEventFinancials = () => {
             const eventId = document.getElementById('finEventSelect').value; const workspace = document.getElementById('finWorkspace');
             if(!eventId) { workspace.style.display = 'none'; return; }
@@ -557,7 +556,7 @@
 
             const expWrapper = document.getElementById('expenseListWrapper'); expWrapper.innerHTML = '';
             if(!fin.expenses || fin.expenses.length===0) { addExpenseRow(); } 
-            else { fin.expenses.forEach(exp => addExpenseRow(exp.desc, exp.amount)); }
+            else { fin.expenses.forEach(exp => addExpenseRow(exp.desc, exp.amount, exp.paid)); }
             calculateFinTotals();
         };
 
@@ -566,21 +565,57 @@
             row.innerHTML = `<input type="text" class="custom-input inc-desc" placeholder="Desc" value="${desc}" style="flex:2;"><input type="number" class="custom-input inc-amt" placeholder="Amt" value="${amount}" onkeyup="calculateFinTotals()" style="flex:1;"><button class="action-btn btn-reject" onclick="this.parentElement.remove(); calculateFinTotals();" style="margin:0; padding:15px;"><i class="fas fa-trash"></i></button>`;
             wrapper.appendChild(row);
         };
-        window.addExpenseRow = (desc = '', amount = '') => {
-            const wrapper = document.getElementById('expenseListWrapper'); const row = document.createElement('div'); row.className = 'finance-row';
-            row.innerHTML = `<input type="text" class="custom-input exp-desc" placeholder="Desc" value="${desc}" style="flex:2;"><input type="number" class="custom-input exp-amt" placeholder="Amt" value="${amount}" onkeyup="calculateFinTotals()" style="flex:1;"><button class="action-btn btn-reject" onclick="this.parentElement.remove(); calculateFinTotals();" style="margin:0; padding:15px;"><i class="fas fa-trash"></i></button>`;
+        
+        window.addExpenseRow = (desc = '', amount = '', paid = '') => {
+            const wrapper = document.getElementById('expenseListWrapper'); const row = document.createElement('div'); 
+            row.className = 'finance-row expense-item-row';
+            row.innerHTML = `
+                <input type="text" class="custom-input exp-desc" placeholder="Vendor" value="${desc}" style="flex:2;">
+                <input type="number" class="custom-input exp-amt" placeholder="Cost" value="${amount}" onkeyup="calculateFinTotals()" style="flex:1;">
+                <input type="number" class="custom-input exp-paid" placeholder="Paid" value="${paid}" onkeyup="calculateFinTotals()" style="flex:1;">
+                <div class="exp-bal-display" style="flex:1; text-align:right; font-size:0.85rem; font-weight:bold; padding-right:10px;">Rs. 0</div>
+                <button class="action-btn btn-reject" onclick="this.parentElement.remove(); calculateFinTotals();" style="margin:0; padding:10px;"><i class="fas fa-trash"></i></button>
+            `;
             wrapper.appendChild(row);
         };
+        
         window.calculateFinTotals = () => {
-            let totalInc = 0; document.querySelectorAll('.inc-amt').forEach(input => totalInc += parseFloat(input.value || 0)); document.getElementById('finTotalInc').innerText = "Rs. " + formatMoney(totalInc);
-            let totalExp = 0; document.querySelectorAll('.exp-amt').forEach(input => totalExp += parseFloat(input.value || 0)); document.getElementById('finTotalExp').innerText = "Rs. " + formatMoney(totalExp);
+            let totalInc = 0; document.querySelectorAll('.inc-amt').forEach(input => totalInc += parseFloat(input.value || 0)); 
+            document.getElementById('finTotalInc').innerText = "Rs. " + formatMoney(totalInc);
+            
+            let totalExp = 0; let totalPaidOut = 0; let totalPending = 0;
+            document.querySelectorAll('.expense-item-row').forEach(row => { 
+                const amt = parseFloat(row.querySelector('.exp-amt').value || 0); 
+                const paid = parseFloat(row.querySelector('.exp-paid').value || 0);
+                const bal = amt - paid;
+                
+                const balDisplay = row.querySelector('.exp-bal-display');
+                balDisplay.innerText = formatMoney(bal);
+                balDisplay.style.color = bal > 0 ? "#ff4c4c" : "#25d366";
+                
+                totalExp += amt; totalPaidOut += paid; totalPending += bal;
+            }); 
+            
+            document.getElementById('finTotalExp').innerText = "Rs. " + formatMoney(totalExp);
+            document.getElementById('finVendorPayments').innerHTML = `<span style="color:var(--text-grey);">Paid: Rs. ${formatMoney(totalPaidOut)}</span> | <span style="color:#ff4c4c; font-weight:bold;">To Pay: Rs. ${formatMoney(totalPending)}</span>`;
+            
             const profit = totalInc - totalExp; const profitEl = document.getElementById('finNetProfit');
             profitEl.innerText = "Rs. " + formatMoney(profit); profitEl.style.color = profit >= 0 ? '#25d366' : '#ff4c4c';
         };
+        
         window.saveFinancials = async (statusType) => {
             const eventId = document.getElementById('finEventSelect').value; if(!eventId) return;
-            let incomes = []; let totalInc = 0; document.querySelectorAll('#incomeListWrapper .finance-row').forEach(row => { const desc = row.querySelector('.inc-desc').value; const amt = parseFloat(row.querySelector('.inc-amt').value || 0); if(desc || amt > 0) { incomes.push({ desc, amount: amt }); totalInc += amt; } });
-            let expenses = []; let totalExp = 0; document.querySelectorAll('#expenseListWrapper .finance-row').forEach(row => { const desc = row.querySelector('.exp-desc').value; const amt = parseFloat(row.querySelector('.exp-amt').value || 0); if(desc || amt > 0) { expenses.push({ desc, amount: amt }); totalExp += amt; } });
+            let incomes = []; let totalInc = 0; 
+            document.querySelectorAll('#incomeListWrapper .finance-row').forEach(row => { const desc = row.querySelector('.inc-desc').value; const amt = parseFloat(row.querySelector('.inc-amt').value || 0); if(desc || amt > 0) { incomes.push({ desc, amount: amt }); totalInc += amt; } });
+            
+            let expenses = []; let totalExp = 0; 
+            document.querySelectorAll('#expenseListWrapper .expense-item-row').forEach(row => { 
+                const desc = row.querySelector('.exp-desc').value; 
+                const amt = parseFloat(row.querySelector('.exp-amt').value || 0); 
+                const paid = parseFloat(row.querySelector('.exp-paid').value || 0); 
+                if(desc || amt > 0) { expenses.push({ desc, amount: amt, paid: paid, balance: amt - paid }); totalExp += amt; } 
+            });
+            
             try {
                 await updateDoc(doc(db, "bookings", eventId), { finStatus: statusType, financials: { incomes, totalIncome: totalInc, expenses, totalExpenses: totalExp, profit: totalInc - totalExp } });
                 alert(`Event marked as ${statusType.toUpperCase()}!`); if(statusType === 'finished') document.getElementById('finEventSelect').dispatchEvent(new Event('change'));
