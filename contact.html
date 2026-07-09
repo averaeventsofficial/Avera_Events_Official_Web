@@ -31,16 +31,18 @@
         .checkbox-label input:checked + .custom-checkbox { background: var(--accent-gold); }
         .checkbox-label input:checked + .custom-checkbox::after { content: '\f00c'; font-family: 'Font Awesome 6 Free'; font-weight: 900; color: var(--primary-blue); font-size: 12px; }
 
-        /* Custom Availability Calendar - Updated */
+        /* Custom Availability Calendar */
         .calendar-container { background: rgba(0, 0, 0, 0.2); border: 1px solid rgba(229, 169, 61, 0.2); border-radius: 8px; padding: 25px; margin-bottom: 40px; position: relative; }
-        .calendar-header { display: flex; justify-content: space-between; align-items: center; color: var(--accent-gold); margin-bottom: 20px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 1px; font-size: 1.1rem; }
+        .calendar-header { display: flex; justify-content: space-between; align-items: center; color: var(--accent-gold); margin-bottom: 20px; font-weight: 600; font-family: 'Montserrat', sans-serif; letter-spacing: 1px; font-size: 1.2rem; }
+        .cal-nav-btn { cursor: pointer; padding: 5px 10px; transition: color 0.3s; color: var(--text-white); }
+        .cal-nav-btn:hover { color: var(--accent-gold); transform: scale(1.1); }
         .calendar-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 8px; text-align: center; }
         .day-name { color: var(--text-grey); font-size: 0.8rem; font-weight: 600; margin-bottom: 10px; }
         .calendar-day { padding: 10px 0; border-radius: 4px; font-size: 0.9rem; cursor: pointer; color: var(--text-white); border: 1px solid transparent; transition: all 0.3s; }
         
         .calendar-day:hover:not(.past):not(.empty) { border-color: var(--accent-gold); background: rgba(229, 169, 61, 0.1); }
         
-        /* New Status Colors */
+        /* Status Colors */
         .calendar-day.past { opacity: 0.3; cursor: not-allowed; text-decoration: line-through; }
         .calendar-day.pending { background: rgba(229, 169, 61, 0.2); border-color: var(--accent-gold); color: #fff; }
         .calendar-day.booked { color: #fff; background: rgba(255, 76, 76, 0.2); border-color: rgba(255, 76, 76, 0.5); }
@@ -61,12 +63,33 @@
         .info-text h4 { color: var(--text-white); margin-bottom: 3px; font-size: 1rem; letter-spacing: 1px; }
         .info-text p { color: var(--text-grey); font-size: 0.85rem; margin: 0; }
 
+        /* Custom Popup Modal styling */
+        .custom-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(4, 13, 26, 0.85); backdrop-filter: blur(5px); z-index: 9999; display: flex; justify-content: center; align-items: center; opacity: 0; visibility: hidden; transition: all 0.3s ease; }
+        .custom-modal-overlay.show { opacity: 1; visibility: visible; }
+        .custom-modal-box { background: linear-gradient(145deg, rgba(10,28,54,1), rgba(6,19,38,1)); border: 1px solid var(--accent-gold); border-radius: 8px; padding: 40px 30px; text-align: center; max-width: 450px; box-shadow: 0 20px 50px rgba(0,0,0,0.8); transform: translateY(20px); transition: transform 0.3s ease; margin: 20px; }
+        .custom-modal-overlay.show .custom-modal-box { transform: translateY(0); }
+        .custom-modal-icon { font-size: 3rem; color: var(--accent-gold); margin-bottom: 20px; }
+        .custom-modal-title { color: var(--accent-gold); font-size: 1.5rem; margin-bottom: 15px; font-family: 'Playfair Display', serif; }
+        .custom-modal-text { color: var(--text-white); font-size: 0.95rem; margin-bottom: 30px; line-height: 1.6; }
+        .custom-modal-btn { background: var(--accent-gold); color: var(--primary-blue); padding: 12px 35px; border: none; border-radius: 4px; font-weight: 600; cursor: pointer; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s; font-family: 'Montserrat', sans-serif; }
+        .custom-modal-btn:hover { background: #fff; box-shadow: 0 5px 15px rgba(229,169,61,0.3); }
+
         @media (max-width: 992px) { .contact-wrapper { grid-template-columns: 1fr; } .input-group-row { flex-direction: column; gap: 0; } }
     </style>
 </head>
 <body>
     <div id="preloader"><img src="Avera ල්.png" alt="Avera Loading" class="loader-logo"></div>
     <div class="cursor-dot"></div><div class="cursor-outline"></div>
+
+    <!-- Custom Alert Popup -->
+    <div class="custom-modal-overlay" id="customModal">
+        <div class="custom-modal-box">
+            <i class="fas fa-info-circle custom-modal-icon"></i>
+            <h3 class="custom-modal-title" id="modalTitle">Notice</h3>
+            <p class="custom-modal-text" id="modalText">Message goes here.</p>
+            <button class="custom-modal-btn hover-link" onclick="closeModal()">Got it!</button>
+        </div>
+    </div>
 
     <!-- Music Player -->
     <div class="music-player">
@@ -78,8 +101,8 @@
     <div class="wa-widget-container">
         <div class="wa-widget-chat" id="wa-chat">
             <div class="wa-header">
-                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783399029/WhatsApp_Image_2026-07-07_at_09.44.45_jn5zst.jpg" alt="Pasindu Fonseka">
-                <div><h4>Pasindu Fonseka</h4><p>Typically replies instantly</p></div>
+                <img src="https://res.cloudinary.com/ord0oppa/image/upload/v1783399033/Man_in_blazer_office_202607070939_g2fzbm.jpg" alt="Lakmal Madhushan">
+                <div><h4>Mr. Lakmal Madhushan</h4></h4><p>Typically replies instantly</p></div>
                 <i class="fas fa-times wa-close hover-link" onclick="toggleWa()"></i>
             </div>
             <div class="wa-body">
@@ -165,15 +188,23 @@
                     <h3 style="color: var(--accent-gold); margin-bottom: 20px; font-family: 'Playfair Display', serif; font-size: 1.6rem;" data-en="Check Availability" data-si="දින පරීක්ෂා කරන්න">Check Availability</h3>
                     <div class="calendar-container">
                         <div id="cal-loader"><i class="fas fa-spinner fa-spin fa-2x"></i></div>
-                        <div class="calendar-header"><span id="cal-month-year"></span></div>
+                        
+                        <!-- Month Navigation Header -->
+                        <div class="calendar-header">
+                            <i class="fas fa-chevron-left cal-nav-btn" id="prevMonthBtn"></i>
+                            <span id="cal-month-year"></span>
+                            <i class="fas fa-chevron-right cal-nav-btn" id="nextMonthBtn"></i>
+                        </div>
+
                         <div class="calendar-grid"><div class="day-name">S</div><div class="day-name">M</div><div class="day-name">T</div><div class="day-name">W</div><div class="day-name">T</div><div class="day-name">F</div><div class="day-name">S</div></div>
                         <div class="calendar-grid" id="cal-days"></div>
+                        
                         <div class="calendar-legend">
                             <div class="legend-item"><div class="legend-dot dot-avail"></div> Available</div>
                             <div class="legend-item"><div class="legend-dot dot-pending"></div> Pending</div>
                             <div class="legend-item"><div class="legend-dot dot-booked"></div> Booked</div>
                         </div>
-                        <p style="font-size: 0.75rem; color: var(--text-grey); text-align: center; margin-top: 15px; font-style: italic;">* You can still request 'Booked' or 'Pending' dates to join the Waitlist.</p>
+                        <p style="font-size: 0.75rem; color: var(--text-grey); text-align: center; margin-top: 15px; font-style: italic;" data-en="* You can still request 'Booked' or 'Pending' dates to join the Waitlist." data-si="* වෙන්කර ඇති දින සඳහාද ඔබට Waitlist එකට එකතු විය හැක.">* You can still request 'Booked' or 'Pending' dates to join the Waitlist.</p>
                     </div>
                 </div>
 
@@ -196,16 +227,45 @@
         AOS.init({ duration: 1000, once: true, offset: 50 });
         window.addEventListener('load', function() { setTimeout(function() { document.body.classList.add('loaded'); }, 1500); });
         
+        let windowLang = 'en'; // Track language for modal
+
+        // Custom Modal Logic
+        function showModal(type) {
+            const titleEl = document.getElementById('modalTitle');
+            const textEl = document.getElementById('modalText');
+            
+            if (type === 'booked') {
+                titleEl.innerText = windowLang === 'si' ? "මෙම දිනය වෙන්කර ඇත" : "Date Currently Booked";
+                textEl.innerText = windowLang === 'si' ? "මෙම දිනය දැනටමත් වෙන්කර ඇත. නමුත් ඔබට 'Waitlist' එකට එකතු වීම සඳහා ඉල්ලීමක් කළ හැක. වෙනසක් සිදුවුවහොත් අපි ඔබට දැනුම් දෙන්නෙමු." : "This date is currently BOOKED. However, you can still submit a request to join the Waitlist! We will contact you if a slot opens up.";
+            } else if (type === 'pending') {
+                titleEl.innerText = windowLang === 'si' ? "ඉල්ලීමක් පවතී" : "Pending Request";
+                textEl.innerText = windowLang === 'si' ? "මෙම දිනය සඳහා වෙනත් පාරිභෝගිකයෙකුගේ ඉල්ලීමක් දැනටමත් ලැබී ඇත. ඔබටද 'Waitlist' එකට එකතු වීම සඳහා ඉල්ලීමක් කළ හැක." : "This date has a PENDING request. You can still submit your request to join the Waitlist!";
+            }
+            
+            document.getElementById('customModal').classList.add('show');
+        }
+
+        function closeModal() { document.getElementById('customModal').classList.remove('show'); }
+
+        // Language toggle update
+        function switchLang(lang, btn) { 
+            windowLang = lang;
+            document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); 
+            document.querySelectorAll('[data-en]').forEach(el => { 
+                if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } 
+                else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; } 
+            }); 
+        }
+
+        // WhatsApp, Music & General UI Interactions
         function toggleWa() { document.getElementById('wa-chat').classList.toggle('active'); }
         function toggleMusic() { const m = document.getElementById("bg-music"); const b = document.getElementById("music-toggle"); const i = b.querySelector("i"); if (m.paused) { m.play(); b.classList.add("playing"); i.classList.replace("fa-play", "fa-pause"); } else { m.pause(); b.classList.remove("playing"); i.classList.replace("fa-pause", "fa-play"); } }
 
         const cursorDot = document.querySelector('.cursor-dot'); const cursorOutline = document.querySelector('.cursor-outline');
-        if (window.innerWidth > 992 && cursorDot && cursorOutline) { window.addEventListener('mousemove', (e) => { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50); }); document.querySelectorAll('a, button, select, input, textarea, .hover-link').forEach(el => { el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; }); el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; }); }); }
+        if (window.innerWidth > 992 && cursorDot && cursorOutline) { window.addEventListener('mousemove', (e) => { cursorDot.style.left = `${e.clientX}px`; cursorDot.style.top = `${e.clientY}px`; setTimeout(() => { cursorOutline.style.left = `${e.clientX}px`; cursorOutline.style.top = `${e.clientY}px`; }, 50); }); document.querySelectorAll('a, button, select, input, textarea, .hover-link, .cal-nav-btn').forEach(el => { el.addEventListener('mouseenter', () => { cursorOutline.style.width = '60px'; cursorOutline.style.height = '60px'; cursorOutline.style.backgroundColor = 'rgba(229, 169, 61, 0.1)'; }); el.addEventListener('mouseleave', () => { cursorOutline.style.width = '35px'; cursorOutline.style.height = '35px'; cursorOutline.style.backgroundColor = 'transparent'; }); }); }
 
         const mobileMenu = document.getElementById('mobile-menu'); const navMenu = document.getElementById('nav-menu'); const menuIcon = mobileMenu.querySelector('i');
         if(mobileMenu && navMenu) { mobileMenu.addEventListener('click', () => { navMenu.classList.toggle('active'); document.body.classList.toggle('no-scroll'); if(navMenu.classList.contains('active')) { menuIcon.classList.remove('fa-bars'); menuIcon.classList.add('fa-times'); } else { menuIcon.classList.remove('fa-times'); menuIcon.classList.add('fa-bars'); } }); }
-
-        function switchLang(lang, btn) { document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active')); btn.classList.add('active'); document.querySelectorAll('[data-en]').forEach(el => { if(lang === 'si' && el.getAttribute('data-si')) { el.innerHTML = el.getAttribute('data-si'); document.body.style.fontFamily = "'Montserrat', 'Iskoola Pota', sans-serif"; } else { el.innerHTML = el.getAttribute('data-en'); document.body.style.fontFamily = "'Montserrat', sans-serif"; } }); }
     </script>
 
     <!-- Firebase Integration for Calendar & Bookings -->
@@ -213,20 +273,13 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
         import { getFirestore, collection, addDoc, getDocs, serverTimestamp, query } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
 
-        const firebaseConfig = { 
-            apiKey: "AIzaSyAv-SoG3q9eOvcGdiBgxtS-GGel5KmbHlc", 
-            authDomain: "avera-events.firebaseapp.com", 
-            projectId: "avera-events", 
-            storageBucket: "avera-events.firebasestorage.app", 
-            messagingSenderId: "295738255118", 
-            appId: "1:295738255118:web:e0b43d84703799c6bc195f" 
-        };
+        const firebaseConfig = { apiKey: "AIzaSyAv-SoG3q9eOvcGdiBgxtS-GGel5KmbHlc", authDomain: "avera-events.firebaseapp.com", projectId: "avera-events", storageBucket: "avera-events.firebasestorage.app", messagingSenderId: "295738255118", appId: "1:295738255118:web:e0b43d84703799c6bc195f" };
         const app = initializeApp(firebaseConfig); 
         const db = getFirestore(app);
 
         let bookingStatusMap = {};
+        let navDate = new Date(); // Tracks the currently viewed month
 
-        // Fetch bookings from Firebase to color the calendar
         async function fetchBookings() {
             document.getElementById('cal-loader').style.display = 'flex';
             try {
@@ -234,27 +287,27 @@
                 const snapshot = await getDocs(q);
                 snapshot.forEach(doc => {
                     const data = doc.data();
-                    if(data.date && data.status) {
-                        bookingStatusMap[data.date] = data.status; 
-                    }
+                    if(data.date && data.status) { bookingStatusMap[data.date] = data.status; }
                 });
-            } catch (error) {
-                console.error("Firebase connection info (showing default marketing dates):", error);
-            } finally {
-                renderCalendar();
-                document.getElementById('cal-loader').style.display = 'none';
-            }
+            } catch (error) { console.error("Firebase connection info:", error);
+            } finally { renderCalendar(); document.getElementById('cal-loader').style.display = 'none'; }
         }
 
-        // Calendar Logic
+        function changeMonth(dir) {
+            navDate.setMonth(navDate.getMonth() + dir);
+            renderCalendar();
+        }
+
+        document.getElementById('prevMonthBtn').addEventListener('click', () => changeMonth(-1));
+        document.getElementById('nextMonthBtn').addEventListener('click', () => changeMonth(1));
+
         function renderCalendar() {
             const calGrid = document.getElementById('cal-days'); 
             const monthYear = document.getElementById('cal-month-year'); 
             const dateInput = document.getElementById('selectedDate');
             
-            const date = new Date();
-            const year = date.getFullYear();
-            const month = date.getMonth();
+            const year = navDate.getFullYear();
+            const month = navDate.getMonth();
             const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             
             monthYear.textContent = `${monthNames[month]} ${year}`;
@@ -262,30 +315,26 @@
             const firstDay = new Date(year, month, 1).getDay();
             const daysInMonth = new Date(year, month + 1, 0).getDate();
             
-            // To disable past dates accurately
             const todayDate = new Date();
             todayDate.setHours(0,0,0,0);
             
             calGrid.innerHTML = '';
-            
-            // Empty slots before 1st of month
             for (let i = 0; i < firstDay; i++) { calGrid.innerHTML += `<div class="calendar-day empty"></div>`; }
             
-            // Generate Days
             for (let i = 1; i <= daysInMonth; i++) {
                 let statusClass = '';
                 const cellDate = new Date(year, month, i);
                 const dateString = `${i} ${monthNames[month]} ${year}`;
                 
                 if (cellDate < todayDate) {
-                    statusClass = 'past'; // Disable past dates
+                    statusClass = 'past';
                 } else {
-                    // Marketing Trick: Show a few fake booked days to create demand if DB is empty
-                    const fakeBookedDays = [date.getDate() + 2, date.getDate() + 6]; 
+                    const realDate = new Date();
+                    const fakeBookedDays = [realDate.getDate() + 2, realDate.getDate() + 6]; 
                     
                     if (bookingStatusMap[dateString]) {
-                        statusClass = bookingStatusMap[dateString]; // 'booked' or 'pending'
-                    } else if (fakeBookedDays.includes(i)) {
+                        statusClass = bookingStatusMap[dateString]; 
+                    } else if (year === realDate.getFullYear() && month === realDate.getMonth() && fakeBookedDays.includes(i)) {
                         statusClass = 'booked';
                     }
                 }
@@ -293,79 +342,43 @@
                 calGrid.innerHTML += `<div class="calendar-day ${statusClass} hover-link" data-day="${i}" data-full="${dateString}">${i}</div>`;
             }
             
-            // Allow selection on ALL future days (including booked/pending)
             document.querySelectorAll('.calendar-day:not(.past):not(.empty)').forEach(day => {
                 day.addEventListener('click', function() {
                     document.querySelectorAll('.calendar-day').forEach(d => d.classList.remove('selected'));
                     this.classList.add('selected'); 
                     dateInput.value = this.getAttribute('data-full');
                     
-                    // Show a message if they select a busy date
-                    if(this.classList.contains('booked')) {
-                        alert("✨ This date is currently BOOKED. However, you can still submit a request to join the Waitlist! We will contact you if a slot opens up.");
-                    } else if(this.classList.contains('pending')) {
-                        alert("✨ This date has a PENDING request. You can still submit your request to join the Waitlist!");
-                    }
+                    if(this.classList.contains('booked')) { showModal('booked'); } 
+                    else if(this.classList.contains('pending')) { showModal('pending'); }
                 });
             });
         }
 
-        // Form Submit -> Save to Firebase -> Redirect to WhatsApp
         document.getElementById("bookingForm").addEventListener("submit", async function(e) {
             e.preventDefault(); 
             const submitBtn = document.getElementById('submitBtn');
             const statusText = document.getElementById('formStatus');
-            
-            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
-            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...'; submitBtn.disabled = true;
 
-            const name = document.getElementById("contactName").value; 
-            const phone = document.getElementById("contactPhone").value; 
-            const eventType = document.getElementById("contactEvent").value; 
-            const date = document.getElementById("selectedDate").value; 
-            const message = document.getElementById("contactMessage").value;
-            
-            let selectedServices = []; 
-            document.querySelectorAll('.package-option:checked').forEach(cb => { selectedServices.push(cb.value); });
+            const name = document.getElementById("contactName").value; const phone = document.getElementById("contactPhone").value; const eventType = document.getElementById("contactEvent").value; const date = document.getElementById("selectedDate").value; const message = document.getElementById("contactMessage").value;
+            let selectedServices = []; document.querySelectorAll('.package-option:checked').forEach(cb => { selectedServices.push(cb.value); });
             const servicesText = selectedServices.length > 0 ? selectedServices.join("\n✅ ") : "No specific packages selected.";
 
             try {
-                // Save to Firebase Firestore
-                await addDoc(collection(db, "bookings"), { 
-                    name: name, 
-                    phone: phone,
-                    eventType: eventType, 
-                    date: date,
-                    services: selectedServices,
-                    message: message, 
-                    status: "pending", // ALWAYS DEFAULT TO PENDING
-                    createdAt: serverTimestamp() 
-                });
-
-                statusText.innerText = "Request saved! Redirecting to WhatsApp...";
-                statusText.style.display = "block";
-
-                // Construct WhatsApp Message
+                await addDoc(collection(db, "bookings"), { name: name, phone: phone, eventType: eventType, date: date, services: selectedServices, message: message, status: "pending", createdAt: serverTimestamp() });
+                statusText.innerText = "Request saved! Redirecting to WhatsApp..."; statusText.style.display = "block";
+                
                 const waNumber = "94766390768";
                 const waMsg = `✨ *New Waitlist/Booking Request | Avera Events* ✨\n\n*Name:* ${name}\n*Phone:* ${phone}\n*Event:* ${eventType}\n*Date:* ${date}\n\n*📦 Selected Packages:*\n✅ ${servicesText}\n\n*📝 Client Vision:*\n"${message}"`;
                 const waUrl = `https://wa.me/${waNumber}?text=${encodeURIComponent(waMsg)}`;
-                
-                setTimeout(() => {
-                    window.open(waUrl, '_blank');
-                    window.location.reload(); // Refresh page to update calendar
-                }, 1500);
+                setTimeout(() => { window.open(waUrl, '_blank'); window.location.reload(); }, 1500);
 
             } catch(error) {
-                console.error("Firebase save error:", error);
-                statusText.innerText = "Error saving request. Please try again.";
-                statusText.style.color = "red";
-                statusText.style.display = "block";
-                submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Request Booking & Get Quote';
-                submitBtn.disabled = false;
+                console.error("Firebase save error:", error); statusText.innerText = "Error saving request. Please try again."; statusText.style.color = "red"; statusText.style.display = "block";
+                submitBtn.innerHTML = '<i class="fab fa-whatsapp"></i> Request Booking & Get Quote'; submitBtn.disabled = false;
             }
         });
 
-        // Initialize App
         document.addEventListener("DOMContentLoaded", fetchBookings);
     </script>
 </body>
