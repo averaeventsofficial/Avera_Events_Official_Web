@@ -90,8 +90,8 @@
         /* Financials Module Specific Styles */
         .finance-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
         .finance-panel { background: var(--card-bg); border: 1px solid var(--gold-border); border-radius: 8px; padding: 30px; }
-        .expense-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
-        .expense-row input { margin-bottom: 0; }
+        .finance-row { display: flex; gap: 10px; margin-bottom: 10px; align-items: center; }
+        .finance-row input { margin-bottom: 0; }
         .summary-box { background: rgba(229, 169, 61, 0.1); border: 1px solid var(--accent-gold); padding: 20px; border-radius: 8px; margin-top: 20px; text-align: center; }
         .summary-box h2 { font-family: 'Playfair Display', serif; color: #25d366; font-size: 2.5rem; margin: 10px 0; }
         .finance-status { display: inline-block; padding: 5px 15px; border-radius: 20px; font-size: 0.8rem; font-weight: bold; margin-bottom: 15px; text-transform: uppercase; }
@@ -194,12 +194,25 @@
                 </div>
 
                 <div id="finWorkspace" class="finance-grid" style="display: none;">
-                    <!-- Income Setup -->
+                    
+                    <!-- DYNAMIC INCOME SETUP -->
                     <div class="finance-panel">
-                        <div id="finStatusBadge" class="finance-status fs-ongoing">Ongoing</div>
-                        <h3 style="color: var(--accent-gold); margin-bottom: 20px;">Total Income (Quote)</h3>
-                        <label class="form-label">Agreed Amount (Rs.)</label>
-                        <input type="number" id="finIncome" class="custom-input" placeholder="e.g. 150000" onkeyup="calculateFinTotals()">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                            <div>
+                                <div id="finStatusBadge" class="finance-status fs-ongoing">Ongoing</div>
+                                <h3 style="color: var(--accent-gold);">Income Breakdown</h3>
+                            </div>
+                            <button class="btn-outline" style="padding: 5px 10px; font-size: 0.75rem;" onclick="addIncomeRow()"><i class="fas fa-plus"></i> Add Item</button>
+                        </div>
+                        
+                        <div id="incomeListWrapper">
+                            <!-- Income Rows will be injected here -->
+                        </div>
+                        
+                        <div style="display: flex; justify-content: space-between; margin-top: 20px; padding-top: 20px; border-top: 1px solid var(--gold-border);">
+                            <strong style="color: var(--text-white);">Total Income:</strong>
+                            <strong style="color: #25d366;" id="finTotalInc">Rs. 0</strong>
+                        </div>
                         
                         <div class="summary-box">
                             <p style="color: var(--text-grey); font-size: 0.9rem; text-transform: uppercase;">Estimated Net Profit</p>
@@ -213,7 +226,7 @@
                         </div>
                     </div>
 
-                    <!-- Expenses Setup -->
+                    <!-- DYNAMIC EXPENSES SETUP -->
                     <div class="finance-panel">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                             <h3 style="color: var(--accent-gold);">Expenses Breakdown</h3>
@@ -368,7 +381,8 @@
                         <tr>
                             <td style="color:var(--accent-gold); font-weight:600;">${d.date}</td>
                             <td><strong>${d.name}</strong><br><span style="font-size:0.8rem; color:var(--text-grey);">${d.phone}</span></td>
-                            <td>${d.eventType}<br><span style="font-size:0.8rem; color:var(--text-grey);">${d.message || 'Manual Entry'}</span></td>
+                            <td>${data.eventType}</td>
+                            <td>${data.services ? data.services.length + " items" : "-"}</td>
                             <td>${statusBadge}</td>
                             <td>
                                 ${d.status === 'pending' ? `<button class="action-btn btn-approve" onclick="updateBooking('${id}', 'approved')" title="Approve"><i class="fas fa-check-circle"></i></button>` : ``}
@@ -376,7 +390,7 @@
                             </td>
                         </tr>`;
 
-                    // Populate Financials Dropdown (Only Approved or Finished events)
+                    // Populate Financials Dropdown
                     if(d.status === 'approved') {
                         const statusLabel = d.finStatus === 'finished' ? '[FINISHED]' : '[ONGOING]';
                         finSelect.innerHTML += `<option value="${id}">${d.date} - ${d.name} ${statusLabel}</option>`;
@@ -389,7 +403,7 @@
                 document.getElementById('stat-profit').innerText = formatMoney(totalProfit);
             });
 
-            // 2. Load Vendors
+            // 2. Load Vendors (Same as before)
             onSnapshot(collection(db, "vendors"), (snapshot) => {
                 const tbody = document.getElementById('vendorsData'); tbody.innerHTML = '';
                 document.getElementById('stat-vendors').innerText = snapshot.size;
@@ -399,7 +413,7 @@
                 });
             });
 
-            // 3. Load Portfolio
+            // 3. Load Portfolio (Same as before)
             onSnapshot(query(collection(db, "portfolio"), orderBy("createdAt", "desc")), (snapshot) => {
                 const grid = document.getElementById('portfolioData'); grid.innerHTML = '';
                 snapshot.forEach((docSnap) => {
@@ -425,21 +439,19 @@
             await addDoc(collection(db, "bookings"), { name: document.getElementById('mbName').value, phone: document.getElementById('mbPhone').value, eventType: document.getElementById('mbType').value, date: document.getElementById('mbDate').value, status: document.getElementById('mbStatus').value, finStatus: 'ongoing', createdAt: serverTimestamp(), message: 'Added manually via Admin' });
             closeModal('bookingModal'); document.getElementById('addBookingForm').reset();
         });
-
         document.getElementById('vendorForm').addEventListener('submit', async (e) => {
             e.preventDefault(); const id = document.getElementById('vId').value;
             const data = { name: document.getElementById('vName').value, category: document.getElementById('vCategory').value, phone: document.getElementById('vPhone').value, notes: document.getElementById('vNotes').value };
             if(id) { await updateDoc(doc(db, "vendors", id), data); } else { data.createdAt = serverTimestamp(); await addDoc(collection(db, "vendors"), data); }
             closeModal('vendorModal');
         });
-
         document.getElementById('portfolioForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             await addDoc(collection(db, "portfolio"), { title: document.getElementById('pTitle').value, url: document.getElementById('pUrl').value, createdAt: serverTimestamp() });
             closeModal('portfolioModal'); document.getElementById('portfolioForm').reset();
         });
 
-        // ---------------- FINANCIALS LOGIC ---------------- //
+        // ---------------- FINANCIALS LOGIC (UPDATED WITH DYNAMIC INCOME) ---------------- //
         window.loadEventFinancials = () => {
             const eventId = document.getElementById('finEventSelect').value;
             const workspace = document.getElementById('finWorkspace');
@@ -448,7 +460,7 @@
             workspace.style.display = 'grid';
             
             const eventData = allBookingsData.find(e => e.id === eventId);
-            const fin = eventData.financials || { income: 0, expenses: [] };
+            const fin = eventData.financials || { incomes: [], expenses: [] };
             
             // Set Badge
             const badge = document.getElementById('finStatusBadge');
@@ -458,21 +470,44 @@
                 badge.className = 'finance-status fs-ongoing'; badge.innerText = "Event Ongoing";
             }
 
-            // Load Data
-            document.getElementById('finIncome').value = fin.income || '';
-            const wrapper = document.getElementById('expenseListWrapper');
-            wrapper.innerHTML = '';
+            // Load Incomes (Dynamic)
+            const incWrapper = document.getElementById('incomeListWrapper');
+            incWrapper.innerHTML = '';
             
-            if(fin.expenses.length === 0) { addExpenseRow(); } 
+            // Backward compatibility for old DB structure
+            if (fin.income && (!fin.incomes || fin.incomes.length === 0)) {
+                addIncomeRow('Agreed Quote Amount', fin.income);
+            } else if (!fin.incomes || fin.incomes.length === 0) {
+                addIncomeRow('Advance Payment', '');
+            } else {
+                fin.incomes.forEach(inc => addIncomeRow(inc.desc, inc.amount));
+            }
+
+            // Load Expenses
+            const expWrapper = document.getElementById('expenseListWrapper');
+            expWrapper.innerHTML = '';
+            if(!fin.expenses || fin.expenses.length === 0) { addExpenseRow(); } 
             else { fin.expenses.forEach(exp => addExpenseRow(exp.desc, exp.amount)); }
             
             calculateFinTotals();
         };
 
+        window.addIncomeRow = (desc = '', amount = '') => {
+            const wrapper = document.getElementById('incomeListWrapper');
+            const row = document.createElement('div');
+            row.className = 'finance-row';
+            row.innerHTML = `
+                <input type="text" class="custom-input inc-desc" placeholder="e.g. Advance Payment / Sponsor" value="${desc}" style="flex:2;">
+                <input type="number" class="custom-input inc-amt" placeholder="Amount" value="${amount}" onkeyup="calculateFinTotals()" style="flex:1;">
+                <button class="action-btn btn-reject" onclick="this.parentElement.remove(); calculateFinTotals();" style="margin:0; padding:15px;"><i class="fas fa-trash"></i></button>
+            `;
+            wrapper.appendChild(row);
+        };
+
         window.addExpenseRow = (desc = '', amount = '') => {
             const wrapper = document.getElementById('expenseListWrapper');
             const row = document.createElement('div');
-            row.className = 'expense-row';
+            row.className = 'finance-row';
             row.innerHTML = `
                 <input type="text" class="custom-input exp-desc" placeholder="Expense (e.g. Decorator)" value="${desc}" style="flex:2;">
                 <input type="number" class="custom-input exp-amt" placeholder="Amount" value="${amount}" onkeyup="calculateFinTotals()" style="flex:1;">
@@ -482,13 +517,18 @@
         };
 
         window.calculateFinTotals = () => {
-            const income = parseFloat(document.getElementById('finIncome').value || 0);
+            // Calculate Total Income
+            let totalInc = 0;
+            document.querySelectorAll('.inc-amt').forEach(input => { totalInc += parseFloat(input.value || 0); });
+            document.getElementById('finTotalInc').innerText = formatMoney(totalInc);
+
+            // Calculate Total Expense
             let totalExp = 0;
             document.querySelectorAll('.exp-amt').forEach(input => { totalExp += parseFloat(input.value || 0); });
-            
             document.getElementById('finTotalExp').innerText = formatMoney(totalExp);
             
-            const profit = income - totalExp;
+            // Calculate Net Profit
+            const profit = totalInc - totalExp;
             const profitEl = document.getElementById('finNetProfit');
             profitEl.innerText = formatMoney(profit);
             profitEl.style.color = profit >= 0 ? '#25d366' : '#ff4c4c';
@@ -498,22 +538,28 @@
             const eventId = document.getElementById('finEventSelect').value;
             if(!eventId) return;
 
-            const income = parseFloat(document.getElementById('finIncome').value || 0);
+            let incomes = [];
+            let totalInc = 0;
+            document.querySelectorAll('#incomeListWrapper .finance-row').forEach(row => {
+                const desc = row.querySelector('.inc-desc').value;
+                const amt = parseFloat(row.querySelector('.inc-amt').value || 0);
+                if(desc || amt > 0) { incomes.push({ desc: desc, amount: amt }); totalInc += amt; }
+            });
+
             let expenses = [];
             let totalExp = 0;
-            
-            document.querySelectorAll('.expense-row').forEach(row => {
+            document.querySelectorAll('#expenseListWrapper .finance-row').forEach(row => {
                 const desc = row.querySelector('.exp-desc').value;
                 const amt = parseFloat(row.querySelector('.exp-amt').value || 0);
                 if(desc || amt > 0) { expenses.push({ desc: desc, amount: amt }); totalExp += amt; }
             });
 
-            const profit = income - totalExp;
+            const profit = totalInc - totalExp;
 
             try {
                 await updateDoc(doc(db, "bookings", eventId), {
                     finStatus: statusType, // 'ongoing' or 'finished'
-                    financials: { income: income, expenses: expenses, totalExpenses: totalExp, profit: profit }
+                    financials: { incomes: incomes, totalIncome: totalInc, expenses: expenses, totalExpenses: totalExp, profit: profit }
                 });
                 alert(`Event financials successfully marked as ${statusType.toUpperCase()}!`);
                 if(statusType === 'finished') document.getElementById('finEventSelect').dispatchEvent(new Event('change'));
